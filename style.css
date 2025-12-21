@@ -184,6 +184,7 @@ header {
 
 #sidebar {
   width: 280px; /* عرض الشريط الجانبي */
+  height: 600px; /* تأكد من أن الخريطة تملأ المساحة المتاحة */
   background-color: #f4f4f4;
   padding: 20px;
   box-shadow: 2px 0 5px rgba(0,0,0,0.1);
@@ -196,7 +197,8 @@ header {
 
 #map {
   flex-grow: 1; /* للسماح للخريطة بأخذ المساحة المتبقية */
-  height: 100%; /* تأكد من أن الخريطة تملأ المساحة المتاحة */
+  height: 600px; /* تأكد من أن الخريطة تملأ المساحة المتاحة */
+  width: 100%;
   position: relative; /* لجعل عناصر التحكم في Leaflet تعمل بشكل صحيح */
 }
 
