@@ -439,3 +439,106 @@ header {
 .suggestion-item:hover {
     background-color: #f0f0f0;
 }
+/* المتغيرات */
+:root {
+    --srv-bg-dark: #121418;
+    --srv-container-bg: #1e2229;
+    --srv-card-bg: #2c303a;
+    --srv-accent: #e67e22;
+    --srv-text: #ffffff;
+    --srv-text-dim: #bdc3c7;
+}
+
+body {
+    background-color: var(--srv-bg-dark);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+/* المربع الخارجي الكبير */
+.srv-main-container {
+    background-color: var(--srv-container-bg);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    max-width: 1200px;
+    margin: 20px auto;
+    border: 1px solid #333;
+}
+
+/* العنوان الداخلي للمربع */
+.srv-main-header {
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #333;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+}
+
+.srv-header-icon {
+    font-size: 2rem;
+    margin-left: 15px;
+}
+
+.srv-main-header h2 {
+    color: var(--srv-accent);
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+/* شبكة الكروت */
+.srv-services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+/* الكارت الفردي */
+.srv-card {
+    background-color: var(--srv-card-bg);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 4px solid var(--srv-accent);
+    transition: 0.3s ease;
+}
+
+.srv-card:hover {
+    transform: translateY(-5px);
+    background-color: #343a46;
+}
+
+.srv-card-title {
+    color: var(--srv-text);
+    margin-top: 0;
+}
+
+.srv-card-count {
+    color: var(--srv-text-dim);
+}
+
+.srv-card-count span {
+    color: var(--srv-text);
+    font-weight: bold;
+}
+
+.srv-btn-details {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 8px 20px;
+    background-color: var(--srv-accent);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
+
+/* التجاوب مع الشاشات */
+@media (max-width: 992px) {
+    .srv-services-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 650px) {
+    .srv-services-grid { grid-template-columns: 1fr; }
+    .srv-main-container { padding: 15px; }
+}
