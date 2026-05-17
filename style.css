@@ -439,18 +439,18 @@ header {
 .suggestion-item:hover {
     background-color: #f0f0f0;
 }
-/* المتغيرات */
+/* المتغيرات بعد التعديل للوضع الفاتح */
 :root {
-    --srv-bg-dark: #121418;
-    --srv-container-bg: #1e2229;
-    --srv-card-bg: #2c303a;
-    --srv-accent: #e67e22;
-    --srv-text: #ffffff;
-    --srv-text-dim: #bdc3c7;
+    --srv-bg-dark: #ffffff;       /*  الخلفية */
+    --srv-container-bg: #339cff;  /*لون المربع الكبير الداخلي */
+    --srv-card-bg: #339cff;       /*  الكروت الفردية */
+    --srv-accent: #e67e22;        /* اللون البرتقالي للتركيز */
+    --srv-text: #ffffff;          /* النص الأساسي  */
+    --srv-text-dim: #6c757d;      /* تم تغيير النص الفرعي إلى رمادي متوسط */
 }
 
 body {
-    background-color: var(--srv-bg-dark);
+    background-color: var(--srv-bg-dark); 
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 20px;
@@ -506,7 +506,7 @@ body {
 
 .srv-card:hover {
     transform: translateY(-5px);
-    background-color: #343a46;
+    background-color: #e0e0e0;
 }
 
 .srv-card-title {

@@ -1,6 +1,7 @@
 const roadsPath = 'data/roads.json';
 const servicesPath = 'data/point.json';
 const borderPath = 'data/border.json';
+const RailwayPath = 'data/Railway.json';
 
 let graph = {};
 let edgeLengths = {};
@@ -10,6 +11,7 @@ let map, userLat, userLng;
 let roadsLayer = L.layerGroup();
 let servicePointsLayer = L.layerGroup();
 let routeLayer = L.layerGroup();
+let railwayLayer = L.layerGroup();
 let borderLayer = L.layerGroup();
 
 let userMarker = null;
@@ -78,28 +80,16 @@ function getRoadColor(fclass) {
 
     switch (lowerFclass) {
         case 'motorway':
-        case 'highway':
-            return '#ff4d4d'; // أحمر ساطع للطرق السريعة والرئيسية جداً
-        case 'primary':
-            return '#ffa500'; // برتقالي للطرق الأساسية
-        case 'primary_link':
-            return '#ffb52e'; // برتقالي أفتح قليلاً لوصلات الطرق الأساسية
-        case 'secondary':
-            return '#28a745'; // أخضر للطرق الثانوية
-        case 'trunk':
-            return '#8e44ad'; // بنفسجي للطرق الجذعية
-        case 'trunk_link':
-            return '#4d2e7a'; // لون بنفسجي أغمق قليلا لوصلات الطرق الجذعية
-        case 'unclassified':
-            return '#28a745'; // أخضر للطرق غير المصنفة (قد تختلف حسب الأهمية)
-        case 'residential':
-            return '#007bff'; // أزرق للطرق السكنية
-        case 'footway':
-            return '#cccccc'; // رمادي فاتح لممرات المشاة
-        case 'track':
-            return '#A52A2A'; // بني للطرق الترابية (إذا كانت موجودة)
+        case 'الطرق الإقليمية':
+            return '#ff4d4d'; 
+        case 'الطرق الشريانية':
+            return '#ff4d4d';  
+        case 'الطرق التجميعية':
+            return '#000000';  
+        case 'الطرق المحلية':
+            return '#cccccc';  
         default:
-            return 'gray'; // رمادي افتراضي لأي فئة غير معروفة
+            return 'gray'; 
     }
 }
 
@@ -325,6 +315,7 @@ async function loadMap() {
     roadsLayer.addTo(map);
     servicePointsLayer.addTo(map);
     routeLayer.addTo(map);
+        railwayLayer.addTo(map);
     borderLayer.addTo(map);
 
     const baseMaps = {
@@ -334,10 +325,11 @@ async function loadMap() {
 
     L.control.layers(baseMaps).addTo(map);
 
-    const [roadsData, servicesData, borderData] = await Promise.all([
+    const [roadsData, servicesData, borderData, railwayData] = await Promise.all([
         fetch(roadsPath).then(res => res.json()),
         fetch(servicesPath).then(res => res.json()),
-        fetch(borderPath).then(res => res.json())
+        fetch(borderPath).then(res => res.json()),
+        fetch(RailwayPath).then(res => res.json())
     ]);
 
     L.geoJSON(borderData, {
@@ -353,6 +345,21 @@ async function loadMap() {
             });
         }
     }).addTo(borderLayer);
+
+L.geoJSON(railwayData, {
+    style: {
+        color: '#2c3e50',       // لون رمادي غامق/أسود
+        weight: 3,              // سمك الخط
+        dashArray: '8, 6'       // خط متقطع ليمثل سكة حديد بشكل كارتوجرافي سليم
+    },
+    onEachFeature: function (feature, layer) {
+        const name = feature.properties?.name || 'خط سكة حديد';
+        layer.bindPopup(`🚂 ${name}`);
+        layer.on('click', function() {
+            displayFeatureInfo(feature.properties || feature.attributes, `معلومات السكة الحديد: ${name}`);
+        });
+    }
+}).addTo(railwayLayer);
 
     roadsData.features.forEach(f => {
         const coords = f.geometry.paths?.[0] || f.geometry.coordinates;
@@ -909,7 +916,7 @@ function generateMapLegendControl() {
         div.innerHTML = '<h4>مفتاح الخريطة:</h4>';
 
         // مفتاح الخدمات
-        div.innerHTML += '<h5>نقاط الخدمة:</h5>';
+        div.innerHTML += '<h5>:نقاط الخدمة</h5>';
         const uniqueServiceTypes = new Set(servicePoints.map(s => s.type));
         Array.from(uniqueServiceTypes).sort().forEach(type => {
             const iconConfig = serviceIconMap[type];
@@ -932,13 +939,13 @@ function generateMapLegendControl() {
         });
 
         // مفتاح الطرق
-        div.innerHTML += '<h5>الطرق:</h5>';
+        div.innerHTML += '<h5>:الطرق</h5>';
         const roadClassesMap = { // تم التأكد من وجود جميع الفئات التي قد تكون في بياناتك
             'motorway': 'طريق سريع',
-            'highway': 'طريق سريع',
-            'primary': 'طريق رئيسي',
-            'primary_link': 'وصلة طريق رئيسي',
-            'secondary': 'طريق ثانوي',
+            'الطرق الإقليمية': 'طريق إقليمي',
+            'الطرق الشريانية': 'طريق شرياني',
+            'الطرق التجميعية': 'طريق تجميعي',
+            'الطرق المحلية': 'طريق محلي',
             'trunk': 'طريق جذعي',
             'trunk_link': 'وصلة طريق جذعي',
             'unclassified': 'طريق غير مصنف',
@@ -975,7 +982,7 @@ function generateMapLegendControl() {
         });
 
         // مفتاح الحدود
-        div.innerHTML += '<h5>الحدود:</h5>';
+        div.innerHTML += '<h5>:الحدود</h5>';
         div.innerHTML += `
             <div class="legend-item">
                 <div class="legend-color-box" style="background-color: purple;"></div>
@@ -984,7 +991,7 @@ function generateMapLegendControl() {
         `;
         
         // مفتاح المسار البديل (5 مسارات)
-        div.innerHTML += '<h5>المسارات:</h5>';
+        div.innerHTML += '<h5>:المسارات</h5>';
         div.innerHTML += `
             <div class="legend-item">
                 <div class="legend-color-box" style="background-color: blue;"></div>
