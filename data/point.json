@@ -1685,1656 +1685,6 @@
     {
       "attributes" : {
         "OBJECTID" : 151,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.639689000000033,
-        "y" : 25.700067000000047
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 152,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.640887000000077,
-        "y" : 25.700042000000053
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 153,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.64204600000005,
-        "y" : 25.700455000000034
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 154,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.643842000000063,
-        "y" : 25.69616300000007
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 155,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.641146000000049,
-        "y" : 25.694896000000028
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 156,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.649304000000029,
-        "y" : 25.704708000000039
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 157,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.647236000000078,
-        "y" : 25.706041000000027
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 158,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.64650000000006,
-        "y" : 25.707446000000061
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 159,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.650704000000076,
-        "y" : 25.706754000000046
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 160,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.655223000000035,
-        "y" : 25.708100000000059
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 162,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.644282000000032,
-        "y" : 25.705677000000037
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 164,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.643735000000049,
-        "y" : 25.702907000000039
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 165,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.644544000000053,
-        "y" : 25.702283000000023
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 166,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.645506000000069,
-        "y" : 25.701374000000044
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 168,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.64321700000005,
-        "y" : 25.69936000000007
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 169,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.665057000000047,
-        "y" : 25.714440000000025
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 170,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.641340000000071,
-        "y" : 25.700394000000074
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 172,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.643541000000027,
-        "y" : 25.696739000000036
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 173,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.641890000000046,
-        "y" : 25.691720000000032
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 174,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.643178000000034,
-        "y" : 25.690371000000027
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 175,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.635548000000028,
-        "y" : 25.691266000000041
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 177,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.641503000000057,
-        "y" : 25.688796000000025
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 178,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.642383000000052,
-        "y" : 25.687535000000025
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 179,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.638392000000067,
-        "y" : 25.689010000000053
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 180,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.637129000000073,
-        "y" : 25.693280000000073
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 184,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.639712000000031,
-        "y" : 25.691869000000054
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 187,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.640629000000047,
-        "y" : 25.688541000000043
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 188,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.632984000000079,
-        "y" : 25.680886000000044
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 189,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.636588000000074,
-        "y" : 25.685574000000031
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 190,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.632592000000045,
-        "y" : 25.683596000000023
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 192,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.63514500000008,
-        "y" : 25.686574000000064
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 193,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.639338000000066,
-        "y" : 25.690074000000038
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 194,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.639414000000045,
-        "y" : 25.691214000000059
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 196,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.638355000000047,
-        "y" : 25.69161900000006
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 197,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.636106000000041,
-        "y" : 25.692053000000044
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 198,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.648116000000073,
-        "y" : 25.713309000000038
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 199,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.652045000000044,
-        "y" : 25.713172000000043
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 200,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.651691000000028,
-        "y" : 25.712799000000075
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 201,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.652687000000071,
-        "y" : 25.714946000000054
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 202,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.654529000000025,
-        "y" : 25.717764000000045
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 203,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.65405700000008,
-        "y" : 25.714627000000064
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 204,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.653525000000059,
-        "y" : 25.713578000000041
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 205,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.655373000000054,
-        "y" : 25.721320000000048
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 206,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.654099000000031,
-        "y" : 25.724367000000029
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 207,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.656965000000071,
-        "y" : 25.72685800000005
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 208,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.656145700000025,
-        "y" : 25.723836200000051
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 209,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.658222000000023,
-        "y" : 25.721062000000074
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 210,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.66084120000005,
-        "y" : 25.723023500000068
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 211,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.661992000000055,
-        "y" : 25.723013000000037
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 212,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.662285000000054,
-        "y" : 25.723068000000069
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 213,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.664477000000034,
-        "y" : 25.725097000000062
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 214,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.664961000000062,
-        "y" : 25.726815000000045
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 215,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.664870000000064,
-        "y" : 25.728111000000069
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 216,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.659080000000074,
-        "y" : 25.725866000000053
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 217,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.660982000000047,
-        "y" : 25.727235000000064
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 218,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.657313000000045,
-        "y" : 25.73084700000004
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 219,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.659301000000028,
-        "y" : 25.733313000000066
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 220,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.661579000000074,
-        "y" : 25.733955000000037
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 221,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.658378000000027,
-        "y" : 25.737524000000064
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 222,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.660743000000025,
-        "y" : 25.738642000000027
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 223,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.663997000000052,
-        "y" : 25.737328000000048
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 224,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.667970000000025,
-        "y" : 25.73356700000005
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 225,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.664124000000072,
-        "y" : 25.722333000000049
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 227,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.66987000000006,
-        "y" : 25.719255000000032
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 228,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.659031000000027,
-        "y" : 25.722864000000072
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 229,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.666373000000078,
-        "y" : 25.719542000000047
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 230,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.665015000000039,
-        "y" : 25.719103000000075
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 231,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.664712000000065,
-        "y" : 25.717314000000044
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 232,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.664145000000076,
-        "y" : 25.715893000000051
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 234,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.660751000000062,
-        "y" : 25.713389000000063
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 235,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.672992000000079,
-        "y" : 25.706716000000029
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 236,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.675600000000031,
-        "y" : 25.698578000000055
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 237,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.677984000000038,
-        "y" : 25.705449000000044
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 239,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.640628000000049,
-        "y" : 25.686194000000057
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 240,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.647456000000034,
-        "y" : 25.699712000000034
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 241,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.645972000000029,
-        "y" : 25.697365000000048
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 242,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.649478000000045,
-        "y" : 25.69649400000003
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 243,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.651288000000079,
-        "y" : 25.698081000000059
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 244,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.647640000000024,
-        "y" : 25.694723000000067
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 246,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.651661000000047,
-        "y" : 25.692958000000033
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 249,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.647103000000072,
-        "y" : 25.682385000000068
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 250,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.65017000000006,
-        "y" : 25.682250000000067
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 251,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.646332000000029,
-        "y" : 25.679133000000036
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 252,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.653782000000035,
-        "y" : 25.686136000000033
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 253,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.638180000000034,
-        "y" : 25.687565000000063
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 254,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.65804200000008,
-        "y" : 25.691081000000054
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 255,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.655216000000053,
-        "y" : 25.692130000000077
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 256,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.661650000000066,
-        "y" : 25.692021000000068
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 257,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.664180000000044,
-        "y" : 25.696256000000062
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 261,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.672245000000032,
-        "y" : 25.677006000000063
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 262,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.680909000000042,
-        "y" : 25.693872000000056
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 264,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.678061000000071,
-        "y" : 25.689685000000054
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 265,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.683965000000057,
-        "y" : 25.694680000000062
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 266,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.699431000000061,
-        "y" : 25.703303000000062
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 268,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.637260000000026,
-        "y" : 25.690980000000025
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 269,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.712056000000075,
-        "y" : 25.690985000000069
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 273,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.70029500000004,
-        "y" : 25.684562000000028
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 274,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.699825000000033,
-        "y" : 25.682589000000064
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 276,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.688605000000052,
-        "y" : 25.670074000000056
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 277,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.704348000000039,
-        "y" : 25.690528000000029
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 278,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.701174000000037,
-        "y" : 25.689250000000072
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 279,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.699487000000033,
-        "y" : 25.686690000000056
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 280,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.698360000000037,
-        "y" : 25.688834000000043
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 281,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.696094000000073,
-        "y" : 25.687441000000035
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 284,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.694573000000048,
-        "y" : 25.684645000000046
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 285,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.691594000000066,
-        "y" : 25.685508000000027
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 286,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.691914000000054,
-        "y" : 25.68336000000005
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 287,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.69740100000007,
-        "y" : 25.682470000000023
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 288,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.698736000000054,
-        "y" : 25.68011400000006
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 291,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.69166000000007,
-        "y" : 25.68076300000007
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 292,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.687689000000034,
-        "y" : 25.680125000000032
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 293,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.690677000000051,
-        "y" : 25.675817000000052
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 295,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.687718000000075,
-        "y" : 25.673881000000051
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 296,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.688530000000071,
-        "y" : 25.672298000000069
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 298,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.688456000000031,
-        "y" : 25.66987400000005
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 299,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.685809000000063,
-        "y" : 25.667415000000062
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 301,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.685441000000026,
-        "y" : 25.673409000000049
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 302,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.629036284000051,
-        "y" : 25.672946032000027
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 303,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.626804972000059,
-        "y" : 25.666416553000033
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 304,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.62786128700003,
-        "y" : 25.67933301100004
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 305,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.634655892000069,
-        "y" : 25.682057481000072
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 306,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.629355695000072,
-        "y" : 25.685073160000059
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 307,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.630313526000066,
-        "y" : 25.681965145000049
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 308,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.636196429000051,
-        "y" : 25.684361051000053
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 309,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.659400762000075,
-        "y" : 25.689347246000068
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 310,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.65199498100003,
-        "y" : 25.694524618000059
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 311,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.64428162400003,
-        "y" : 25.705677181000055
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 312,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.649225632000025,
-        "y" : 25.704653617000076
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 313,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.636865640000053,
-        "y" : 25.695590525000057
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 314,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.641945760000056,
-        "y" : 25.689248774000077
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 315,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.661185701000079,
-        "y" : 25.695154437000042
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 316,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.653319214000078,
-        "y" : 25.706367815000078
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 317,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.66660424500003,
-        "y" : 25.698762443000078
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 318,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.66244744100004,
-        "y" : 25.715314635000027
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 319,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.664944363000075,
-        "y" : 25.716452334000053
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 320,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.693313512000032,
-        "y" : 25.689255647000039
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 321,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.68835123100007,
-        "y" : 25.677575882000042
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 322,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.688174915000047,
-        "y" : 25.692360174000044
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 323,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.68752657400006,
-        "y" : 25.699800922000065
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 324,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.691880368000056,
-        "y" : 25.703160718000049
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 325,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.686662411000043,
-        "y" : 25.671064559000058
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 326,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.685299615000076,
-        "y" : 25.668661536000059
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 327,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.680265732000066,
-        "y" : 25.711573378000026
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 328,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.690101871000024,
-        "y" : 25.678993386000059
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 329,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.663106946000028,
-        "y" : 25.67422218300004
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 330,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.672579306000046,
-        "y" : 25.684907708000026
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 331,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.686684512000056,
-        "y" : 25.690220771000043
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 332,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.683312339000054,
-        "y" : 25.668983916000059
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 333,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.682143291000045,
-        "y" : 25.67124463500005
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 334,
-        "Name" : null,
-        "type" : "مسجد"
-      },
-      "geometry" : {
-        "x" : 32.682128673000079,
-        "y" : 25.675365636000038
-      }
-    },
-    {
-      "attributes" : {
-        "OBJECTID" : 335,
         "Name" : "مركز شباب القباحي الغربي",
         "type" : "مركز شباب"
       },
@@ -3345,7 +1695,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 336,
+        "OBJECTID" : 152,
         "Name" : "مركز شباب نجع الخطباء",
         "type" : "مركز شباب"
       },
@@ -3356,7 +1706,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 337,
+        "OBJECTID" : 153,
         "Name" : "مركز شباب طيبة العوامية",
         "type" : "مركز شباب"
       },
@@ -3367,7 +1717,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 338,
+        "OBJECTID" : 154,
         "Name" : "مركز شباب الاقصر",
         "type" : "مركز شباب"
       },
@@ -3378,7 +1728,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 339,
+        "OBJECTID" : 155,
         "Name" : "مركز شباب منشاة العماري",
         "type" : "مركز شباب"
       },
@@ -3389,7 +1739,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 340,
+        "OBJECTID" : 156,
         "Name" : "مركز شباب نجع بدران",
         "type" : "مركز شباب"
       },
@@ -3400,7 +1750,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 341,
+        "OBJECTID" : 157,
         "Name" : "مركز شباب الاتحاد",
         "type" : "مركز شباب"
       },
@@ -3411,7 +1761,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 342,
+        "OBJECTID" : 158,
         "Name" : "مركز شباب الزناقطة",
         "type" : "مركز شباب"
       },
@@ -3422,7 +1772,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 343,
+        "OBJECTID" : 159,
         "Name" : "مركز شباب الحاج نصر (الساحة )",
         "type" : "مركز شباب"
       },
@@ -3433,7 +1783,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 344,
+        "OBJECTID" : 160,
         "Name" : "قصر ثقافة بهاء طاهر",
         "type" : "قصر ثقافة"
       },
@@ -3444,7 +1794,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 345,
+        "OBJECTID" : 161,
         "Name" : "قصر ثقافه الاقصر",
         "type" : "قصر ثقافة"
       },
@@ -3455,7 +1805,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 346,
+        "OBJECTID" : 162,
         "Name" : "قصر ثقافه الطفل",
         "type" : "قصر ثقافة"
       },
@@ -3466,7 +1816,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 347,
+        "OBJECTID" : 163,
         "Name" : "دير سيدة النور",
         "type" : "كنيسة"
       },
@@ -3477,7 +1827,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 348,
+        "OBJECTID" : 164,
         "Name" : "كنيسة الايمان الرسوليه الانجيلين",
         "type" : "كنيسة"
       },
@@ -3488,7 +1838,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 349,
+        "OBJECTID" : 165,
         "Name" : "دير الأنبا باخوميوس الشايب",
         "type" : "كنيسة"
       },
@@ -3499,7 +1849,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 350,
+        "OBJECTID" : 166,
         "Name" : "كنيسة الشهيد العظيم مارجرجس…",
         "type" : "كنيسة"
       },
@@ -3510,7 +1860,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 351,
+        "OBJECTID" : 167,
         "Name" : "الكنيسة الانجيلية بالأقصر",
         "type" : "كنيسة"
       },
@@ -3521,7 +1871,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 352,
+        "OBJECTID" : 168,
         "Name" : "كنيسة السيدة العذراء مريم بالأقصر لأقباط الأرثوذوكس",
         "type" : "كنيسة"
       },
@@ -3532,7 +1882,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 353,
+        "OBJECTID" : 169,
         "Name" : "الكنيسة الأرثوذكسية الشهيد العظيم مارجرجس بالسواقى بالأقصر ايبارشية الأقصر و توابعها -",
         "type" : "كنيسة"
       },
@@ -3543,7 +1893,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 354,
+        "OBJECTID" : 170,
         "Name" : "دير وكنيسة العائلة المقدسة للأباء الفرنسيسكان بالاقصر كنيسة كاثوليكية",
         "type" : "كنيسة"
       },
@@ -3554,7 +1904,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 355,
+        "OBJECTID" : 171,
         "Name" : "كنيسة الأنبا أنطونيوس والأنبا بولا للأقباط الأرثوذكس بالأقصر",
         "type" : "كنيسة"
       },
@@ -3565,7 +1915,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 356,
+        "OBJECTID" : 172,
         "Name" : "كنيسة الملاك ميخائيل للأقباط الأرثوذوكس",
         "type" : "كنيسة"
       },
@@ -3576,7 +1926,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 357,
+        "OBJECTID" : 173,
         "Name" : "كنيسة الملاك ميخائيل للأقباط الكاثوليك",
         "type" : "كنيسة"
       },
@@ -3587,7 +1937,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 358,
+        "OBJECTID" : 174,
         "Name" : "كنيسة نهضة القداسة الانجيليه",
         "type" : "كنيسة"
       },
@@ -3598,7 +1948,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 359,
+        "OBJECTID" : 175,
         "Name" : "كنيسة الاخوة - شارع كيلوباترا",
         "type" : "كنيسة"
       },
@@ -3609,7 +1959,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 360,
+        "OBJECTID" : 176,
         "Name" : "بريد السوق السياحي",
         "type" : "مكتب بريد"
       },
@@ -3620,7 +1970,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 361,
+        "OBJECTID" : 177,
         "Name" : "مكتب بريد الاقصر",
         "type" : "مكتب بريد"
       },
@@ -3631,7 +1981,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 362,
+        "OBJECTID" : 178,
         "Name" : "بريد مطار الاقصر الدولي",
         "type" : "مكتب بريد"
       },
@@ -3642,7 +1992,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 363,
+        "OBJECTID" : 179,
         "Name" : "بريد الكرنك الاقصر",
         "type" : "مكتب بريد"
       },
@@ -3653,7 +2003,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 364,
+        "OBJECTID" : 180,
         "Name" : "بريد الكرنك ثان(نجع الطويل)",
         "type" : "مكتب بريد"
       },
@@ -3664,7 +2014,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 365,
+        "OBJECTID" : 181,
         "Name" : "مكتب بريد ابو الجود مؤقتا",
         "type" : "مكتب بريد"
       },
@@ -3675,7 +2025,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 366,
+        "OBJECTID" : 182,
         "Name" : "بريد منشاه العماري",
         "type" : "مكتب بريد"
       },
@@ -3686,7 +2036,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 367,
+        "OBJECTID" : 183,
         "Name" : "بريد العوامية",
         "type" : "مكتب بريد"
       },
@@ -3697,7 +2047,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 368,
+        "OBJECTID" : 184,
         "Name" : "بريد نجع الصياغ بالاقصر",
         "type" : "مكتب بريد"
       },
@@ -3708,7 +2058,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 369,
+        "OBJECTID" : 185,
         "Name" : "بريد الزناقطة",
         "type" : "مكتب بريد"
       },
@@ -3719,7 +2069,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 370,
+        "OBJECTID" : 186,
         "Name" : "بريد مجمع محاكم الاقصر",
         "type" : "مكتب بريد"
       },
@@ -3730,7 +2080,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 371,
+        "OBJECTID" : 187,
         "Name" : "بريد نجع الخطباء التحقق ميدانيا",
         "type" : "مكتب بريد"
       },
@@ -3741,7 +2091,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 372,
+        "OBJECTID" : 188,
         "Name" : "بريد جامعة الاقصر",
         "type" : "مكتب بريد"
       },
@@ -3752,7 +2102,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 373,
+        "OBJECTID" : 189,
         "Name" : "بريد القباحي",
         "type" : "مكتب بريد"
       },
@@ -3763,7 +2113,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 374,
+        "OBJECTID" : 190,
         "Name" : "مكتب بريد سيدي ابو الحجاج",
         "type" : "مكتب بريد"
       },
@@ -3774,7 +2124,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 375,
+        "OBJECTID" : 191,
         "Name" : "نادي الشبان المسلمين",
         "type" : "نادي رياضي"
       },
@@ -3785,7 +2135,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 376,
+        "OBJECTID" : 192,
         "Name" : "نادي أبناء أسوان",
         "type" : "نادي رياضي"
       },
@@ -3796,7 +2146,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 377,
+        "OBJECTID" : 193,
         "Name" : "نادي التجديف والرياضات المائية",
         "type" : "نادي رياضي"
       },
@@ -3807,7 +2157,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 378,
+        "OBJECTID" : 194,
         "Name" : "نادي المدينة المنورة",
         "type" : "نادي رياضي"
       },
@@ -3818,7 +2168,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 379,
+        "OBJECTID" : 195,
         "Name" : "نادي الأقصر الرياضي",
         "type" : "نادي رياضي"
       },
@@ -3829,7 +2179,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 380,
+        "OBJECTID" : 196,
         "Name" : "نادي ماري مرقص",
         "type" : "نادي رياضي"
       },
@@ -3840,7 +2190,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 381,
+        "OBJECTID" : 197,
         "Name" : "نادي الشبيبة القبطي",
         "type" : "نادي رياضي"
       },
@@ -3851,7 +2201,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 382,
+        "OBJECTID" : 198,
         "Name" : "نقطة اطفاء الكرنك",
         "type" : "نقطة إطفاء"
       },
@@ -3862,7 +2212,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 383,
+        "OBJECTID" : 199,
         "Name" : "نقطه إطفاء شرق السكه",
         "type" : "نقطة إطفاء"
       },
@@ -3873,7 +2223,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 384,
+        "OBJECTID" : 200,
         "Name" : "نقطة اطفاء العموامية",
         "type" : "نقطة إطفاء"
       },
@@ -3884,7 +2234,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 385,
+        "OBJECTID" : 201,
         "Name" : "نقطة اطفاء منشأة العماري",
         "type" : "نقطة إطفاء"
       },
@@ -3895,7 +2245,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 386,
+        "OBJECTID" : 202,
         "Name" : "نقطه إسعاف معبد الكرنك",
         "type" : "نقطة إسعاف"
       },
@@ -3906,7 +2256,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 387,
+        "OBJECTID" : 203,
         "Name" : "نقطة اسعاف ميدان المحطة",
         "type" : "نقطة إسعاف"
       },
@@ -3917,7 +2267,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 388,
+        "OBJECTID" : 204,
         "Name" : "اسعاف منشاة العماري",
         "type" : "نقطة إسعاف"
       },
@@ -3928,7 +2278,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 389,
+        "OBJECTID" : 205,
         "Name" : "مركز اسعاف الاقصر الرئيسي",
         "type" : "نقطة إسعاف"
       },
@@ -3939,7 +2289,7 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 390,
+        "OBJECTID" : 206,
         "Name" : "نقطة إسعاف شرق السكة الحديد",
         "type" : "نقطة إسعاف"
       },
@@ -3950,13 +2300,1663 @@
     },
     {
       "attributes" : {
-        "OBJECTID" : 391,
+        "OBJECTID" : 207,
         "Name" : "نقطة اسعاف مجمع المواقف",
         "type" : "نقطة إسعاف"
       },
       "geometry" : {
         "x" : 32.645825000000059,
         "y" : 25.696893000000046
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 208,
+        "Name" : "م/ سيدى ابو الحجاج",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.639689000000033,
+        "y" : 25.700067000000047
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 209,
+        "Name" : "م/ احمد النجم  ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.640887000000077,
+        "y" : 25.700042000000053
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 210,
+        "Name" : "م/ محسب  ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.64204600000005,
+        "y" : 25.700455000000034
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 211,
+        "Name" : "م/ ابو عياد ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.643842000000063,
+        "y" : 25.69616300000007
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 212,
+        "Name" : "م/ صلاح الدين  ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.641146000000049,
+        "y" : 25.694896000000028
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 213,
+        "Name" : "م/ على القرافي ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.649304000000029,
+        "y" : 25.704708000000039
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 214,
+        "Name" : "م/ الشيخ الصابوني ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.647236000000078,
+        "y" : 25.706041000000027
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 215,
+        "Name" : "م/ الشبان المسلمين  ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.64650000000006,
+        "y" : 25.707446000000061
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 216,
+        "Name" : "م/ الشيخ ابو الجود ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.650704000000076,
+        "y" : 25.706754000000046
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 217,
+        "Name" : "م/ الراضي  ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.655223000000035,
+        "y" : 25.708100000000059
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 219,
+        "Name" : "م/ الثقافة الاسلامية ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.644282000000032,
+        "y" : 25.705677000000037
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 221,
+        "Name" : "م/ اسماعيل المقشقش ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.643735000000049,
+        "y" : 25.702907000000039
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 222,
+        "Name" : "م/ البر و التقوي ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.644544000000053,
+        "y" : 25.702283000000023
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 223,
+        "Name" : "م/ عيد سقاو ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.645506000000069,
+        "y" : 25.701374000000044
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 225,
+        "Name" : "م/ سيدى محمود ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.64321700000005,
+        "y" : 25.69936000000007
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 226,
+        "Name" : "م/ الصالحين  ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.665057000000047,
+        "y" : 25.714440000000025
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 227,
+        "Name" : "م/ الشيخ فرج  ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.641340000000071,
+        "y" : 25.700394000000074
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 229,
+        "Name" : "م/ الوحشي  ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.643541000000027,
+        "y" : 25.696739000000036
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 230,
+        "Name" : "م/ الشيخ السمان ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.641890000000046,
+        "y" : 25.691720000000032
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 231,
+        "Name" : "م/ الرحمن الدريسة ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.643178000000034,
+        "y" : 25.690371000000027
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 232,
+        "Name" : "م/ عمر بن الخطاب   ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.635548000000028,
+        "y" : 25.691266000000041
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 234,
+        "Name" : "م/  البنا  ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.641503000000057,
+        "y" : 25.688796000000025
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 235,
+        "Name" : "م/ الحرمين    ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.642383000000052,
+        "y" : 25.687535000000025
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 236,
+        "Name" : "م/ حمزه بن عبد المنطلب ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.638392000000067,
+        "y" : 25.689010000000053
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 237,
+        "Name" : "م/ التوبة الجزيرة",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.637129000000073,
+        "y" : 25.693280000000073
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 241,
+        "Name" : "م/ السلام العوامية ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.639712000000031,
+        "y" : 25.691869000000054
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 244,
+        "Name" : "م/ الرحمن البستة  ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.640629000000047,
+        "y" : 25.688541000000043
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 245,
+        "Name" : "م/ العتيق العوامية ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.632984000000079,
+        "y" : 25.680886000000044
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 246,
+        "Name" : "م/ النور السن\u0651ي  العوامية",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.636588000000074,
+        "y" : 25.685574000000031
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 247,
+        "Name" : "م/ النصر العوامية ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.632592000000045,
+        "y" : 25.683596000000023
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 249,
+        "Name" : "م/ الرحمن النادي الرياضي ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.63514500000008,
+        "y" : 25.686574000000064
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 250,
+        "Name" : "م/ الشهيد عليان المدينة",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.639338000000066,
+        "y" : 25.690074000000038
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 251,
+        "Name" : "م/ محمد حسين المدينة ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.639414000000045,
+        "y" : 25.691214000000059
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 253,
+        "Name" : "م/ الاحسان المدينة",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.638355000000047,
+        "y" : 25.69161900000006
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 254,
+        "Name" : "م/ ال البيت المدينة",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.636106000000041,
+        "y" : 25.692053000000044
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 255,
+        "Name" : "م/ السيد يوسف ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.648116000000073,
+        "y" : 25.713309000000038
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 256,
+        "Name" : "م/ الشيخ موسي ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.652045000000044,
+        "y" : 25.713172000000043
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 257,
+        "Name" : "م/ عبد الله أعوض ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.651691000000028,
+        "y" : 25.712799000000075
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 258,
+        "Name" : "م/ السيدة عائشة  ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.652687000000071,
+        "y" : 25.714946000000054
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 259,
+        "Name" : "م/ السلام السبتية ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.654529000000025,
+        "y" : 25.717764000000045
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 260,
+        "Name" : "م/ عمار بن ياسر ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.65405700000008,
+        "y" : 25.714627000000064
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 261,
+        "Name" : "م/ عبد الهادي الكرنك",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.653525000000059,
+        "y" : 25.713578000000041
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 262,
+        "Name" : "م/ الرفاعي الكرنك",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.655373000000054,
+        "y" : 25.721320000000048
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 263,
+        "Name" : "م/ خالد بن الوليد ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.654099000000031,
+        "y" : 25.724367000000029
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 264,
+        "Name" : "م/ عمرو بن العاص ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.656965000000071,
+        "y" : 25.72685800000005
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 265,
+        "Name" : "م/ الشيخ الطاهر الحامدي ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.656145700000025,
+        "y" : 25.723836200000051
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 266,
+        "Name" : "م/ الشيخ عوض الله ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.658222000000023,
+        "y" : 25.721062000000074
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 267,
+        "Name" : "م/ عقبة بن نافع ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.66084120000005,
+        "y" : 25.723023500000068
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 268,
+        "Name" : "م/ النور الملقطة ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.661992000000055,
+        "y" : 25.723013000000037
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 269,
+        "Name" : "م/ مأمون الطواب ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.662285000000054,
+        "y" : 25.723068000000069
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 270,
+        "Name" : "م/ احمد عبد الرحيم ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.664477000000034,
+        "y" : 25.725097000000062
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 271,
+        "Name" : "م/ الشعراوي بدران ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.664961000000062,
+        "y" : 25.726815000000045
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 272,
+        "Name" : "م/ العتيق بدران ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.664870000000064,
+        "y" : 25.728111000000069
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 273,
+        "Name" : "م/ خليل العماري ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.659080000000074,
+        "y" : 25.725866000000053
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 274,
+        "Name" : "م/ نور الايمان ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.660982000000047,
+        "y" : 25.727235000000064
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 275,
+        "Name" : "م/ الهدى الشهاينة  ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.657313000000045,
+        "y" : 25.73084700000004
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 276,
+        "Name" : "م/ ال البقري الكرنك",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.659301000000028,
+        "y" : 25.733313000000066
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 277,
+        "Name" : "م/ المعز المستعمرة ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.661579000000074,
+        "y" : 25.733955000000037
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 278,
+        "Name" : "م/ النور الطينة ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.658378000000027,
+        "y" : 25.737524000000064
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 279,
+        "Name" : "م/ نجع عبادي ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.660743000000025,
+        "y" : 25.738642000000027
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 280,
+        "Name" : "م/ الايمان نجع الجالس ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.663997000000052,
+        "y" : 25.737328000000048
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 281,
+        "Name" : "م/ نجع جودة الكرنك",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.667970000000025,
+        "y" : 25.73356700000005
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 282,
+        "Name" : "م/ عمر بن الخطاب الكرنك",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.664124000000072,
+        "y" : 25.722333000000049
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 284,
+        "Name" : "م/ الشيخ مبارك  ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.66987000000006,
+        "y" : 25.719255000000032
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 285,
+        "Name" : "م/ السيدة نفيسة ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.659031000000027,
+        "y" : 25.722864000000072
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 286,
+        "Name" : "م/ الشيخ العجمي ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.666373000000078,
+        "y" : 25.719542000000047
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 287,
+        "Name" : "م/ السلام نجع الطويل",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.665015000000039,
+        "y" : 25.719103000000075
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 288,
+        "Name" : "م/ الرحمن الاربعين ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.664712000000065,
+        "y" : 25.717314000000044
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 289,
+        "Name" : "م/ النور الجداوية ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.664145000000076,
+        "y" : 25.715893000000051
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 291,
+        "Name" : "م/ الرحمن مصنع الثلج ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.660751000000062,
+        "y" : 25.713389000000063
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 292,
+        "Name" : "م/ الرحمة   حسونة ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.672992000000079,
+        "y" : 25.706716000000029
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 293,
+        "Name" : "م/ التوبة العوابد ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.675600000000031,
+        "y" : 25.698578000000055
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 294,
+        "Name" : "م/ بدوى المأمون ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.677984000000038,
+        "y" : 25.705449000000044
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 296,
+        "Name" : "م/على بن ابى طالب ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.640628000000049,
+        "y" : 25.686194000000057
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 297,
+        "Name" : "م/ عبد الله بن مسعود ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.647456000000034,
+        "y" : 25.699712000000034
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 298,
+        "Name" : "م/ السيد ة زينب ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.645972000000029,
+        "y" : 25.697365000000048
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 299,
+        "Name" : "م/ فاطمة الزهراء ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.649478000000045,
+        "y" : 25.69649400000003
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 300,
+        "Name" : "م/ جمال ابو زيد ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.651288000000079,
+        "y" : 25.698081000000059
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 301,
+        "Name" : "م/ الشيخ حفني ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.647640000000024,
+        "y" : 25.694723000000067
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 303,
+        "Name" : "م/ مشايخ عطية ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.651661000000047,
+        "y" : 25.692958000000033
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 306,
+        "Name" : "م/ العتيق  الخطباء",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.647103000000072,
+        "y" : 25.682385000000068
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 307,
+        "Name" : "م/ الرحمن  الخطباء",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.65017000000006,
+        "y" : 25.682250000000067
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 308,
+        "Name" : "م/ الانوار المحمدية  ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.646332000000029,
+        "y" : 25.679133000000036
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 309,
+        "Name" : "م/ ابو الخلى الجواهرة",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.653782000000035,
+        "y" : 25.686136000000033
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 310,
+        "Name" : "م/ الخلفاء الراشدين  ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.638180000000034,
+        "y" : 25.687565000000063
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 311,
+        "Name" : "م/ عمر بن الخطاب القباحى ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.65804200000008,
+        "y" : 25.691081000000054
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 312,
+        "Name" : "م/ الحاج آمين القباحي ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.655216000000053,
+        "y" : 25.692130000000077
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 313,
+        "Name" : "م/ العتيق القباحي الغربي",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.661650000000066,
+        "y" : 25.692021000000068
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 314,
+        "Name" : "م/ السمان نجع السمانين",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.664180000000044,
+        "y" : 25.696256000000062
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 318,
+        "Name" : "م/العتيق القباحي الشرقي",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.672245000000032,
+        "y" : 25.677006000000063
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 319,
+        "Name" : "م/الحاج طه ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.680909000000042,
+        "y" : 25.693872000000056
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 321,
+        "Name" : "م/ السيدة نفيسة ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.678061000000071,
+        "y" : 25.689685000000054
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 322,
+        "Name" : "م/ الامام الحسين  ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.683965000000057,
+        "y" : 25.694680000000062
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 323,
+        "Name" : "م/ عمر بن الخطاب  البنى  ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.699431000000061,
+        "y" : 25.703303000000062
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 325,
+        "Name" : "م/ الايمان نجع ريان ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.637260000000026,
+        "y" : 25.690980000000025
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 326,
+        "Name" : "الدسوقى البنا الفرقة",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.712056000000075,
+        "y" : 25.690985000000069
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 330,
+        "Name" : "م/ الرحمة الشرقى ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.70029500000004,
+        "y" : 25.684562000000028
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 331,
+        "Name" : "م/ النصر الفاخورة",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.699825000000033,
+        "y" : 25.682589000000064
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 333,
+        "Name" : "م/ الرحمن نجع سليمان ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.688605000000052,
+        "y" : 25.670074000000056
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 334,
+        "Name" : "م/ نجع غنيم ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.704348000000039,
+        "y" : 25.690528000000029
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 335,
+        "Name" : "م/ الخليفة ابو بكر الصديق ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.701174000000037,
+        "y" : 25.689250000000072
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 336,
+        "Name" : "م/ الرحمة الغربى ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.699487000000033,
+        "y" : 25.686690000000056
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 337,
+        "Name" : "م/ ال عطيتو ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.698360000000037,
+        "y" : 25.688834000000043
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 338,
+        "Name" : "م/ ال العمارى ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.696094000000073,
+        "y" : 25.687441000000035
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 341,
+        "Name" : "م/ الخليفة العتيق ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.694573000000048,
+        "y" : 25.684645000000046
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 342,
+        "Name" : "م/ عوض الله الغربى ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.691594000000066,
+        "y" : 25.685508000000027
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 343,
+        "Name" : "م/ الحاج نصر ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.691914000000054,
+        "y" : 25.68336000000005
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 344,
+        "Name" : "م/ الامام مالك ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.69740100000007,
+        "y" : 25.682470000000023
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 345,
+        "Name" : "م/ خاتم المرسلين ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.698736000000054,
+        "y" : 25.68011400000006
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 348,
+        "Name" : "م/ ساحة على القرافى ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.69166000000007,
+        "y" : 25.68076300000007
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 349,
+        "Name" : "م/ الهدى منشتح ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.687689000000034,
+        "y" : 25.680125000000032
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 350,
+        "Name" : "م/ سيدنا الحسين ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.690677000000051,
+        "y" : 25.675817000000052
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 352,
+        "Name" : "م/ السيدة زينب ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.687718000000075,
+        "y" : 25.673881000000051
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 353,
+        "Name" : "م/ احمد ابراهيم ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.688530000000071,
+        "y" : 25.672298000000069
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 355,
+        "Name" : "م/ الرحمن الساحة  ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.688456000000031,
+        "y" : 25.66987400000005
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 356,
+        "Name" : "م/ التوبة العتامين  ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.685809000000063,
+        "y" : 25.667415000000062
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 358,
+        "Name" : "م/ السوالم  ",
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.685441000000026,
+        "y" : 25.673409000000049
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 359,
+        "Name" : null,
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.629036284000051,
+        "y" : 25.672946032000027
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 360,
+        "Name" : null,
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.626804972000059,
+        "y" : 25.666416553000033
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 361,
+        "Name" : null,
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.62786128700003,
+        "y" : 25.67933301100004
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 362,
+        "Name" : null,
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.634655892000069,
+        "y" : 25.682057481000072
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 363,
+        "Name" : null,
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.629355695000072,
+        "y" : 25.685073160000059
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 364,
+        "Name" : null,
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.630313526000066,
+        "y" : 25.681965145000049
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 365,
+        "Name" : null,
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.636196429000051,
+        "y" : 25.684361051000053
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 366,
+        "Name" : null,
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.659400762000075,
+        "y" : 25.689347246000068
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 367,
+        "Name" : null,
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.65199498100003,
+        "y" : 25.694524618000059
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 368,
+        "Name" : null,
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.64428162400003,
+        "y" : 25.705677181000055
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 369,
+        "Name" : null,
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.649225632000025,
+        "y" : 25.704653617000076
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 370,
+        "Name" : null,
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.636865640000053,
+        "y" : 25.695590525000057
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 371,
+        "Name" : null,
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.641945760000056,
+        "y" : 25.689248774000077
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 372,
+        "Name" : null,
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.661185701000079,
+        "y" : 25.695154437000042
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 373,
+        "Name" : null,
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.653319214000078,
+        "y" : 25.706367815000078
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 374,
+        "Name" : null,
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.66660424500003,
+        "y" : 25.698762443000078
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 375,
+        "Name" : null,
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.66244744100004,
+        "y" : 25.715314635000027
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 376,
+        "Name" : null,
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.664944363000075,
+        "y" : 25.716452334000053
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 377,
+        "Name" : null,
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.693313512000032,
+        "y" : 25.689255647000039
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 378,
+        "Name" : null,
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.68835123100007,
+        "y" : 25.677575882000042
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 379,
+        "Name" : null,
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.688174915000047,
+        "y" : 25.692360174000044
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 380,
+        "Name" : null,
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.68752657400006,
+        "y" : 25.699800922000065
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 381,
+        "Name" : null,
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.691880368000056,
+        "y" : 25.703160718000049
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 382,
+        "Name" : null,
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.686662411000043,
+        "y" : 25.671064559000058
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 383,
+        "Name" : null,
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.685299615000076,
+        "y" : 25.668661536000059
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 384,
+        "Name" : null,
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.680265732000066,
+        "y" : 25.711573378000026
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 385,
+        "Name" : null,
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.690101871000024,
+        "y" : 25.678993386000059
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 386,
+        "Name" : null,
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.663106946000028,
+        "y" : 25.67422218300004
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 387,
+        "Name" : null,
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.672579306000046,
+        "y" : 25.684907708000026
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 388,
+        "Name" : null,
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.686684512000056,
+        "y" : 25.690220771000043
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 389,
+        "Name" : null,
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.683312339000054,
+        "y" : 25.668983916000059
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 390,
+        "Name" : null,
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.682143291000045,
+        "y" : 25.67124463500005
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 391,
+        "Name" : null,
+        "type" : null
+      },
+      "geometry" : {
+        "x" : 32.682128673000079,
+        "y" : 25.675365636000038
       }
     }
   ]
