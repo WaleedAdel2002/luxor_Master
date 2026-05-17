@@ -58,8 +58,11 @@ const redIcon = L.icon({
 });
 
 const serviceIconMap = {
-    "مستشفى": { localImage: 'images/مستشفى.png' },
-    "مدرسة": { localImage: 'images/مدرسة.jpg' },
+    "مستشفى": { localImage: 'images/school.png' },
+    "مدرسة ابتدائية": { localImage: 'images/مدرسة.jpg' },
+    "مدرسة اعدادية": { localImage: 'images/مدرسة.jpg' },
+    "مدرسة ثانوية": { localImage: 'images/مدرسة.jpg' },
+    "مدرسة رياض اطفال": { localImage: 'images/مدرسة.jpg' },
     "جامعة": { color: 'purple' },
     "مسجد": { localImage: 'images/مسجد.png' },
     "مركز صحي": { color: 'cadetblue' },
