@@ -59,21 +59,27 @@ const redIcon = L.icon({
 
 const serviceIconMap = {
     "مستشفى": { localImage: 'images/مستشفى.png' },
-    "مدرسة ابتدائية": { localImage: 'images/مدرسة.jpg' },
-    "مدرسة اعدادية": { localImage: 'images/مدرسة.jpg' },
-    "مدرسة ثانوية": { localImage: 'images/مدرسة.jpg' },
+    "مدرسة ابتدائية": { localImage: 'images/school (1).png' },
+    "مدرسة اعدادية": { localImage: 'images/school (2).png' },
+    "مدرسة ثانوية": { localImage: 'images/school (3).png' },
     "مدرسة رياض اطفال": { localImage: 'images/school.png' },
-    "جامعة": { color: 'purple' },
     "مسجد": { localImage: 'images/مسجد.png' },
-    "مركز صحي": { color: 'cadetblue' },
-    "مخبز": { localImage: 'images/bakery.png' },
-    "صيدلية": { localImage: 'images/صيدلية.png' },
-    "بنك": { localImage: 'images/بنك.jpg' },
-    "نقطة اطفاء": { localImage: 'images/اطفاء.jpg' },
-    "نقطة اسعاف": { localImage: 'images/اسعاف.png' },
-    "بريد": { localImage: 'images/بريد.png' },
+    "كنيسة": { localImage: 'images/كنيسة.png' },
+    "نقطة إطفاء": { localImage: 'images/اطفاء.jpg' },
+    "نقطة إسعاف": { localImage: 'images/اسعاف.png' },
+    "مكتب بريد": { localImage: 'images/بريد.png' },
     "شرطة": { localImage: 'images/شرطة.jpg' },
-    "مدرسة اعدادية": { localImage: 'images/مدرسة.jpg' },
+    "قصر ثقافة": { localImage: 'images/diocletian-palace.png' },
+    "مركز شباب": { localImage: 'images/pennant.png' },
+    "نادي رياضي": { localImage: 'images/club.png' },
+    "معبد | متحف": { localImage: 'images/museum.png' },
+
+
+
+
+
+
+
     // أضف المزيد من الأنواع هنا مع مسارات صورك المحلية أو الألوان
 };
 
