@@ -2313,7 +2313,7 @@
       "attributes" : {
         "OBJECTID" : 208,
         "Name" : "م/ سيدى ابو الحجاج",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.639689000000033,
@@ -2324,7 +2324,7 @@
       "attributes" : {
         "OBJECTID" : 209,
         "Name" : "م/ احمد النجم  ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.640887000000077,
@@ -2335,7 +2335,7 @@
       "attributes" : {
         "OBJECTID" : 210,
         "Name" : "م/ محسب  ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.64204600000005,
@@ -2346,7 +2346,7 @@
       "attributes" : {
         "OBJECTID" : 211,
         "Name" : "م/ ابو عياد ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.643842000000063,
@@ -2357,7 +2357,7 @@
       "attributes" : {
         "OBJECTID" : 212,
         "Name" : "م/ صلاح الدين  ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.641146000000049,
@@ -2368,7 +2368,7 @@
       "attributes" : {
         "OBJECTID" : 213,
         "Name" : "م/ على القرافي ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.649304000000029,
@@ -2379,7 +2379,7 @@
       "attributes" : {
         "OBJECTID" : 214,
         "Name" : "م/ الشيخ الصابوني ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.647236000000078,
@@ -2390,7 +2390,7 @@
       "attributes" : {
         "OBJECTID" : 215,
         "Name" : "م/ الشبان المسلمين  ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.64650000000006,
@@ -2401,7 +2401,7 @@
       "attributes" : {
         "OBJECTID" : 216,
         "Name" : "م/ الشيخ ابو الجود ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.650704000000076,
@@ -2412,7 +2412,7 @@
       "attributes" : {
         "OBJECTID" : 217,
         "Name" : "م/ الراضي  ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.655223000000035,
@@ -2423,7 +2423,7 @@
       "attributes" : {
         "OBJECTID" : 219,
         "Name" : "م/ الثقافة الاسلامية ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.644282000000032,
@@ -2434,7 +2434,7 @@
       "attributes" : {
         "OBJECTID" : 221,
         "Name" : "م/ اسماعيل المقشقش ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.643735000000049,
@@ -2445,7 +2445,7 @@
       "attributes" : {
         "OBJECTID" : 222,
         "Name" : "م/ البر و التقوي ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.644544000000053,
@@ -2456,7 +2456,7 @@
       "attributes" : {
         "OBJECTID" : 223,
         "Name" : "م/ عيد سقاو ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.645506000000069,
@@ -2467,7 +2467,7 @@
       "attributes" : {
         "OBJECTID" : 225,
         "Name" : "م/ سيدى محمود ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.64321700000005,
@@ -2478,7 +2478,7 @@
       "attributes" : {
         "OBJECTID" : 226,
         "Name" : "م/ الصالحين  ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.665057000000047,
@@ -2489,7 +2489,7 @@
       "attributes" : {
         "OBJECTID" : 227,
         "Name" : "م/ الشيخ فرج  ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.641340000000071,
@@ -2500,7 +2500,7 @@
       "attributes" : {
         "OBJECTID" : 229,
         "Name" : "م/ الوحشي  ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.643541000000027,
@@ -2511,7 +2511,7 @@
       "attributes" : {
         "OBJECTID" : 230,
         "Name" : "م/ الشيخ السمان ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.641890000000046,
@@ -2522,7 +2522,7 @@
       "attributes" : {
         "OBJECTID" : 231,
         "Name" : "م/ الرحمن الدريسة ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.643178000000034,
@@ -2533,7 +2533,7 @@
       "attributes" : {
         "OBJECTID" : 232,
         "Name" : "م/ عمر بن الخطاب   ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.635548000000028,
@@ -2544,7 +2544,7 @@
       "attributes" : {
         "OBJECTID" : 234,
         "Name" : "م/  البنا  ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.641503000000057,
@@ -2555,7 +2555,7 @@
       "attributes" : {
         "OBJECTID" : 235,
         "Name" : "م/ الحرمين    ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.642383000000052,
@@ -2566,7 +2566,7 @@
       "attributes" : {
         "OBJECTID" : 236,
         "Name" : "م/ حمزه بن عبد المنطلب ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.638392000000067,
@@ -2577,7 +2577,7 @@
       "attributes" : {
         "OBJECTID" : 237,
         "Name" : "م/ التوبة الجزيرة",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.637129000000073,
@@ -2588,7 +2588,7 @@
       "attributes" : {
         "OBJECTID" : 241,
         "Name" : "م/ السلام العوامية ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.639712000000031,
@@ -2599,7 +2599,7 @@
       "attributes" : {
         "OBJECTID" : 244,
         "Name" : "م/ الرحمن البستة  ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.640629000000047,
@@ -2610,7 +2610,7 @@
       "attributes" : {
         "OBJECTID" : 245,
         "Name" : "م/ العتيق العوامية ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.632984000000079,
@@ -2621,7 +2621,7 @@
       "attributes" : {
         "OBJECTID" : 246,
         "Name" : "م/ النور السن\u0651ي  العوامية",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.636588000000074,
@@ -2632,7 +2632,7 @@
       "attributes" : {
         "OBJECTID" : 247,
         "Name" : "م/ النصر العوامية ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.632592000000045,
@@ -2643,7 +2643,7 @@
       "attributes" : {
         "OBJECTID" : 249,
         "Name" : "م/ الرحمن النادي الرياضي ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.63514500000008,
@@ -2654,7 +2654,7 @@
       "attributes" : {
         "OBJECTID" : 250,
         "Name" : "م/ الشهيد عليان المدينة",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.639338000000066,
@@ -2665,7 +2665,7 @@
       "attributes" : {
         "OBJECTID" : 251,
         "Name" : "م/ محمد حسين المدينة ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.639414000000045,
@@ -2676,7 +2676,7 @@
       "attributes" : {
         "OBJECTID" : 253,
         "Name" : "م/ الاحسان المدينة",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.638355000000047,
@@ -2687,7 +2687,7 @@
       "attributes" : {
         "OBJECTID" : 254,
         "Name" : "م/ ال البيت المدينة",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.636106000000041,
@@ -2698,7 +2698,7 @@
       "attributes" : {
         "OBJECTID" : 255,
         "Name" : "م/ السيد يوسف ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.648116000000073,
@@ -2709,7 +2709,7 @@
       "attributes" : {
         "OBJECTID" : 256,
         "Name" : "م/ الشيخ موسي ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.652045000000044,
@@ -2720,7 +2720,7 @@
       "attributes" : {
         "OBJECTID" : 257,
         "Name" : "م/ عبد الله أعوض ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.651691000000028,
@@ -2731,7 +2731,7 @@
       "attributes" : {
         "OBJECTID" : 258,
         "Name" : "م/ السيدة عائشة  ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.652687000000071,
@@ -2742,7 +2742,7 @@
       "attributes" : {
         "OBJECTID" : 259,
         "Name" : "م/ السلام السبتية ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.654529000000025,
@@ -2753,7 +2753,7 @@
       "attributes" : {
         "OBJECTID" : 260,
         "Name" : "م/ عمار بن ياسر ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.65405700000008,
@@ -2764,7 +2764,7 @@
       "attributes" : {
         "OBJECTID" : 261,
         "Name" : "م/ عبد الهادي الكرنك",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.653525000000059,
@@ -2775,7 +2775,7 @@
       "attributes" : {
         "OBJECTID" : 262,
         "Name" : "م/ الرفاعي الكرنك",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.655373000000054,
@@ -2786,7 +2786,7 @@
       "attributes" : {
         "OBJECTID" : 263,
         "Name" : "م/ خالد بن الوليد ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.654099000000031,
@@ -2797,7 +2797,7 @@
       "attributes" : {
         "OBJECTID" : 264,
         "Name" : "م/ عمرو بن العاص ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.656965000000071,
@@ -2808,7 +2808,7 @@
       "attributes" : {
         "OBJECTID" : 265,
         "Name" : "م/ الشيخ الطاهر الحامدي ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.656145700000025,
@@ -2819,7 +2819,7 @@
       "attributes" : {
         "OBJECTID" : 266,
         "Name" : "م/ الشيخ عوض الله ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.658222000000023,
@@ -2830,7 +2830,7 @@
       "attributes" : {
         "OBJECTID" : 267,
         "Name" : "م/ عقبة بن نافع ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.66084120000005,
@@ -2841,7 +2841,7 @@
       "attributes" : {
         "OBJECTID" : 268,
         "Name" : "م/ النور الملقطة ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.661992000000055,
@@ -2852,7 +2852,7 @@
       "attributes" : {
         "OBJECTID" : 269,
         "Name" : "م/ مأمون الطواب ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.662285000000054,
@@ -2863,7 +2863,7 @@
       "attributes" : {
         "OBJECTID" : 270,
         "Name" : "م/ احمد عبد الرحيم ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.664477000000034,
@@ -2874,7 +2874,7 @@
       "attributes" : {
         "OBJECTID" : 271,
         "Name" : "م/ الشعراوي بدران ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.664961000000062,
@@ -2885,7 +2885,7 @@
       "attributes" : {
         "OBJECTID" : 272,
         "Name" : "م/ العتيق بدران ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.664870000000064,
@@ -2896,7 +2896,7 @@
       "attributes" : {
         "OBJECTID" : 273,
         "Name" : "م/ خليل العماري ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.659080000000074,
@@ -2907,7 +2907,7 @@
       "attributes" : {
         "OBJECTID" : 274,
         "Name" : "م/ نور الايمان ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.660982000000047,
@@ -2918,7 +2918,7 @@
       "attributes" : {
         "OBJECTID" : 275,
         "Name" : "م/ الهدى الشهاينة  ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.657313000000045,
@@ -2929,7 +2929,7 @@
       "attributes" : {
         "OBJECTID" : 276,
         "Name" : "م/ ال البقري الكرنك",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.659301000000028,
@@ -2940,7 +2940,7 @@
       "attributes" : {
         "OBJECTID" : 277,
         "Name" : "م/ المعز المستعمرة ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.661579000000074,
@@ -2951,7 +2951,7 @@
       "attributes" : {
         "OBJECTID" : 278,
         "Name" : "م/ النور الطينة ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.658378000000027,
@@ -2962,7 +2962,7 @@
       "attributes" : {
         "OBJECTID" : 279,
         "Name" : "م/ نجع عبادي ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.660743000000025,
@@ -2973,7 +2973,7 @@
       "attributes" : {
         "OBJECTID" : 280,
         "Name" : "م/ الايمان نجع الجالس ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.663997000000052,
@@ -2984,7 +2984,7 @@
       "attributes" : {
         "OBJECTID" : 281,
         "Name" : "م/ نجع جودة الكرنك",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.667970000000025,
@@ -2995,7 +2995,7 @@
       "attributes" : {
         "OBJECTID" : 282,
         "Name" : "م/ عمر بن الخطاب الكرنك",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.664124000000072,
@@ -3006,7 +3006,7 @@
       "attributes" : {
         "OBJECTID" : 284,
         "Name" : "م/ الشيخ مبارك  ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.66987000000006,
@@ -3017,7 +3017,7 @@
       "attributes" : {
         "OBJECTID" : 285,
         "Name" : "م/ السيدة نفيسة ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.659031000000027,
@@ -3028,7 +3028,7 @@
       "attributes" : {
         "OBJECTID" : 286,
         "Name" : "م/ الشيخ العجمي ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.666373000000078,
@@ -3039,7 +3039,7 @@
       "attributes" : {
         "OBJECTID" : 287,
         "Name" : "م/ السلام نجع الطويل",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.665015000000039,
@@ -3050,7 +3050,7 @@
       "attributes" : {
         "OBJECTID" : 288,
         "Name" : "م/ الرحمن الاربعين ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.664712000000065,
@@ -3061,7 +3061,7 @@
       "attributes" : {
         "OBJECTID" : 289,
         "Name" : "م/ النور الجداوية ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.664145000000076,
@@ -3072,7 +3072,7 @@
       "attributes" : {
         "OBJECTID" : 291,
         "Name" : "م/ الرحمن مصنع الثلج ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.660751000000062,
@@ -3083,7 +3083,7 @@
       "attributes" : {
         "OBJECTID" : 292,
         "Name" : "م/ الرحمة   حسونة ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.672992000000079,
@@ -3094,7 +3094,7 @@
       "attributes" : {
         "OBJECTID" : 293,
         "Name" : "م/ التوبة العوابد ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.675600000000031,
@@ -3105,7 +3105,7 @@
       "attributes" : {
         "OBJECTID" : 294,
         "Name" : "م/ بدوى المأمون ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.677984000000038,
@@ -3116,7 +3116,7 @@
       "attributes" : {
         "OBJECTID" : 296,
         "Name" : "م/على بن ابى طالب ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.640628000000049,
@@ -3127,7 +3127,7 @@
       "attributes" : {
         "OBJECTID" : 297,
         "Name" : "م/ عبد الله بن مسعود ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.647456000000034,
@@ -3138,7 +3138,7 @@
       "attributes" : {
         "OBJECTID" : 298,
         "Name" : "م/ السيد ة زينب ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.645972000000029,
@@ -3149,7 +3149,7 @@
       "attributes" : {
         "OBJECTID" : 299,
         "Name" : "م/ فاطمة الزهراء ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.649478000000045,
@@ -3160,7 +3160,7 @@
       "attributes" : {
         "OBJECTID" : 300,
         "Name" : "م/ جمال ابو زيد ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.651288000000079,
@@ -3171,7 +3171,7 @@
       "attributes" : {
         "OBJECTID" : 301,
         "Name" : "م/ الشيخ حفني ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.647640000000024,
@@ -3182,7 +3182,7 @@
       "attributes" : {
         "OBJECTID" : 303,
         "Name" : "م/ مشايخ عطية ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.651661000000047,
@@ -3193,7 +3193,7 @@
       "attributes" : {
         "OBJECTID" : 306,
         "Name" : "م/ العتيق  الخطباء",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.647103000000072,
@@ -3204,7 +3204,7 @@
       "attributes" : {
         "OBJECTID" : 307,
         "Name" : "م/ الرحمن  الخطباء",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.65017000000006,
@@ -3215,7 +3215,7 @@
       "attributes" : {
         "OBJECTID" : 308,
         "Name" : "م/ الانوار المحمدية  ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.646332000000029,
@@ -3226,7 +3226,7 @@
       "attributes" : {
         "OBJECTID" : 309,
         "Name" : "م/ ابو الخلى الجواهرة",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.653782000000035,
@@ -3237,7 +3237,7 @@
       "attributes" : {
         "OBJECTID" : 310,
         "Name" : "م/ الخلفاء الراشدين  ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.638180000000034,
@@ -3248,7 +3248,7 @@
       "attributes" : {
         "OBJECTID" : 311,
         "Name" : "م/ عمر بن الخطاب القباحى ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.65804200000008,
@@ -3259,7 +3259,7 @@
       "attributes" : {
         "OBJECTID" : 312,
         "Name" : "م/ الحاج آمين القباحي ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.655216000000053,
@@ -3270,7 +3270,7 @@
       "attributes" : {
         "OBJECTID" : 313,
         "Name" : "م/ العتيق القباحي الغربي",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.661650000000066,
@@ -3281,7 +3281,7 @@
       "attributes" : {
         "OBJECTID" : 314,
         "Name" : "م/ السمان نجع السمانين",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.664180000000044,
@@ -3292,7 +3292,7 @@
       "attributes" : {
         "OBJECTID" : 318,
         "Name" : "م/العتيق القباحي الشرقي",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.672245000000032,
@@ -3303,7 +3303,7 @@
       "attributes" : {
         "OBJECTID" : 319,
         "Name" : "م/الحاج طه ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.680909000000042,
@@ -3314,7 +3314,7 @@
       "attributes" : {
         "OBJECTID" : 321,
         "Name" : "م/ السيدة نفيسة ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.678061000000071,
@@ -3325,7 +3325,7 @@
       "attributes" : {
         "OBJECTID" : 322,
         "Name" : "م/ الامام الحسين  ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.683965000000057,
@@ -3336,7 +3336,7 @@
       "attributes" : {
         "OBJECTID" : 323,
         "Name" : "م/ عمر بن الخطاب  البنى  ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.699431000000061,
@@ -3347,7 +3347,7 @@
       "attributes" : {
         "OBJECTID" : 325,
         "Name" : "م/ الايمان نجع ريان ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.637260000000026,
@@ -3358,7 +3358,7 @@
       "attributes" : {
         "OBJECTID" : 326,
         "Name" : "الدسوقى البنا الفرقة",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.712056000000075,
@@ -3369,7 +3369,7 @@
       "attributes" : {
         "OBJECTID" : 330,
         "Name" : "م/ الرحمة الشرقى ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.70029500000004,
@@ -3380,7 +3380,7 @@
       "attributes" : {
         "OBJECTID" : 331,
         "Name" : "م/ النصر الفاخورة",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.699825000000033,
@@ -3391,7 +3391,7 @@
       "attributes" : {
         "OBJECTID" : 333,
         "Name" : "م/ الرحمن نجع سليمان ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.688605000000052,
@@ -3402,7 +3402,7 @@
       "attributes" : {
         "OBJECTID" : 334,
         "Name" : "م/ نجع غنيم ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.704348000000039,
@@ -3413,7 +3413,7 @@
       "attributes" : {
         "OBJECTID" : 335,
         "Name" : "م/ الخليفة ابو بكر الصديق ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.701174000000037,
@@ -3424,7 +3424,7 @@
       "attributes" : {
         "OBJECTID" : 336,
         "Name" : "م/ الرحمة الغربى ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.699487000000033,
@@ -3435,7 +3435,7 @@
       "attributes" : {
         "OBJECTID" : 337,
         "Name" : "م/ ال عطيتو ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.698360000000037,
@@ -3446,7 +3446,7 @@
       "attributes" : {
         "OBJECTID" : 338,
         "Name" : "م/ ال العمارى ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.696094000000073,
@@ -3457,7 +3457,7 @@
       "attributes" : {
         "OBJECTID" : 341,
         "Name" : "م/ الخليفة العتيق ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.694573000000048,
@@ -3468,7 +3468,7 @@
       "attributes" : {
         "OBJECTID" : 342,
         "Name" : "م/ عوض الله الغربى ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.691594000000066,
@@ -3479,7 +3479,7 @@
       "attributes" : {
         "OBJECTID" : 343,
         "Name" : "م/ الحاج نصر ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.691914000000054,
@@ -3490,7 +3490,7 @@
       "attributes" : {
         "OBJECTID" : 344,
         "Name" : "م/ الامام مالك ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.69740100000007,
@@ -3501,7 +3501,7 @@
       "attributes" : {
         "OBJECTID" : 345,
         "Name" : "م/ خاتم المرسلين ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.698736000000054,
@@ -3512,7 +3512,7 @@
       "attributes" : {
         "OBJECTID" : 348,
         "Name" : "م/ ساحة على القرافى ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.69166000000007,
@@ -3523,7 +3523,7 @@
       "attributes" : {
         "OBJECTID" : 349,
         "Name" : "م/ الهدى منشتح ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.687689000000034,
@@ -3534,7 +3534,7 @@
       "attributes" : {
         "OBJECTID" : 350,
         "Name" : "م/ سيدنا الحسين ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.690677000000051,
@@ -3545,7 +3545,7 @@
       "attributes" : {
         "OBJECTID" : 352,
         "Name" : "م/ السيدة زينب ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.687718000000075,
@@ -3556,7 +3556,7 @@
       "attributes" : {
         "OBJECTID" : 353,
         "Name" : "م/ احمد ابراهيم ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.688530000000071,
@@ -3567,7 +3567,7 @@
       "attributes" : {
         "OBJECTID" : 355,
         "Name" : "م/ الرحمن الساحة  ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.688456000000031,
@@ -3578,7 +3578,7 @@
       "attributes" : {
         "OBJECTID" : 356,
         "Name" : "م/ التوبة العتامين  ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.685809000000063,
@@ -3589,7 +3589,7 @@
       "attributes" : {
         "OBJECTID" : 358,
         "Name" : "م/ السوالم  ",
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.685441000000026,
@@ -3600,7 +3600,7 @@
       "attributes" : {
         "OBJECTID" : 359,
         "Name" : null,
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.629036284000051,
@@ -3611,7 +3611,7 @@
       "attributes" : {
         "OBJECTID" : 360,
         "Name" : null,
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.626804972000059,
@@ -3622,7 +3622,7 @@
       "attributes" : {
         "OBJECTID" : 361,
         "Name" : null,
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.62786128700003,
@@ -3633,7 +3633,7 @@
       "attributes" : {
         "OBJECTID" : 362,
         "Name" : null,
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.634655892000069,
@@ -3644,7 +3644,7 @@
       "attributes" : {
         "OBJECTID" : 363,
         "Name" : null,
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.629355695000072,
@@ -3655,7 +3655,7 @@
       "attributes" : {
         "OBJECTID" : 364,
         "Name" : null,
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.630313526000066,
@@ -3666,7 +3666,7 @@
       "attributes" : {
         "OBJECTID" : 365,
         "Name" : null,
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.636196429000051,
@@ -3677,7 +3677,7 @@
       "attributes" : {
         "OBJECTID" : 366,
         "Name" : null,
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.659400762000075,
@@ -3688,7 +3688,7 @@
       "attributes" : {
         "OBJECTID" : 367,
         "Name" : null,
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.65199498100003,
@@ -3699,7 +3699,7 @@
       "attributes" : {
         "OBJECTID" : 368,
         "Name" : null,
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.64428162400003,
@@ -3710,7 +3710,7 @@
       "attributes" : {
         "OBJECTID" : 369,
         "Name" : null,
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.649225632000025,
@@ -3721,7 +3721,7 @@
       "attributes" : {
         "OBJECTID" : 370,
         "Name" : null,
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.636865640000053,
@@ -3732,7 +3732,7 @@
       "attributes" : {
         "OBJECTID" : 371,
         "Name" : null,
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.641945760000056,
@@ -3743,7 +3743,7 @@
       "attributes" : {
         "OBJECTID" : 372,
         "Name" : null,
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.661185701000079,
@@ -3754,7 +3754,7 @@
       "attributes" : {
         "OBJECTID" : 373,
         "Name" : null,
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.653319214000078,
@@ -3765,7 +3765,7 @@
       "attributes" : {
         "OBJECTID" : 374,
         "Name" : null,
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.66660424500003,
@@ -3776,7 +3776,7 @@
       "attributes" : {
         "OBJECTID" : 375,
         "Name" : null,
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.66244744100004,
@@ -3787,7 +3787,7 @@
       "attributes" : {
         "OBJECTID" : 376,
         "Name" : null,
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.664944363000075,
@@ -3798,7 +3798,7 @@
       "attributes" : {
         "OBJECTID" : 377,
         "Name" : null,
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.693313512000032,
@@ -3809,7 +3809,7 @@
       "attributes" : {
         "OBJECTID" : 378,
         "Name" : null,
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.68835123100007,
@@ -3820,7 +3820,7 @@
       "attributes" : {
         "OBJECTID" : 379,
         "Name" : null,
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.688174915000047,
@@ -3831,7 +3831,7 @@
       "attributes" : {
         "OBJECTID" : 380,
         "Name" : null,
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.68752657400006,
@@ -3842,7 +3842,7 @@
       "attributes" : {
         "OBJECTID" : 381,
         "Name" : null,
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.691880368000056,
@@ -3853,7 +3853,7 @@
       "attributes" : {
         "OBJECTID" : 382,
         "Name" : null,
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.686662411000043,
@@ -3864,7 +3864,7 @@
       "attributes" : {
         "OBJECTID" : 383,
         "Name" : null,
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.685299615000076,
@@ -3875,7 +3875,7 @@
       "attributes" : {
         "OBJECTID" : 384,
         "Name" : null,
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.680265732000066,
@@ -3886,7 +3886,7 @@
       "attributes" : {
         "OBJECTID" : 385,
         "Name" : null,
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.690101871000024,
@@ -3897,7 +3897,7 @@
       "attributes" : {
         "OBJECTID" : 386,
         "Name" : null,
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.663106946000028,
@@ -3908,7 +3908,7 @@
       "attributes" : {
         "OBJECTID" : 387,
         "Name" : null,
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.672579306000046,
@@ -3919,7 +3919,7 @@
       "attributes" : {
         "OBJECTID" : 388,
         "Name" : null,
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.686684512000056,
@@ -3930,7 +3930,7 @@
       "attributes" : {
         "OBJECTID" : 389,
         "Name" : null,
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.683312339000054,
@@ -3941,7 +3941,7 @@
       "attributes" : {
         "OBJECTID" : 390,
         "Name" : null,
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.682143291000045,
@@ -3952,7 +3952,7 @@
       "attributes" : {
         "OBJECTID" : 391,
         "Name" : null,
-        "type" : null
+        "type" : "مسجد"
       },
       "geometry" : {
         "x" : 32.682128673000079,
