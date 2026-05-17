@@ -102,7 +102,7 @@ function getServiceIcon(type) {
     const iconConfig = serviceIconMap[type];
     let iconUrl;
     let iconOptions = {
-        iconSize: [20, 30],
+        iconSize: [18, 26],
         iconAnchor: [12, 41],
         popupAnchor: [1, -34],
     };
