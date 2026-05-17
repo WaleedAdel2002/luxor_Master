@@ -1,5 +1,5 @@
 {
-  "displayFieldName" : "",
+  "displayFieldName" : "type",
   "fieldAliases" : {
     "OBJECTID" : "OBJECTID",
     "Name" : "Name",
