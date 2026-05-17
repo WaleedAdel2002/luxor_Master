@@ -58,14 +58,14 @@ const redIcon = L.icon({
 });
 
 const serviceIconMap = {
-    "مستشفى": { localImage: 'images/مستشفى.png' },
+    "مستشفي": { localImage: 'images/مستشفى.png' },
     "مدرسة ابتدائية": { localImage: 'images/school (1).png' },
     "مدرسة اعدادية": { localImage: 'images/school (2).png' },
     "مدرسة ثانوية": { localImage: 'images/school (3).png' },
     "مدرسة رياض اطفال": { localImage: 'images/school.png' },
     "مسجد": { localImage: 'images/مسجد.png' },
     "كنيسة": { localImage: 'images/كنيسة.png' },
-    "نقطة إطفاء": { localImage: 'images/اطفاء.jpg' },
+    "نقطة إطفاء": { localImage: 'images/fire.png' },
     "نقطة إسعاف": { localImage: 'images/اسعاف.png' },
     "مكتب بريد": { localImage: 'images/بريد.png' },
     "شرطة": { localImage: 'images/شرطة.jpg' },
@@ -73,11 +73,7 @@ const serviceIconMap = {
     "مركز شباب": { localImage: 'images/pennant.png' },
     "نادي رياضي": { localImage: 'images/club.png' },
     "معبد | متحف": { localImage: 'images/museum.png' },
-
-
-
-
-
+    "مكتبة عامة": { localImage: 'images/public-library.png' },
 
 
     // أضف المزيد من الأنواع هنا مع مسارات صورك المحلية أو الألوان
