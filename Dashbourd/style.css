@@ -1,5 +1,5 @@
 :root {
-    --bg-dark: #121824;
+    --bg-dark: #0f172a;
     --bg-card: #1e293b;
     --text-main: #f8fafc;
     --text-muted: #94a3b8;
@@ -137,15 +137,6 @@ header h1 {
     height: 100%;
 }
 
-.leaflet-control-layers {
-    background: var(--bg-card) !important;
-    color: var(--text-main) !important;
-    border: 1px solid var(--border-color) !important;
-    font-family: 'Cairo', sans-serif !important;
-    font-size: 0.85rem !important;
-    border-radius: 6px !important;
-}
-
 .analytics-top {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -193,24 +184,38 @@ header h1 {
 table {
     width: 100%;
     border-collapse: collapse;
-    text-align: right;
-    font-size: 0.9rem;
+    text-align: center;
+    font-size: 0.88rem;
 }
 
 th, td {
-    padding: 12px 15px;
+    padding: 12px 10px;
     border-bottom: 1px solid var(--border-color);
 }
 
 th {
-    background-color: var(--bg-dark);
-    color: var(--accent-color);
+    background-color: #111827;
+    color: var(--text-muted);
+    font-weight: 600;
     position: sticky;
     top: 0;
 }
 
+.index-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: #334155;
+    color: var(--text-main);
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
 tr:hover {
-    background-color: rgba(56, 189, 248, 0.05);
+    background-color: rgba(56, 189, 248, 0.03);
 }
 
 @media (max-width: 1024px) {

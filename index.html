@@ -8,6 +8,31 @@
     <link rel="stylesheet" href="project-style.css">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+        /* الحاوية الرأسية للأزرار */
+        .buttons-vertical-container {
+            display: flex;
+            flex-direction: column;
+            gap: 8px; /* تقليل المسافة بين الزرين */
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* التحكم في تصغير حجم الأزرار وتوحيد أبعادها */
+        .buttons-vertical-container .access-map-button {
+            padding: 8px 16px !important; /* تقليل الحشو الداخلي لجعل الزر نحيفاً */
+            font-size: 0.85rem !important; /* تصغير حجم خط النص داخل الزر */
+            min-width: 180px !important;   /* تحديد عرض أدنى موحد للزرين */
+            max-width: 220px !important;   /* تحديد عرض أقصى لكي لا يتمدد الزر */
+            text-align: center;
+        }
+
+        /* تصغير حجم الأيقونة داخل الأزرار بالتناسب */
+        .buttons-vertical-container .access-map-button i {
+            font-size: 0.9rem !important;
+            margin-left: 6px;
+        }
+    </style>
 </head>
 <body>
 
@@ -20,10 +45,14 @@
 العامة في مدينة الاقصر</h1>
                 <p>دراسة تطبيقية في الذكاء الاصطناعي الجغرافي</p>
             </div>
-<a href="index2.html" class="access-map-button">
-    <i class="fas fa-map"></i> زيارة منصة الخرائط
-</a>
-            <img src="images/جامعة قنا.jpg" alt="شعار جامعة قنا" class="header-logo1">
+<div class="buttons-vertical-container">
+                <a href="index2.html" class="access-map-button">
+                    <i class="fas fa-map"></i> زيارة منصة الخرائط
+                </a>
+                <a href="Dashbourd\index.html" class="access-map-button">
+                    <i class="fas fa-chart-pie"></i> زيارة منصة المعلومات
+                </a>
+            </div>            <img src="images/جامعة قنا.jpg" alt="شعار جامعة قنا" class="header-logo1">
         </div>
     </header>
 

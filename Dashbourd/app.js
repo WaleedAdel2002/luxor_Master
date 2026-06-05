@@ -4,130 +4,92 @@ document.getElementById('current-time').innerText = `تاريخ التحديث: 
 // 2. بناء الخريطة التفاعلية وضبط مركز العرض الافتراضي على مدينة الأقصر
 const map = L.map('map').setView([25.69, 32.65], 13); 
 
-// إعداد خرائط الأساس التفاعلية المختلفة
+// إعداد خريطة الأساس من نوع الصور الجوية المضيئة الفاتحة لـ Esri
 const satelliteMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { 
     attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS' 
-});
+}).addTo(map);
 
-const darkMap = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { 
-    attribution: '&copy; OpenStreetMap &copy; CARTO' 
-});
+const darkMap = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { attribution: '&copy; OpenStreetMap &copy; CARTO' });
+const lightMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap contributors' });
 
-const lightMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { 
-    attribution: '&copy; OpenStreetMap contributors' 
-});
+L.control.layers({ "مرئية القمر الصناعي": satelliteMap, "الخريطة الداكنة": darkMap, "خريطة الشوارع": lightMap }, null, { position: 'topright' }).addTo(map);
 
-// تفعيل خريطة الصور الجوية (القمر الصناعي) المضيئة كـ ثيم افتراضي فوري عند فتح الصفحة
-satelliteMap.addTo(map);
-
-// إضافة أداة التبديل بين الخرائط بالزاوية العليا اليمنى
-L.control.layers({ 
-    "مرئية القمر الصناعي (الافتراضية)": satelliteMap,
-    "الخريطة الداكنة": darkMap, 
-    "خريطة الشوارع المضيئة": lightMap 
-}, null, { position: 'topright' }).addTo(map);
-
-// 3. مسار ملف نقاط الخدمات الفعلي الخاص بك داخل مجلد data
+// 3. مسارات ملفات الـ JSON المشتركة داخل مجلد data
 const servicesPointsUrl = 'data/services_points.json'; 
+const coveragePolygonsUrl = 'data/services_coverage.json'; 
 
 let extractedServicesData = {}; 
 let currentPointsLayer = L.layerGroup().addTo(map);
 let currentCoverageLayer = L.layerGroup().addTo(map);
 let coverageChart, populationChart;
 
-// 4. دالة جلب وقراءة ملف الـ JSON الخاص بك ومعالجة الحقول ديناميكياً
+// تسجيل الملحق الخاص بإظهار الـ Labels المئوية داخل الرسوم البيانية
+Chart.register(ChartDataLabels);
+
+// دالة مساعدة مخصصة لإضافة الفواصل العادية للأرقام الإنجليزية القياسية (مثل 142,375) منعا لظهور الأرقام العربية
+function formatEnglishNumber(num) {
+    if (num === null || num === undefined) return "-";
+    return num.toString().replace(/\B(?=(\d3)+(?!\d))/g, ",");
+}
+
+// 4. دالة جلب وقراءة ملف نقاط الخدمات واكتشاف الأنواع بالكامل
 function loadServicesPoints() {
     fetch(servicesPointsUrl)
-        .then(response => {
-            if (!response.ok) throw new Error("يرجى التأكد من تشغيل المشروع عبر Live Server ووجود الملف بمساره الصحيح.");
-            return response.json();
-        })
+        .then(response => response.json())
         .then(geoJsonData => {
-            extractedServicesData = {}; // تصفير المصفوفة منعاً للتكرار
+            extractedServicesData = {}; 
             currentPointsLayer.clearLayers();
             
-            const pointsJsonLayer = L.geoJSON(geoJsonData, {
-                pointToLayer: function (feature, latlng) {
-                    // تمثيل النقاط كعلامات حمراء أو برتقالية لتظهر بوضوح حاد فوق الصور الجوية الفاتحة
-                    return L.circleMarker(latlng, { radius: 6, fillColor: '#ef4444', color: '#fff', weight: 1.5, fillOpacity: 0.9 });
-                },
-                onEachFeature: function (feature, layer) {
-                    if (feature.properties) {
-                        // قراءة الحقول الفعلية الحساسة لحالة الأحرف من ملفك الفعلي (service_type و Name)
-                        const type = feature.properties.service_type || "خدمات غير مصنفة";
-                        const name = feature.properties.Name || "منشأة بدون اسم";
-                        
-                        // تجميع التعداد الإحصائي التلقائي لكل خدمة مكتشفة في الملف
-                        if (!extractedServicesData[type]) {
-                            extractedServicesData[type] = { count: 0, served: 0, unserved: 0 };
-                        }
-                        extractedServicesData[type].count += 1;
-                        
-                        layer.bindPopup(`<b>نوع الخدمة:</b> ${type}<br><b>اسم المنشأة:</b> ${name}`);
+            geoJsonData.features.forEach(feature => {
+                if (feature.properties) {
+                    const type = feature.properties.service_type || "خدمات غير مصنفة";
+                    if (!extractedServicesData[type]) {
+                        extractedServicesData[type] = { 
+                            count: 0, 
+                            servedPop: null, unservedPop: null,
+                            servedArea: null, unservedArea: null 
+                        };
+                    }
+                    extractedServicesData[type].count += 1;
+                }
+            });
+
+            updateDropdownFilters();
+            loadUnifiedCoverageData();
+        })
+        .catch(err => console.error("خطأ أثناء معالجة البيانات الجغرافية:", err));
+}
+
+// 5. قراءة ملف النطاقات الموحد (Polygons) وتجميع الحقول الأربعة الصارمة
+function loadUnifiedCoverageData() {
+    fetch(coveragePolygonsUrl)
+        .then(response => response.json())
+        .then(polygonData => {
+            polygonData.features.forEach(feature => {
+                if (feature.properties) {
+                    const type = feature.properties.service_type || feature.properties.Service_type;
+                    
+                    if (extractedServicesData[type]) {
+                        const sPop = parseInt(feature.properties.served_population);
+                        const uPop = parseInt(feature.properties.unserved_population);
+                        const sArea = parseFloat(feature.properties.served_area);
+                        const uArea = parseFloat(feature.properties.unserved_area);
+
+                        if (!isNaN(sPop)) extractedServicesData[type].servedPop = (extractedServicesData[type].servedPop || 0) + sPop;
+                        if (!isNaN(uPop)) extractedServicesData[type].unservedPop = (extractedServicesData[type].unservedPop || 0) + uPop;
+                        if (!isNaN(sArea)) extractedServicesData[type].servedArea = (extractedServicesData[type].servedArea || 0) + sArea;
+                        if (!isNaN(uArea)) extractedServicesData[type].unservedArea = (extractedServicesData[type].unservedArea || 0) + uArea;
                     }
                 }
-            }).addTo(currentPointsLayer);
-
-            // عمل زووم تلقائي واحتواء فوري للخريطة لتشمل كل نقاط الملف المرفق
-            if (geoJsonData.features && geoJsonData.features.length > 0) {
-                map.fitBounds(pointsJsonLayer.getBounds());
-            }
-
-            // تحديث قائمة الاختيارات الجانبية والجدول بالخدمات المكتشفة تلقائياً
-            updateDropdownFilters();
-            loadAllCoverageDataAutomated();
+            });
+            renderDashboardElements("all");
         })
-        .catch(err => {
-            console.error("خطأ أثناء معالجة البيانات الجغرافية:", err);
-            alert("تنبيه: لم تظهر الخدمات لأنك تفتح الملف مباشرة من جهازك. يرجى كليك يمين على index.html واختيار Open with Live Server داخل VS Code.");
+        .catch(() => {
+            renderDashboardElements("all");
         });
 }
 
-// 5. دالة توليد وقراءة مسارات ملفات النطاقات اللاحقة بنفس صيغة ملفك الحالي (.json)
-function loadAllCoverageDataAutomated() {
-    const serviceTypes = Object.keys(extractedServicesData);
-    
-    const promises = serviceTypes.map(type => {
-        // البحث التلقائي عن ملفات النطاقات بنفس صيغة ملفك المرفق (.json)
-        const automatedUrl = `data/coverage_${type}.json`; 
-        
-        return fetch(automatedUrl)
-            .then(res => {
-                if (!res.ok) throw new Error();
-                return res.json();
-            })
-            .then(polygonData => {
-                let servedPop = 0;
-                let unservedPop = 0;
-
-                if (polygonData.features) {
-                    polygonData.features.forEach(feature => {
-                        const status = feature.properties.status; 
-                        const pop = parseInt(feature.properties.population) || 0;
-
-                        if (status === 'served') servedPop += pop;
-                        if (status === 'unserved') unservedPop += pop;
-                    });
-                }
-
-                extractedServicesData[type].served = servedPop;
-                extractedServicesData[type].unserved = unservedPop;
-            })
-            .catch(() => {
-                // قيم ذكية افتراضية مؤقتة من أجل العرض الإحصائي فقط حتى يتم تجهيز ملفات التغطية المستخرجة من الـ GIS
-                const randomServed = Math.floor(Math.random() * 35000) + 12000;
-                const randomUnserved = Math.floor(Math.random() * 10000) + 1500;
-                extractedServicesData[type].served = randomServed;
-                extractedServicesData[type].unserved = randomUnserved;
-            });
-    });
-
-    Promise.all(promises).then(() => {
-        renderDashboardElements("all");
-    });
-}
-
-// 6. دالة تحديث الفلتر الجانبي تلقائياً بأسماء الخدمات المكتشفة
+// 6. دالة تحديث الفلتر الجانبي
 function updateDropdownFilters() {
     const selectElement = document.getElementById('service-type');
     selectElement.innerHTML = '<option value="all">كل الخدمات المتاحة بالأقصر</option>';
@@ -140,98 +102,170 @@ function updateDropdownFilters() {
     });
 }
 
-// 7. دالة استدعاء ملف النطاق (.json) وعرضه ملوّناً فوق الصور الجوية عند الاختيار
+// 7. دالة تصفية وعرض مضلعات التغطية على الخريطة تبعاً للاختيار
 function updateMapCoverage(filterType) {
     currentCoverageLayer.clearLayers(); 
-
     if (filterType === "all") return; 
 
-    const automatedUrl = `data/coverage_${filterType}.json`;
-
-    fetch(automatedUrl)
+    fetch(coveragePolygonsUrl)
         .then(response => response.json())
         .then(polygonData => {
             const polyLayer = L.geoJSON(polygonData, {
+                filter: function(feature) {
+                    const type = feature.properties.service_type || feature.properties.Service_type;
+                    return type === filterType;
+                },
                 style: function (feature) {
-                    // تلوين النطاق: أخضر داكن للمخدوم وأحمر ناصع للمحروم ليتناسب مع تباين الصور الجوية الفاتحة
-                    if (feature.properties.status === 'served') {
-                        return { color: '#059669', weight: 2, fillOpacity: 0.3, dashboardStatus: 'served' };
-                    } else if (feature.properties.status === 'unserved') {
-                        return { color: '#dc2626', weight: 2, fillOpacity: 0.35, dashboardStatus: 'unserved' };
-                    }
-                    return { color: '#4b5563', weight: 1, fillOpacity: 0.1 };
+                    const sArea = parseFloat(feature.properties.served_area) || 0;
+                    const uArea = parseFloat(feature.properties.unserved_area) || 0;
+                    if (sArea > 0 && uArea === 0) return { color: '#10b981', weight: 2, fillOpacity: 0.35 }; 
+                    if (uArea > 0 && sArea === 0) return { color: '#ef4444', weight: 2, fillOpacity: 0.4 };  
+                    return { color: '#38bdf8', weight: 2, fillOpacity: 0.3 }; 
                 },
                 onEachFeature: function (feature, layer) {
-                    const statusText = feature.properties.status === 'served' ? 'نطاق مخدوم شبكيّاً' : 'نطاق محروم (فجوة مكانية)';
-                    const pop = parseInt(feature.properties.population) || 0;
-                    layer.bindPopup(`<b>حالة النطاق:</b> ${statusText}<br><b>عدد السكان المحصورين:</b> ${pop.toLocaleString('ar-EG')} نسمة`);
+                    const type = feature.properties.service_type || feature.properties.Service_type;
+                    const sPop = feature.properties.served_population !== null ? formatEnglishNumber(feature.properties.served_population) : "-";
+                    const uPop = feature.properties.unserved_population !== null ? formatEnglishNumber(feature.properties.unserved_population) : "-";
+                    layer.bindPopup(`<b>نوع الخدمة:</b> ${type}<br><b>مخدومين:</b> ${sPop}<br><b>محرومين:</b> ${uPop}`);
                 }
             }).addTo(currentCoverageLayer);
 
-            map.fitBounds(polyLayer.getBounds());
-        })
-        .catch(() => console.log(`الملف التلقائي [ ${automatedUrl} ] غير متوفر بالمجلد حالياً لعرض نطاقات الـ Network Analysis الخاصة به.`));
+            if (polyLayer.getBounds().isValid()) {
+                map.fitBounds(polyLayer.getBounds());
+            }
+        });
 }
 
-// 8. دالة تعبئة الجدول والرسوم الإحصائية
+// 8. دالة تعبئة الجدول وتصفيته بالكامل بالصيغة الرقمية الإنجليزية القياسية وبدون العمود الأخير
 function renderDashboardElements(filterType = "all") {
     const tbody = document.querySelector("#data-table tbody");
     tbody.innerHTML = "";
+    currentPointsLayer.clearLayers(); 
 
-    let totalServed = 0;
-    let totalUnserved = 0;
+    // جلب وتصفية نقاط الخدمات على الخريطة
+    fetch(servicesPointsUrl)
+        .then(response => response.json())
+        .then(geoJsonData => {
+            const pointsJsonLayer = L.geoJSON(geoJsonData, {
+                pointToLayer: function (feature, latlng) {
+                    return L.circleMarker(latlng, { radius: 5.5, fillColor: '#ef4444', color: '#fff', weight: 1.2, fillOpacity: 0.9 });
+                },
+                filter: function(feature) {
+                    if (filterType === "all") return true;
+                    return feature.properties.service_type === filterType;
+                },
+                onEachFeature: function (feature, layer) {
+                    const type = feature.properties.service_type || "خدمات غير مصنفة";
+                    const name = feature.properties.Name || "منشأة بدون اسم";
+                    layer.bindPopup(`<b>نوع الخدمة:</b> ${type}<br><b>اسم المنشأة:</b> ${name}`);
+                }
+            }).addTo(currentPointsLayer);
+
+            if (filterType !== "all" && pointsJsonLayer.getBounds().isValid()) {
+                map.fitBounds(pointsJsonLayer.getBounds());
+            }
+        });
+
+    let totalServedPop = 0, totalUnservedPop = 0;
+    let totalServedArea = 0, totalUnservedArea = 0;
+    let hasValidChartData = false;
+    let rowCounter = 1;
 
     Object.keys(extractedServicesData).forEach(type => {
         if (filterType !== "all" && type !== filterType) return;
 
         const info = extractedServicesData[type];
-        totalServed += info.served;
-        totalUnserved += info.unserved;
         
-        const totalPop = info.served + info.unserved;
-        const coveragePercent = totalPop > 0 ? ((info.served / totalPop) * 100).toFixed(1) : 0;
-        
-        const statusText = coveragePercent >= 75 ? "كفاية ممتازة" : (coveragePercent >= 50 ? "كفاية متوسطة" : "عجز مكاني شديد");
-        const statusColor = coveragePercent >= 75 ? "#4ade80" : (coveragePercent >= 50 ? "#f59e0b" : "#ef4444");
+        let servedPopText = "-";
+        let unservedPopText = "-";
+        let servedAreaText = "-";
+        let unservedAreaText = "-";
+        let coveragePercentText = "-";
 
+        if (info.servedPop !== null && info.unservedPop !== null) {
+            totalServedPop += info.servedPop;
+            totalUnservedPop += info.unservedPop;
+            if (info.servedArea !== null) totalServedArea += info.servedArea;
+            if (info.unservedArea !== null) totalUnservedArea += info.unservedArea;
+            hasValidChartData = true;
+
+            // استخدام الدالة الجديدة لفرض كتابة الأرقام بالصيغة الإنجليزية المنسقة بفواصل
+            servedPopText = formatEnglishNumber(info.servedPop);
+            unservedPopText = formatEnglishNumber(info.unservedPop);
+            servedAreaText = info.servedArea !== null ? info.servedArea.toFixed(2) : "-";
+            unservedAreaText = info.unservedArea !== null ? info.unservedArea.toFixed(2) : "-";
+            
+            const totalPop = info.servedPop + info.unservedPop;
+            if (totalPop > 0) {
+                const coveragePercent = ((info.servedPop / totalPop) * 100).toFixed(1);
+                coveragePercentText = `${coveragePercent}%`;
+            }
+        }
+
+        // بناء أسطر الجدول وحذف حقل مستوى العجز الجانبي تماماً
         const row = `<tr>
-            <td style="font-weight: 600; color: var(--accent-color);">${type}</td>
-            <td style="font-weight: bold; text-align: center;">${info.count}</td>
-            <td>${info.served.toLocaleString('ar-EG')}</td>
-            <td>${info.unserved.toLocaleString('ar-EG')}</td>
-            <td style="color: ${statusColor}; font-weight: bold;">${coveragePercent}%</td>
-            <td style="color: ${statusColor}; font-weight: bold;">${statusText}</td>
+            <td><span class="index-badge">${rowCounter++}</span></td>
+            <td style="text-align: right; font-weight: 600; color: var(--accent-color);">${type}</td>
+            <td style="font-weight: bold;">${info.count}</td>
+            <td>${servedAreaText}</td>
+            <td>${unservedAreaText}</td>
+            <td>${servedPopText}</td>
+            <td>${unservedPopText}</td>
+            <td style="font-weight: 700; color: var(--text-main); font-size: 0.95rem;">${coveragePercentText}</td>
         </tr>`;
         tbody.innerHTML += row;
     });
 
-    updateCharts(totalServed, totalUnserved);
+    if (hasValidChartData && (totalServedPop > 0 || totalUnservedPop > 0)) {
+        updateCharts(totalServedPop, totalUnservedPop, totalServedArea, totalUnservedArea);
+    } else {
+        if (coverageChart) coverageChart.destroy();
+        if (populationChart) populationChart.destroy();
+    }
 }
 
-// ربط الفلتر الجانبي
 document.getElementById('service-type').addEventListener('change', function(e) {
     const selected = e.target.value;
     renderDashboardElements(selected);
     updateMapCoverage(selected);
 });
 
-// 9. دالة تحديث الرسوم البيانية (Chart.js)
-function updateCharts(served, unserved) {
-    const total = served + unserved;
-    const servedPercent = total > 0 ? ((served / total) * 100).toFixed(1) : 0;
-    const unservedPercent = 100 - servedPercent;
-
+// 9. دالة تحديث الرسوم البيانية لتعرض النسب المئوية (%) بشكل دائم ومقروء بالصيغة الموحدة
+function updateCharts(servedPop, unservedPop, servedArea, unservedArea) {
     if (coverageChart) coverageChart.destroy();
     if (populationChart) populationChart.destroy();
+
+    const totalArea = servedArea + unservedArea;
+    const servedAreaPercent = totalArea > 0 ? ((servedArea / totalArea) * 100).toFixed(1) : 0;
+    const unservedAreaPercent = (100 - servedAreaPercent).toFixed(1);
+
+    const totalPop = servedPop + unservedPop;
+    const servedPopPercent = totalPop > 0 ? ((servedPop / totalPop) * 100).toFixed(1) : 0;
+    const unservedPopPercent = (100 - servedPopPercent).toFixed(1);
+
+    const datalabelsOptions = {
+        formatter: (value) => {
+            return `${value}%`; 
+        },
+        color: '#fff',
+        font: { family: 'Cairo', weight: 'bold', size: 12 }
+    };
 
     const ctx1 = document.getElementById('coverageChart').getContext('2d');
     coverageChart = new Chart(ctx1, {
         type: 'doughnut',
         data: {
-            labels: ['تغطية مخدومة مكانيّاً', 'فجوة مكانية محرومة'],
-            datasets: [{ data: [servedPercent, unservedPercent], backgroundColor: ['#10b981', '#ef4444'], borderWidth: 0 }]
+            labels: ['كتلة مخدومة', 'كتلة محرومة'],
+            datasets: [{ data: [servedAreaPercent, unservedAreaPercent], backgroundColor: ['#10b981', '#ef4444'], borderWidth: 0 }]
         },
-        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { color: '#f8fafc', font: { family: 'Cairo' } } } } }
+        options: { 
+            responsive: true, 
+            maintainAspectRatio: false, 
+            plugins: { 
+                legend: { position: 'bottom', labels: { color: '#f8fafc', font: { family: 'Cairo' } } },
+                datalabels: datalabelsOptions
+            } 
+        }
     });
 
     const ctx2 = document.getElementById('populationChart').getContext('2d');
@@ -239,9 +273,16 @@ function updateCharts(served, unserved) {
         type: 'pie',
         data: {
             labels: ['سكان مخدومين', 'سكان محرومين'],
-            datasets: [{ data: [served, unserved], backgroundColor: ['#38bdf8', '#f59e0b'], borderWidth: 0 }]
+            datasets: [{ data: [servedPopPercent, unservedPopPercent], backgroundColor: ['#38bdf8', '#f59e0b'], borderWidth: 0 }]
         },
-        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { color: '#f8fafc', font: { family: 'Cairo' } } } } }
+        options: { 
+            responsive: true, 
+            maintainAspectRatio: false, 
+            plugins: { 
+                legend: { position: 'bottom', labels: { color: '#f8fafc', font: { family: 'Cairo' } } },
+                datalabels: datalabelsOptions
+            } 
+        }
     });
 }
 
@@ -252,5 +293,4 @@ function resetFilters() {
     map.setView([25.69, 32.65], 13);
 }
 
-// استدعاء جلب البيانات الفوري
 loadServicesPoints();
