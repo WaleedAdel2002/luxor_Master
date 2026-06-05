@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم الجغرافية للمؤشرات المكانية - الأقصر</title>
+    
+    <!-- مكتبة الخرائط Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <!-- خط Cairo لتنسيق عربي احترافي -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- ربط ملف التنسيق الخارجي -->
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+
+    <!-- الهيدر العلوي للوحة التحكم -->
+    <header>
+        <h1>نظام المؤشرات الجغرافية ونطاقات الخدمة (Network Analysis) - مدينة الأقصر</h1>
+        <div id="current-time"></div>
+    </header>
+
+    <div class="main-container">
+        
+        <!-- القائمة الجانبية للفلاتر وأدوات التحكم -->
+        <aside class="sidebar">
+            <h2>أدوات التحكم والفلترة</h2>
+            
+            <div class="filter-group">
+                <label for="service-type">نوع الخدمة المستهدفة:</label>
+                <select id="service-type">
+                    <option value="all">جاري تحميل الخدمات واستخراج الحقول...</option>
+                </select>
+            </div>
+
+            <div class="filter-group" style="margin-top: auto;">
+                <button onclick="resetFilters()">إعادة ضبط العرض كاملاً</button>
+            </div>
+        </aside>
+
+        <!-- منطقة عرض محتوى الداشبورد الرئيسي -->
+        <main class="dashboard-content">
+            
+            <!-- القسم العلوي: الخريطة والرسوم البيانية -->
+            <div class="top-section">
+                
+                <!-- كارت الخريطة التفاعلية -->
+                <div class="map-card">
+                    <div class="card-header">التوزيع المكاني الفعلي ونطاقات الوصول الشبكي لمدينة الأقصر</div>
+                    <div id="map"></div>
+                </div>
+
+                <!-- كروت الرسوم البيانية الدائرية النسبية المحدثة بالمئوية -->
+                <div class="analytics-top">
+                    <div class="chart-card">
+                        <div class="chart-title">تحليل مساحة الكتلة العمرانية (%)</div>
+                        <div class="chart-container">
+                            <canvas id="coverageChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-title">التوزيع النسبي للسكان المستهدفين (%)</div>
+                        <div class="chart-container">
+                            <canvas id="populationChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- القسم السفلي: جدول البيانات التفصيلي بعد حذف العمود الأخير -->
+            <div class="bottom-section">
+                <div class="card-header">جدول الحصر التلقائي للخدمات والمؤشرات المكانية التفصيلية</div>
+                <div class="table-container">
+                    <table id="data-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 5%;">م</th>
+                                <th style="text-align: right;">نوع الخدمة المكتشفة</th>
+                                <th>إجمالي المنشآت</th>
+                                <th>المساحة المخدومة (كم²)</th>
+                                <th>المساحة المحرومة (كم²)</th>
+                                <th>السكان المخدومين</th>
+                                <th>السكان المحرومين</th>
+                                <th>نسبة التغطية السكانية</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- يتم تعبئتها ديناميكياً -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+  <div class="designer-info" onclick="togglePopup()">
+      ℹ️
+  </div>
+
+  <div class="popup" id="info-popup">
+      <img src="images/cv.jpg" alt="cv">
+      <h3>Waleed Adel Salah</h3>
+      <p>Teaching Assistant at SVU </p>
+      <p>Waleedadel@art.svu.edu.eg</p>
+<a href="Portfolio.html" class="access-map-button">
+    <i class="fas fa-map"></i> open Portfolio 
+</a>
+  </div>
+    <!-- استدعاء مكتبات الـ JS الخارجي ومكتبة الرسوم البيانية المتطورة -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <script src="app.js"></script>
+</body>
+</html>
