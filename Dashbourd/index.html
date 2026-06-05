@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم الجغرافية للمؤشرات المكانية - الأقصر</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>نظام المؤشرات الجغرافية ونطاقات الخدمة (Network Analysis) - مدينة الأقصر</h1>
+        <div id="current-time"></div>
+    </header>
+
+    <div class="main-container">
+        
+        <aside class="sidebar">
+            <h2>أدوات التحكم والفلترة</h2>
+            
+            <div class="filter-group">
+                <label for="service-type">نوع الخدمة المستهدفة:</label>
+                <select id="service-type">
+                    <option value="all">جاري تحميل الخدمات واستخراج الحقول...</option>
+                </select>
+            </div>
+
+            <div class="filter-group" style="margin-top: auto;">
+                <button onclick="resetFilters()">إعادة ضبط العرض كاملاً</button>
+            </div>
+        </aside>
+
+        <main class="dashboard-content">
+            
+            <div class="top-section">
+                
+                <div class="map-card">
+                    <div class="card-header">التوزيع المكاني الفعلي ونطاقات الوصول الشبكي لمدينة الأقصر</div>
+                    <div id="map"></div>
+                </div>
+
+                <div class="analytics-top">
+                    <div class="chart-card">
+                        <div class="chart-title">نسبة التغطية السكانية (%)</div>
+                        <div class="chart-container">
+                            <canvas id="coverageChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-title">التوزيع العددي للسكان المستهدفين</div>
+                        <div class="chart-container">
+                            <canvas id="populationChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="bottom-section">
+                <div class="card-header">جدول الحصر التلقائي للخدمات والمؤشرات السكانية التفصيلية</div>
+                <div class="table-container">
+                    <table id="data-table">
+                        <thead>
+                            <tr>
+                                <th>نوع الخدمة المكتشفة</th>
+                                <th>إجمالي عدد المنشآت بالملف</th>
+                                <th>السكان المخدومين (داخل النطاق)</th>
+                                <th>السكان المحرومين (خارج النطاق)</th>
+                                <th>نسبة كفاية التغطية السكانية</th>
+                                <th>مستوى العجز المكاني للخدمة</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
