@@ -326,22 +326,52 @@ tr:hover {
     }
 
     .dashboard-content {
-        grid-template-rows: auto auto;
+        display: flex; /* تحويل الحاوية إلى flex عمودي لترتيب كروت المحتوى بشكل مرن */
+        flex-direction: column;
         padding: 10px;
-        gap: 10px;
+        gap: 15px;
+        height: auto;
+        overflow: visible;
     }
 
+    .top-section {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    /* إعطاء كارت الخريطة ارتفاعاً ثابتاً ومستقلاً يمنعه من الانهيار */
+    .map-card {
+        height: 400px; 
+        min-height: 400px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* إجبار عنصر الخريطة على ملء مساحة الكارت المحددة */
     #map {
-        height: 350px; /* تحديد ارتفاع ثابت ومناسب للخريطة على الهواتف */
+        flex: 1;
+        width: 100%;
+        height: 100%;
     }
 
     .analytics-top {
         grid-template-columns: 1fr; /* جعل الرسوم البيانية تحت بعضها لتفادي الانضغاط */
-        gap: 10px;
+        gap: 15px;
+    }
+
+    .chart-card {
+        padding: 15px;
     }
 
     .chart-container {
-        height: 160px; /* تقليص نسبي لطول الرسوم البيانية */
+        height: 180px; /* تقليص نسبي لطول الرسوم البيانية لتناسب الهواتف */
+    }
+
+    /* إعطاء كارت الجدول مساحة مرنة طبيعية */
+    .bottom-section {
+        height: auto;
+        min-height: 300px;
     }
 
     /* حماية الجدول من التشويه وتفعيل التمرير الأفقي السلس */
@@ -359,7 +389,7 @@ tr:hover {
         font-size: 0.8rem;
     }
 
-    /* تمركز النافذة المنبثقة المنبثقة الخاصة ببيانات المصمم في منتصف الهواتف */
+    /* تمركز النافذة المنبثقة الخاصة ببيانات المصمم في منتصف الهواتف */
     .popup {
         left: 50%;
         bottom: 50%;
