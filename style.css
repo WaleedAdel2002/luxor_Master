@@ -180,11 +180,12 @@ header {
 .main-content {
   display: flex;
   flex-grow: 1;
+  height: calc(100vh - 60px); /* يضمن أن المحتوى يملأ بقية مساحة الشاشة تحت الهيدر مباشرة */
 }
 
 #sidebar {
   width: 280px; /* عرض الشريط الجانبي */
-  height: 600px; /* تأكد من أن الخريطة تملأ المساحة المتاحة */
+  height: 100%; /* جعل الشريط يملأ الارتفاع المتاح بالكامل بدلاً من الـ 600px الثابتة */
   background-color: #f4f4f4;
   padding: 20px;
   box-shadow: 2px 0 5px rgba(0,0,0,0.1);
@@ -197,7 +198,7 @@ header {
 
 #map {
   flex-grow: 1; /* للسماح للخريطة بأخذ المساحة المتبقية */
-  height: 600px; /* تأكد من أن الخريطة تملأ المساحة المتاحة */
+  height: 100%; /* جعل الخريطة تملأ كامل المساحة المتاحة ديناميكياً بدلاً من 600px ثابته */
   width: 100%;
   position: relative; /* لجعل عناصر التحكم في Leaflet تعمل بشكل صحيح */
 }
@@ -441,9 +442,9 @@ header {
 }
 /* المتغيرات بعد التعديل للوضع الفاتح */
 :root {
-    --srv-bg-dark: #ffffff;       /*  الخلفية */
+    --srv-bg-dark: #ffffff;       /* الخلفية */
     --srv-container-bg: #339cff;  /*لون المربع الكبير الداخلي */
-    --srv-card-bg: #339cff;       /*  الكروت الفردية */
+    --srv-card-bg: #339cff;       /* الكروت الفردية */
     --srv-accent: #e67e22;        /* اللون البرتقالي للتركيز */
     --srv-text: #ffffff;          /* النص الأساسي  */
     --srv-text-dim: #6c757d;      /* تم تغيير النص الفرعي إلى رمادي متوسط */
@@ -534,11 +535,101 @@ body {
     font-size: 0.9rem;
 }
 
-/* التجاوب مع الشاشات */
+/* ======================================================= */
+/* تحسينات الاستجابة الفائقة للهواتف والشاشات الصغيرة        */
+/* ======================================================= */
+
+@media (max-width: 768px) {
+    /* إلغاء وضع الارتفاع الثابت الكلي للـ body ليتحرك بمرونة */
+    body {
+        height: auto;
+        overflow-x: hidden;
+        padding: 0; /* التخلص من الهوامش الجانبية المزعجة على الموبايل */
+    }
+
+    header {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+        gap: 8px;
+        text-align: center;
+    }
+
+    .header-logo {
+        margin-left: 0;
+        height: 50px; /* تصغير اللوجو ليناسب الهيدر العمودي */
+    }
+
+    .header-title h1 {
+        font-size: 1.2rem;
+    }
+
+    /* تحويل العرض الرئيسي من بجانب بعض إلى تحت بعض بالتوالي لملء الشاشة */
+    .main-content {
+        flex-direction: column;
+        height: auto;
+    }
+
+    /* شريط الأدوات الجانبي يملأ العرض بالكامل ويكون فوق أو تحت الخريطة */
+    #sidebar {
+        width: 100%;
+        height: auto;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        padding: 15px;
+        order: 2; /* إعطاء الخيار لظهور الشريط تحت الخريطة لسهولة التصفح */
+    }
+
+    /* الخريطة تأخذ مساحة عرضية كاملة وارتفاع مريح جداً على الهاتف يمنع انهيارها */
+    #map {
+        width: 100%;
+        height: 70vh; /* تأخذ 70% من طول شاشة الهاتف الفعلي لملء المساحة الرأسية */
+        min-height: 400px;
+        order: 1; /* الخريطة تظهر أولاً في الشاشة */
+    }
+
+    /* ضبط المفتاح التفاعلي (Legend) داخل الخريطة لكي لا يغطي الشاشة بالكامل */
+    .info.legend {
+        max-width: 160px;
+        max-height: 200px;
+        font-size: 11px;
+    }
+
+    /* معالجة صندوق تفاصيل المعلومات المنبثق ليصبح مريحاً على الهاتف */
+    #info {
+        max-height: 300px;
+        margin-top: 15px;
+    }
+
+    #info table {
+        font-size: 0.8rem;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+
+    /* مركزة كارت الـ Popup الخاص ببيانات المصمم وتوسيطه بذكاء */
+    .popup {
+        left: 50%;
+        bottom: 50%;
+        transform: translate(-50%, 50%);
+        width: 85%;
+        max-width: 260px;
+    }
+}
+
+/* التجاوب مع الشاشات لكروت الخدمات العامة السفلى (srv) */
 @media (max-width: 992px) {
     .srv-services-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 650px) {
     .srv-services-grid { grid-template-columns: 1fr; }
-    .srv-main-container { padding: 15px; }
+    .srv-main-container { 
+        padding: 15px; 
+        margin: 10px;
+        border-radius: 10px;
+    }
+    .srv-main-header h2 {
+        font-size: 1.3rem;
+    }
 }
