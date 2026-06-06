@@ -16,11 +16,13 @@ L.control.layers({ "مرئية القمر الصناعي": satelliteMap, "الخ
 
 // 3. مسارات ملفات الـ JSON المشتركة داخل مجلد data
 const servicesPointsUrl = 'data/services_points.json'; 
-const coveragePolygonsUrl = 'data/services_coverage.json'; 
+const coveragePolygonsUrl = 'data/services_coverage.json';
+const borderPath = 'data/border.json';
 
 let extractedServicesData = {}; 
 let currentPointsLayer = L.layerGroup().addTo(map);
 let currentCoverageLayer = L.layerGroup().addTo(map);
+let borderLayer = L.layerGroup().addTo(map);
 let coverageChart, populationChart;
 
 // تسجيل الملحق الخاص بإظهار الـ Labels المئوية داخل الرسوم البيانية
@@ -303,4 +305,8 @@ function togglePopup() {
         overlay.style.display = "block";
     }
 }
+// حل مشكلة عدم رندرة أبعاد الخريطة على الشاشات الصغيرة تلقائياً
+setTimeout(function() {
+    map.invalidateSize();
+}, 500);
 loadServicesPoints();
