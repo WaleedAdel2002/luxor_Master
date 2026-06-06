@@ -98,16 +98,14 @@ body {
     margin: 4px auto;
     padding: 0 20px;
     flex: 1; /* Allow content to grow */
-    width: 100%;
-    box-sizing: border-box;
 }
 
 .section {
     background-color: #fff;
     border-radius: 12px;
     box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-    padding: 20px; /* تم تعديل القيمة الافتراضية هنا لتكون متناسقة ومنع الالتصاق بالحواف */
-    margin-bottom: 20px;
+    padding: 4px;
+    margin-bottom: 4px;
 }
 
 .section-title {
@@ -133,7 +131,7 @@ body {
     flex-direction: row; /* **المفتاح:** يرتب العناصر في صف واحد */
     align-items: flex-start; /* **المفتاح:** لمحاذاة الصورة والنص في الأعلى */
     text-align: right; /* محاذاة النص داخل البطاقة لليمين */
-    padding: 15px; /* تحسين الـ padding الداخلي للبطاقة */
+    padding: 5px;
     background-color: #fdfdfd;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
@@ -144,10 +142,9 @@ body {
 .persons-grid {
     display: flex;
     flex-wrap: nowrap;
-    gap: 15px;
+    gap: 5px;
     overflow-x: auto;
     padding-bottom: 10px;
-    -webkit-overflow-scrolling: touch; /* تمرير سلس على الهواتف */
 }
 
 .person-photo {
@@ -222,126 +219,97 @@ body {
     margin: 5px 0;
 }
 
-/* ======================================================= */
-/* Responsive Design & Media Queries           */
-/* ======================================================= */
-
-/* الشاشات المتوسطة (الأجهزة اللوحية) */
+/* Responsive Design */
 @media (max-width: 992px) {
     .header-content-wrapper {
         flex-direction: column;
         text-align: center;
-        gap: 15px;
     }
     .header-logo {
         margin-left: 0;
-    }
-    .header-logo1 {
-        margin-right: 0;
+        margin-bottom: 15px;
     }
     .header-text {
-        margin: 0;
+        margin-right: 0;
+        margin-bottom: 20px;
     }
     .project-header h1 {
-        font-size: 1.8rem;
+        font-size: 2em;
     }
     .project-header p {
         font-size: 1em;
     }
     .access-map-button {
-        width: 100%;
+        width: 80%;
         max-width: 300px;
     }
 }
 
-/* الشاشات الصغيرة (الهواتف الذكية) */
+/* **تعديلات للواجهة المتجاوبة لبطاقة الشخص** */
 @media (max-width: 768px) {
     .project-header {
-        padding: 20px 10px;
+        padding: 15px 0;
     }
-    
-    /* ترتيب لوجو يمين ولوجو يسار بجانب بعضهما في سطر مستقل فوق النصوص */
-    .header-content-wrapper {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
+    .project-header h1 {
+        font-size: 1.8em;
     }
-
-    /* حاوية مخصصة لوضع الشعارات في الموبايل بشكل متناسق في سطر واحد */
-    .header-content-wrapper::before {
-        content: "";
-        display: none;
-    }
-
     .project-main-content {
-        margin: 10px auto;
-        padding: 0 10px;
+        margin: 20px auto;
+        padding: 0 15px;
     }
     .section {
-        padding: 15px;
-        margin-bottom: 15px;
-        border-radius: 8px;
+        padding: 25px;
+        margin-bottom: 25px;
     }
     .section-title {
-        font-size: 1.3em;
-        margin-bottom: 15px;
+        font-size: 1.8em;
+        margin-bottom: 20px;
     }
-    
-    /* جعل كروت الأشخاص مرنة لملء الشاشة بالكامل عمودياً وبشكل مريح */
+    /* على الشاشات الأصغر، قد يكون من الأفضل العودة إلى الترتيب العمودي لبطاقة الشخص */
     .person-card {
         flex-direction: column; /* عودة إلى ترتيب عمودي */
         align-items: center; /* توسيط العناصر */
         text-align: center; /* توسيط النص */
         min-width: unset; /* إزالة الحد الأدنى للعرض للسماح بالتقلص */
         width: 100%; /* اجعل البطاقة تأخذ العرض الكامل */
-        box-sizing: border-box;
     }
     .person-photo {
         margin-left: 0; /* إزالة الهامش الأيسر */
         margin-bottom: 15px; /* إضافة هامش سفلي للصورة */
     }
     .person-card h3 {
-        font-size: 1.2em;
+        font-size: 1.4em;
     }
     .person-title, .person-bio, .contact-info {
         max-width: 100%; /* السماح للنص بأخذ العرض الكامل */
     }
-    
-    /* تحويل شبكة كروت الأشخاص الملتفة لتناسب الأبعاد المتاحة بدون تخريب الاستايل */
-    .persons-grid {
-        flex-wrap: column;
-        flex-direction: column;
-        overflow-x: hidden;
-    }
 }
 
-/* الشاشات الصغيرة جداً للهواتف */
 @media (max-width: 480px) {
     .project-header h1 {
-        font-size: 1.3em;
+        font-size: 1.5em;
     }
     .project-header p {
-        font-size: 0.85em;
+        font-size: 0.9em;
     }
     .person-photo {
-        width: 90px;
-        height: 90px;
+        width: 100px;
+        height: 100px;
     }
     .section {
-        padding: 12px;
+        padding: 20px;
     }
     .section-title {
-        font-size: 1.15em;
+        font-size: 1.5em;
     }
     .person-card h3 {
-        font-size: 1.1em;
+        font-size: 1.2em;
     }
     .person-title, .person-bio {
-        font-size: 0.8em;
+        font-size: 0.85em;
     }
     .access-map-button {
-        font-size: 0.95em;
+        font-size: 1em;
         padding: 10px 20px;
     }
 }
