@@ -218,22 +218,6 @@ tr:hover {
     background-color: rgba(56, 189, 248, 0.03);
 }
 
-@media (max-width: 1024px) {
-    .top-section {
-        grid-template-columns: 1fr;
-    }
-    .main-container {
-        flex-direction: column;
-        overflow-y: auto;
-    }
-    .sidebar {
-        width: 100%;
-        height: auto;
-    }
-}
-
-
-
 /* تنسيق الأيقونة */
 .designer-info {
     position: fixed;
@@ -256,7 +240,6 @@ tr:hover {
 .designer-info:hover {
     background-color: #555;
 }
-
 
 /* تنسيق النافذة المنبثقة */
 .popup {
@@ -302,3 +285,86 @@ tr:hover {
     z-index: 999;
 }
 
+/* ======================================================= */
+/* تحسينات الاستجابة والتوافق مع الشاشات المختلفة والهواتف  */
+/* ======================================================= */
+
+/* الشاشات المتوسطة (الأجهزة اللوحية والتابلت - أقل من 1024px) */
+@media (max-width: 1024px) {
+    .top-section {
+        grid-template-columns: 1fr;
+    }
+    .main-container {
+        flex-direction: column;
+        height: auto;
+        overflow: auto;
+    }
+    body {
+        height: auto;
+        overflow: auto;
+    }
+    .sidebar {
+        width: 100%;
+        height: auto;
+        border-left: none;
+        border-bottom: 1px solid var(--border-color);
+    }
+}
+
+/* الشاشات الصغيرة (الهواتف الذكية - أقل من 768px) */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+        gap: 8px;
+        text-align: center;
+    }
+
+    header h1 {
+        font-size: 1.1rem;
+    }
+
+    .dashboard-content {
+        grid-template-rows: auto auto;
+        padding: 10px;
+        gap: 10px;
+    }
+
+    #map {
+        height: 350px; /* تحديد ارتفاع ثابت ومناسب للخريطة على الهواتف */
+    }
+
+    .analytics-top {
+        grid-template-columns: 1fr; /* جعل الرسوم البيانية تحت بعضها لتفادي الانضغاط */
+        gap: 10px;
+    }
+
+    .chart-container {
+        height: 160px; /* تقليص نسبي لطول الرسوم البيانية */
+    }
+
+    /* حماية الجدول من التشويه وتفعيل التمرير الأفقي السلس */
+    .table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    table {
+        min-width: 750px; /* يمنع تداخل النصوص ويحمي بيانات الأعمدة الثمانية */
+    }
+
+    th, td {
+        padding: 8px 6px;
+        font-size: 0.8rem;
+    }
+
+    /* تمركز النافذة المنبثقة المنبثقة الخاصة ببيانات المصمم في منتصف الهواتف */
+    .popup {
+        left: 50%;
+        bottom: 50%;
+        transform: translate(-50%, 50%);
+        width: 85%;
+        max-width: 280px;
+    }
+}
