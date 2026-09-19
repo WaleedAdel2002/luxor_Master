@@ -1,5 +1,5 @@
 // geoai-routing.js - وحدة التوجيه الذكي المستقلة
-const GEOAI_API_URL = "https://diesel-mode-invitation-cal.trycloudflare.com/api";
+const GEOAI_API_URL = "https://diesel-mode-invitation-cal.trycloudflare.com";
 
 let activeTrip = {
   trackingId: null,
