@@ -18,25 +18,25 @@ let userMarker = null;
 let destinationMarker = null;
 
 // متغيرات جديدة لتخزين المسار الأقصر والخدمة النهائية
-let initialBestPath = []; 
-let destinationService = null; 
+let initialBestPath = [];
+let destinationService = null;
 
 // متغير لتتبع حالة العرض الحالية (0: الأقصر، 1-4: بدائل)
-let currentRouteIndex = 0; 
+let currentRouteIndex = 0;
 
 // لتخزين نتائج المسارات البديلة (4 بدائل)
 let alternateRouteCache = {
-    1: null, 
+    1: null,
     2: null,
-    3: null, // المسار البديل الثالث
-    4: null  // المسار البديل الرابع
+    3: null,
+    4: null
 };
 
 const ALTERNATE_COLORS = {
     1: 'orange',
     2: 'red',
     3: 'purple',
-    4: 'green' 
+    4: 'green'
 };
 
 
@@ -86,15 +86,15 @@ function getRoadColor(fclass) {
     switch (lowerFclass) {
         case 'motorway':
         case 'الطرق الإقليمية':
-            return '#ff4d4d'; 
+            return '#ff4d4d';
         case 'الطرق الشريانية':
-            return '#ff4d4d';  
+            return '#ff4d4d';
         case 'الطرق التجميعية':
-            return '#000000';  
+            return '#000000';
         case 'الطرق المحلية':
-            return '#cccccc';  
+            return '#cccccc';
         default:
-            return 'gray'; 
+            return 'gray';
     }
 }
 
@@ -209,9 +209,9 @@ function displayServicePoints(filterValue) {
 // دالة البحث عن الخدمات (مُعدَّلة لإخفاء الاقتراحات وإعادة تعيين حالة المسار)
 function searchServices() {
     const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-    servicePointsLayer.clearLayers(); 
+    servicePointsLayer.clearLayers();
 
-    let foundMarkers = []; 
+    let foundMarkers = [];
 
     servicePoints.forEach(s => {
         const nameMatches = s.name.toLowerCase().includes(searchTerm);
@@ -219,31 +219,31 @@ function searchServices() {
 
         if (nameMatches || typeMatches) {
             s.marker.addTo(servicePointsLayer);
-            foundMarkers.push(s.marker); 
+            foundMarkers.push(s.marker);
         }
     });
 
     const typeFilterSelect = document.getElementById('typeFilter');
     if (searchTerm) {
-        typeFilterSelect.value = "all"; 
+        typeFilterSelect.value = "all";
     } else {
         displayServicePoints(typeFilterSelect.value);
     }
-    
+
     // إعادة تعيين حالة المسار عند البحث الجديد
-    routeLayer.clearLayers(); 
+    routeLayer.clearLayers();
     if (destinationMarker) map.removeLayer(destinationMarker);
     initialBestPath = [];
     destinationService = null;
     currentRouteIndex = 0;
     alternateRouteCache = { 1: null, 2: null, 3: null, 4: null };
     document.getElementById('findAlternateRouteBtn').style.display = 'none';
-    
+
     if (servicePointsLayer.getLayers().length > 0) {
         document.getElementById('info').innerHTML = `<h4>نتائج البحث:</h4><p>تم العثور على ${servicePointsLayer.getLayers().length} نقطة خدمة مطابقة لبحثك.</p>`;
-        
+
         const group = new L.featureGroup(foundMarkers);
-        map.fitBounds(group.getBounds(), { padding: [50, 50] }); 
+        map.fitBounds(group.getBounds(), { padding: [50, 50] });
 
         if (userLat && userLng) {
             runRouting();
@@ -261,29 +261,29 @@ function searchServices() {
     }
 }
 
-// دالة جديدة لتحديث الاقتراحات
+// New function to update suggestions
 function updateSuggestions() {
     const searchInput = document.getElementById('searchInput');
     const searchTerm = searchInput.value.toLowerCase();
     let suggestionsContainer = document.getElementById('suggestions-container');
 
-    // إذا لم يكن هناك حاوية للاقتراحات، قم بإنشائها
+    // If there is no suggestion container, create one.
     if (!suggestionsContainer) {
         suggestionsContainer = document.createElement('div');
         suggestionsContainer.id = 'suggestions-container';
         searchInput.parentNode.insertBefore(suggestionsContainer, searchInput.nextSibling);
     }
 
-    suggestionsContainer.innerHTML = ''; // مسح الاقتراحات القديمة
+    suggestionsContainer.innerHTML = ''; // Clear old suggestions
 
     if (searchTerm.length === 0) {
-        suggestionsContainer.style.display = 'none'; // إخفاء الحاوية إذا كان حقل البحث فارغًا
+        suggestionsContainer.style.display = 'none'; // Hide the container if the search field is empty
         return;
     }
 
     const filteredSuggestions = Array.from(allSearchableTerms).filter(term =>
         term.startsWith(searchTerm)
-    ).slice(0, 5); // عرض 5 اقتراحات فقط
+    ).slice(0, 5); // Showing only 5 suggestions
 
     if (filteredSuggestions.length > 0) {
         suggestionsContainer.style.display = 'block';
@@ -294,7 +294,7 @@ function updateSuggestions() {
             suggestionItem.addEventListener('click', () => {
                 searchInput.value = suggestion;
                 suggestionsContainer.style.display = 'none';
-                searchServices(); // قم بتشغيل البحث فورًا عند اختيار الاقتراح
+                searchServices(); // Run the search immediately upon selecting the suggestion.
             });
             suggestionsContainer.appendChild(suggestionItem);
         });
@@ -385,9 +385,9 @@ L.geoJSON(railwayData, {
             weight: 3,
             opacity: 0.8
         });
-        // ** هذا السطر حيوي لجعل مفتاح الخريطة يعمل بشكل صحيح **
+
         roadPolyline.feature = f;
-        
+
         roadPolyline.addTo(roadsLayer);
         roadPolyline.on('click', function() {
             displayFeatureInfo(props, `معلومات الطريق: ${props.name || props.fclass || 'غير معروف'}`);
@@ -430,7 +430,7 @@ L.geoJSON(railwayData, {
         // أضف اسم الخدمة ونوعها إلى قائمة المصطلحات القابلة للبحث
         allSearchableTerms.add(name.toLowerCase());
         allSearchableTerms.add(type.toLowerCase());
-        
+
         const marker = L.marker(latlng, { icon: getServiceIcon(type) }).bindPopup(name);
         marker.on('click', function() {
             displayFeatureInfo(props, `معلومات الخدمة: ${name}`);
@@ -454,7 +454,7 @@ L.geoJSON(railwayData, {
         const selectedType = document.getElementById("typeFilter").value;
         document.getElementById('searchInput').value = ''; // مسح حقل البحث عند تغيير الفلتر
         displayServicePoints(selectedType);
-        
+
         // إعادة تعيين حالة المسار عند تغيير الفلتر
         routeLayer.clearLayers();
         if (destinationMarker) map.removeLayer(destinationMarker);
@@ -492,29 +492,27 @@ function createDrivingGraph(baseGraph) {
 }
 
 
-// ** دالة مساعدة لـ Dijkstra (مُعدَّلة لحساب الزمن الحقيقي) **
+// ** Dijkstra function (modified to calculate real time) **
 function findShortestPath(startNode, endNode, drivingGraphToUse) {
     let shortestPath = null;
-    // تم إضافة متغيرين لحساب الزمن الحقيقي بغض النظر عن العقوبة
+    // Two variables were added to calculate real time
     let totalDrivingTime = 0;
-    let totalDrivingTime_Penalty = 0; 
+    let totalDrivingTime_Penalty = 0;
     let totalWalkingTime = 0;
     let totalLength = 0;
 
     try {
-        // 1. استخدام مكتبة دايكسترا لإيجاد تسلسل العقد
+        // 1. Using the Dixtra library to find the node sequence
         const path = dijkstra.find_path(drivingGraphToUse, startNode, endNode);
-        
-        // 2. حساب إجمالي الوقت والمسافة للمسار الناتج
+
+        // 2. Calculate the total time and distance of the resulting route
         for (let i = 0; i < path.length - 1; i++) {
             const from = path[i], to = path[i + 1];
-            
-            // الوزن الذي تم استخدامه في الخوارزمية (قد يكون به عقوبة)
-            totalDrivingTime_Penalty += drivingGraphToUse[from][to]; 
-            
-            // *** المفتاح: استخدام الرسم البياني الأصلي (graph) لحساب الزمن الحقيقي والمسافة ***
+
+            totalDrivingTime_Penalty += drivingGraphToUse[from][to];
+
             const segmentDataOriginal = graph[from][to];
-            totalDrivingTime += segmentDataOriginal.drivingTime; // الزمن الحقيقي
+            totalDrivingTime += segmentDataOriginal.drivingTime;
             totalWalkingTime += segmentDataOriginal.walkingTime;
             totalLength += edgeLengths[`${from}_${to}`] || 0;
         }
@@ -522,11 +520,11 @@ function findShortestPath(startNode, endNode, drivingGraphToUse) {
         shortestPath = path;
 
     } catch (e) {
-        // المسار غير قابل للوصول
+        // The path is inaccessible
         console.warn('لا يمكن الوصول من:', startNode, 'إلى:', endNode, e);
     }
-    
-    // نُرجع totalDrivingTime (الزمن الحقيقي) للحسابات
+
+    // return totalDrivingTime (real time) for the calculations
     return { path: shortestPath, distDriving: totalDrivingTime, distWalking: totalWalkingTime, length: totalLength, distDriving_Penalty: totalDrivingTime_Penalty };
 }
 
@@ -534,20 +532,20 @@ function findShortestPath(startNode, endNode, drivingGraphToUse) {
 // ** دالة جديدة لعرض نتائج التوجيه (مُعدّلة لحل مشكلة #info) **
 function displayRouteResult(routeData, color, title, isInitialRoute = false) {
     const latlngs = routeData.path.map(str => str.split(',').reverse().map(Number));
-    
-    routeLayer.clearLayers(); 
-    if (destinationMarker) map.removeLayer(destinationMarker); 
+
+    routeLayer.clearLayers();
+    if (destinationMarker) map.removeLayer(destinationMarker);
 
     L.polyline(latlngs, { color: color, weight: 5, opacity: 0.8 }).addTo(routeLayer);
     map.fitBounds(latlngs, { padding: [50, 50] });
 
-    if (routeData.service) { 
+    if (routeData.service) {
         destinationMarker = L.marker(routeData.service.coord, { icon: getServiceIcon(routeData.service.type) })
             .addTo(map)
             .bindPopup(`📌 ${routeData.service.name}`)
             .openPopup();
     }
-    
+
     let timeNote = '';
     // ملاحظة: في المسار البديل، لا نحتاج لتحذير حول "الأوقات المبالغ فيها" لأننا الآن نعرض الزمن الحقيقي
     if (!isInitialRoute && color !== 'blue') {
@@ -639,9 +637,7 @@ function runRouting() {
 
     let best = { distDriving: Infinity, service: null, path: [] };
 
-    // ** استخدام الدالة المساعدة لإنشاء الرسم البياني الموزون بالوقت **
     const drivingGraphForDijkstra = createDrivingGraph(graph);
-
 
     servicePoints.forEach(s => {
         let matchesFilter = false;
@@ -657,10 +653,7 @@ function runRouting() {
 
         const [lat, lng] = s.coord;
         const targetNode = findClosestNode(lng, lat, Object.keys(graph));
-
-        // استخدام الدالة المساعدة
         const result = findShortestPath(userNode, targetNode, drivingGraphForDijkstra);
-
 
         if (result.path && result.distDriving < best.distDriving) {
             best = {
@@ -674,15 +667,15 @@ function runRouting() {
     });
 
     if (best.path.length > 0) {
-        initialBestPath = best.path; 
-        destinationService = best.service; 
-        
-        // إعادة تعيين حالة المسار البديل وتخزين المسار الأقصر
-        currentRouteIndex = 0; 
+        initialBestPath = best.path;
+        destinationService = best.service;
+
+        // Reset the alternate path state and store the shorter pat
+        currentRouteIndex = 0;
         alternateRouteCache = { 1: null, 2: null, 3: null, 4: null };
-        
+
         displayRouteResult(best, 'blue', 'أقصر مسار(الافتراضي)', true);
-        document.getElementById('findAlternateRouteBtn').style.display = 'block'; 
+        document.getElementById('findAlternateRouteBtn').style.display = 'block';
 
     } else {
         document.getElementById('info').textContent = 'لم يتم العثور على مسار مناسب لنوع الخدمة المحدد من موقعك الحالي.';
@@ -702,37 +695,37 @@ function calculateAndDisplayAlternate(alternateNum) {
     if (alternateRouteCache[alternateNum]) {
         // إذا كان مخزناً، اعرضه فوراً
         const cache = alternateRouteCache[alternateNum];
-        displayRouteResult(cache, cache.color, `مسار بديل ${alternateNum}`, false); 
+        displayRouteResult(cache, cache.color, `مسار بديل ${alternateNum}`, false);
         return;
     }
 
     // **************** منطق الحساب الفعلي ****************
-    
+
     const userNode = findClosestNode(userLng, userLat, Object.keys(graph));
     const [lat, lng] = destinationService.coord;
     const targetNode = findClosestNode(lng, lat, Object.keys(graph));
 
-    // 1. إنشاء نسخة من الرسم البياني الأصلي لتطبيق العقوبة عليها
-    let alternateGraph = JSON.parse(JSON.stringify(graph)); 
-    const PENALTY = 1000; 
+    // 1. Create a copy of the original graph to apply the penalty to it
+    let alternateGraph = JSON.parse(JSON.stringify(graph));
+    const PENALTY = 1000;
 
-    // 2. تطبيق العقوبة على المسارات السابقة
-    let pathsToPenalize = [initialBestPath]; // المسار الأقصر يعاقب دائماً
-    
-    // إضافة جميع المسارات البديلة التي تم حسابها مسبقاً للعقوبة
+    // 2. Applying the penalty to previous routes
+    let pathsToPenalize = [initialBestPath];
+
+    // Add all alternative routes previously calculated for the penalty
     for (let i = 1; i < alternateNum; i++) {
         if (alternateRouteCache[i]) {
             pathsToPenalize.push(alternateRouteCache[i].path);
         }
     }
-    
-    // تطبيق العقوبة
+
+    // Punishment application
     pathsToPenalize.forEach(path => {
         for (let i = 0; i < path.length - 1; i++) {
             const from = path[i];
             const to = path[i + 1];
-            
-            // زيادة الوزن في كلا الاتجاهين
+
+            // Weight gain in both directions
             if (alternateGraph[from] && alternateGraph[from][to]) {
                 alternateGraph[from][to].drivingTime += PENALTY;
             }
@@ -742,31 +735,31 @@ function calculateAndDisplayAlternate(alternateNum) {
         }
     });
 
-    // 3. تجهيز الرسم البياني الجديد لدايكسترا بعد تطبيق العقوبة
+    // 3. Preparing the new Dijkstra chart after the penalty is applied
     const drivingAlternateGraphForDijkstra = createDrivingGraph(alternateGraph);
 
-    // 4. إيجاد المسار البديل
-    // سيجد المسار الأقصر في الرسم البياني المعاقب، ولكنه سيعيد الزمن الحقيقي
+    // 4. Find an alternative path
+    // The shortest path will be found in the punishing graph, but it will restore real-time.
     const alternateResult = findShortestPath(userNode, targetNode, drivingAlternateGraphForDijkstra);
-    
+
     if (alternateResult.path && alternateResult.path.length > 0) {
-        
-        // جلب بيانات المسار الأقصر الأصلي لإعادة العرض لاحقًا
+
+        // Retrieve the original shorter path data for later playback
         const drivingGraphForDijkstra = createDrivingGraph(graph);
         const currentBest = findShortestPath(userNode, targetNode, drivingGraphForDijkstra);
 
-        // تخزين البيانات في الذاكرة المؤقتة
-        const color = ALTERNATE_COLORS[alternateNum] || 'gray'; // استخدام الألوان المحددة
-        alternateRouteCache[alternateNum] = { 
-            ...alternateResult, 
+        //Data storage in temporary memory
+        const color = ALTERNATE_COLORS[alternateNum] || 'gray';
+        alternateRouteCache[alternateNum] = {
+            ...alternateResult,
             service: destinationService,
             color: color,
-            initialDistDriving: currentBest.distDriving, 
-            initialDistWalking: currentBest.distWalking, 
+            initialDistDriving: currentBest.distDriving,
+            initialDistWalking: currentBest.distWalking,
             initialLength: currentBest.length
         };
 
-        // تغيير عنوان العرض هنا
+        // Change display title here
         displayRouteResult(alternateRouteCache[alternateNum], color, `مسار بديل ${alternateNum}`, false);
 
     } else {
@@ -775,7 +768,7 @@ function calculateAndDisplayAlternate(alternateNum) {
 }
 
 
-// ** الدالة الجديدة للتبديل بين المسارات الخمسة (Toggle) **
+// ** The new function for switching between the five paths (Toggle) **
 function toggleNextRoute() {
     if (!initialBestPath || !destinationService) {
         document.getElementById('info').textContent = 'الرجاء تحديد موقعك والبحث عن أقرب خدمة أولاً.';
@@ -783,21 +776,21 @@ function toggleNextRoute() {
     }
 
     // 1. حساب حالة العرض التالية (5 حالات: 0-4)
-    currentRouteIndex = (currentRouteIndex + 1) % 5; 
+    currentRouteIndex = (currentRouteIndex + 1) % 5;
 
     // 2. تحديث العرض حسب الحالة الجديدة
     if (currentRouteIndex === 0) {
         // الحالة 0: العودة إلى المسار الأقصر
         // نستخدم بيانات المسار البديل الأول المخزنة كمرجع للزمن الأقصر الحقيقي
-        const best = { 
+        const best = {
             distDriving: alternateRouteCache[1]?.initialDistDriving || 0,
             distWalking: alternateRouteCache[1]?.initialDistWalking || 0,
             length: alternateRouteCache[1]?.initialLength || 0,
-            service: destinationService, 
-            path: initialBestPath 
+            service: destinationService,
+            path: initialBestPath
         };
         displayRouteResult(best, 'blue', 'أقصر مسار (الافتراضي)', true);
-        
+
     } else {
         // الحالات 1 إلى 4: حساب وعرض المسار البديل N
         calculateAndDisplayAlternate(currentRouteIndex);
@@ -806,7 +799,7 @@ function toggleNextRoute() {
 
 
 document.getElementById("locateBtn").addEventListener("click", () => {
-    document.getElementById('info').textContent = 'جارٍ تحديد موقعك...';
+    document.getElementById('info').textContent = '...جارٍ تحديد موقعك';
     navigator.geolocation.getCurrentPosition(pos => {
         userLat = pos.coords.latitude;
         userLng = pos.coords.longitude;
@@ -831,11 +824,33 @@ document.getElementById("locateBtn").addEventListener("click", () => {
 // إضافة مستمعي الأحداث لزر البحث وحقل الإدخال عند تحميل DOM
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('searchBtn').addEventListener('click', searchServices);
-    
+
     // **ربط زر المسار البديل بالدالة الجديدة للتبديل**
     document.getElementById('findAlternateRouteBtn').addEventListener('click', toggleNextRoute);
 
+// ربط زر التوجيه الذكي GeoAI
+    // ==========================================
+    const geoaiBtn = document.getElementById('geoaiRouteBtn');
+    if (geoaiBtn) {
+        geoaiBtn.addEventListener('click', function () {
+            if (!userLat || !userLng) {
+                alert("يرجى تحديد موقعك أولاً عبر الضغط على زر 📍 موقعي");
+                return;
+            }
 
+            if (!destinationService) {
+                alert("يرجى اختيار أو البحث عن خدمة أولاً لتحديد وجهة المسار");
+                return;
+            }
+
+            // إرسال الإحداثيات الفعلية إلى دالة GeoAI
+            fetchSmartRoute(
+                { lat: userLat, lng: userLng },
+                { lat: destinationService.coord[0], lng: destinationService.coord[1] },
+                destinationService.name
+            );
+        });
+    }
     const searchInput = document.getElementById('searchInput');
     searchInput.addEventListener('input', updateSuggestions); // استدعاء الدالة عند كل تغيير في الإدخال
 
@@ -875,15 +890,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // منطق التمدد والانقباض للأكورديون
+    // The expansion and contraction zone of the accordion
     const accordionHeaders = document.querySelectorAll('.accordion-header');
 
     accordionHeaders.forEach(header => {
         header.addEventListener('click', () => {
-            const content = header.nextElementSibling; // المحتوى هو العنصر التالي للهيدر
+            const content = header.nextElementSibling;
             const toggleIcon = header.querySelector('.toggle-icon');
 
-            // إغلاق جميع الأقسام الأخرى باستثناء القسم الحالي
+
             accordionHeaders.forEach(otherHeader => {
                 if (otherHeader !== header) {
                     otherHeader.classList.remove('active');
@@ -892,14 +907,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // تبديل حالة القسم الحالي
+
             header.classList.toggle('active');
             if (content.style.display === 'block') {
                 content.style.display = 'none';
                 toggleIcon.style.transform = 'rotate(0deg)';
             } else {
                 content.style.display = 'block';
-                toggleIcon.style.transform = 'rotate(180deg)'; // تدوير السهم
+                toggleIcon.style.transform = 'rotate(180deg)'; // Rotate the arrow
             }
         });
     });
@@ -964,7 +979,7 @@ function generateMapLegendControl() {
         roadsLayer.eachLayer(layer => {
             const properties = layer.feature?.properties || layer.feature?.attributes;
             // التحويل إلى أحرف صغيرة ضروري هنا للمطابقة مع المفاتيح في roadClassesMap
-            const fclass = (properties?.fclass || 'default').toLowerCase(); 
+            const fclass = (properties?.fclass || 'default').toLowerCase();
             uniqueRoadClasses.add(fclass);
         });
 
@@ -994,7 +1009,7 @@ function generateMapLegendControl() {
                 <span>حدود المنطقة</span>
             </div>
         `;
-        
+
         // مفتاح المسار البديل (5 مسارات)
         div.innerHTML += '<h5>:المسارات</h5>';
         div.innerHTML += `
@@ -1025,5 +1040,6 @@ function generateMapLegendControl() {
     };
     return legend;
 }
+
 
 loadMap();
