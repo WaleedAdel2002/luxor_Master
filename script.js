@@ -1049,7 +1049,7 @@ loadMap();
 // ==========================================
 // دالة التوجيه الذكي المباشرة GeoAI
 // ==========================================
-const GEOAI_API_URL = "https://lung-mono-calculator-differ.trycloudflare.com";
+const GEOAI_API_URL = "https://lung-mono-calculator-differ.trycloudflare.com/api";
 
 let smartRouteLayer = null;
 
