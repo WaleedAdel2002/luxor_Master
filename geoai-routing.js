@@ -1,5 +1,5 @@
 // geoai-routing.js - وحدة التوجيه الذكي المستقلة
-const GEOAI_API_URL = "https://avi-contracts-spider-suppliers.trycloudflare.com/api";
+const GEOAI_API_URL = "https://avi-contracts-spider-suppliers.trycloudflare.com";
 
 let activeTrip = {
   trackingId: null,
