@@ -13,12 +13,18 @@ let smartRouteLayer = null;
 // 1. دالة طلب المسار الذكي وعرضه على الخريطة
 async function requestSmartRoute(userCoords, facilityCoords, facilityName) {
   try {
+    // استخراج خطوط الطول والعرض سواء كانت كائنات Leaflet أو عادية
+    const uLat = userCoords.lat !== undefined ? userCoords.lat : userCoords[0];
+    const uLng = userCoords.lng !== undefined ? userCoords.lng : userCoords[1];
+    const fLat = facilityCoords.lat !== undefined ? facilityCoords.lat : facilityCoords[0];
+    const fLng = facilityCoords.lng !== undefined ? facilityCoords.lng : facilityCoords[1];
+
     const response = await fetch(`${GEOAI_API_URL}/get-smart-route`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        origin: [userCoords.lat, userCoords.lng],
-        destination: [facilityCoords.lat, facilityCoords.lng]
+        origin: [uLat, uLng],
+        destination: [fLat, fLng]
       })
     });
 
@@ -49,13 +55,13 @@ async function requestSmartRoute(userCoords, facilityCoords, facilityName) {
     smartRouteLayer.bindPopup(`
       <div style="direction: rtl; text-align: right; font-family: sans-serif;">
         <b style="color: #2563eb;">مسار GeoAI الذكي ⚡</b><br>
-        <b>الوجهة:</b> ${facilityName}<br>
+        <b>الوجهة:</b> ${facilityName || "الخدمة المحددة"}<br>
         <b>الزمن المتوقع:</b> ${routeData.eta_minutes} دقيقة
       </div>
     `).openPopup();
 
     // بدء رصد الرحلة للتعلّم المستمر
-    startTripMonitoring(facilityCoords);
+    startTripMonitoring({ lat: fLat, lng: fLng });
 
   } catch (err) {
     console.error("GeoAI Engine error:", err);
@@ -63,13 +69,15 @@ async function requestSmartRoute(userCoords, facilityCoords, facilityName) {
   }
 }
 
+// إنشاء اسم بديل متطابق لـ script.js (يحل خطأ Uncaught ReferenceError: fetchSmartRoute)
+const fetchSmartRoute = requestSmartRoute;
+
 // 2. مراقبة حركة المستخدم وحساب زمن الوصول الفعلي
 function startTripMonitoring(destination) {
   activeTrip.startTime = Date.now();
 
   if (!navigator.geolocation) return;
 
-  // إلغاء أي مراقبة سابقة إن وجدت
   if (activeTrip.trackingId) {
     navigator.geolocation.clearWatch(activeTrip.trackingId);
   }
@@ -78,7 +86,6 @@ function startTripMonitoring(destination) {
     const currentLat = position.coords.latitude;
     const currentLng = position.coords.longitude;
 
-    // فحص المسافة بين المستخدم والوجهة (ضمن نطاق 30 متراً)
     const dist = map.distance([currentLat, currentLng], [destination.lat, destination.lng]);
     if (dist <= 30) {
       completeTrip();
@@ -102,7 +109,7 @@ async function completeTrip() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         actual_duration_seconds: totalDurationSec,
-        length_m: 1200, // مسافة تقريبية للقطاع
+        length_m: 1200,
         hour: currentHour,
         is_tourist_zone: 1
       })
