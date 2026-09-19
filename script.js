@@ -1043,3 +1043,63 @@ function generateMapLegendControl() {
 
 
 loadMap();
+
+
+
+// ==========================================
+// دالة التوجيه الذكي المباشرة GeoAI
+// ==========================================
+const GEOAI_API_URL = "https://disclosure-maintaining-helen-bath.trycloudflare.com/api";
+
+let smartRouteLayer = null;
+
+async function fetchSmartRoute(originLatLng, destLatLng, serviceName) {
+  try {
+    const uLat = originLatLng.lat !== undefined ? originLatLng.lat : originLatLng[0];
+    const uLng = originLatLng.lng !== undefined ? originLatLng.lng : originLatLng[1];
+    const fLat = destLatLng.lat !== undefined ? destLatLng.lat : destLatLng[0];
+    const fLng = destLatLng.lng !== undefined ? destLatLng.lng : destLatLng[1];
+
+    const response = await fetch(`${GEOAI_API_URL}/get-smart-route`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        origin: [uLat, uLng],
+        destination: [fLat, fLng]
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error(`Server status: ${response.status}`);
+    }
+
+    const routeData = await response.json();
+
+    if (smartRouteLayer && map.hasLayer(smartRouteLayer)) {
+      map.removeLayer(smartRouteLayer);
+    }
+
+    smartRouteLayer = L.geoJSON(routeData.geojson, {
+      style: {
+        color: "#2563eb",
+        weight: 6,
+        opacity: 0.9,
+        dashArray: "4, 8"
+      }
+    }).addTo(map);
+
+    map.fitBounds(smartRouteLayer.getBounds(), { padding: [40, 40] });
+
+    smartRouteLayer.bindPopup(`
+      <div style="direction: rtl; text-align: right; font-family: sans-serif;">
+        <b style="color: #2563eb;">مسار GeoAI الذكي ⚡</b><br>
+        <b>الوجهة:</b> ${serviceName || "الخدمة المحددة"}<br>
+        <b>الزمن المتوقع:</b> ${routeData.eta_minutes} دقيقة
+      </div>
+    `).openPopup();
+
+  } catch (err) {
+    console.error("GeoAI Error:", err);
+    alert("تعذر جلب المسار الذكي. تأكد من تشغيل نفق Cloudflare وسيرفر بايثون.");
+  }
+}
