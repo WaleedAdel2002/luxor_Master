@@ -1053,19 +1053,23 @@ const GEOAI_API_URL = "https://lung-mono-calculator-differ.trycloudflare.com/api
 
 let smartRouteLayer = null;
 
-async function fetchSmartRoute(originLatLng, destLatLng, serviceName) {
+async function fetchSmartRoute(originLatLng, destLatLng, serviceName, calculatedStreetRouteCoords) {
   try {
     const uLat = originLatLng.lat !== undefined ? originLatLng.lat : originLatLng[0];
     const uLng = originLatLng.lng !== undefined ? originLatLng.lng : originLatLng[1];
     const fLat = destLatLng.lat !== undefined ? destLatLng.lat : destLatLng[0];
     const fLng = destLatLng.lng !== undefined ? destLatLng.lng : destLatLng[1];
 
+    // إذا وُجد مسار شوارع محسوب مسبقاً نرسله، وإلا نرسل نقطتي البداية والنهاية
+    const rawCoords = calculatedStreetRouteCoords || [[uLat, uLng], [fLat, fLng]];
+
     const response = await fetch(`${GEOAI_API_URL}/get-smart-route`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         origin: [uLat, uLng],
-        destination: [fLat, fLng]
+        destination: [fLat, fLng],
+        route_coords: rawCoords // تمرير مسار الشوارع
       })
     });
 
@@ -1079,22 +1083,28 @@ async function fetchSmartRoute(originLatLng, destLatLng, serviceName) {
       map.removeLayer(smartRouteLayer);
     }
 
+    // رسم مسار الـ GeoAI: خط متصل وواضح بدون dashArray
     smartRouteLayer = L.geoJSON(routeData.geojson, {
       style: {
-        color: "#2563eb",
-        weight: 6,
-        opacity: 0.9,
-        dashArray: "4, 8"
+        color: "#8b5cf6",     // لون بنفسجي ذكي مميز (GeoAI Violet)
+        weight: 7,            // خط عريض وبارز
+        opacity: 0.95,
+        lineCap: "round",
+        lineJoin: "round"
+        // حذف dashArray بالكامل حتى لا يظهر منقطاً
       }
     }).addTo(map);
 
     map.fitBounds(smartRouteLayer.getBounds(), { padding: [40, 40] });
 
     smartRouteLayer.bindPopup(`
-      <div style="direction: rtl; text-align: right; font-family: sans-serif;">
-        <b style="color: #2563eb;">مسار GeoAI الذكي ⚡</b><br>
+      <div style="direction: rtl; text-align: right; font-family: sans-serif; min-width: 160px;">
+        <div style="background: #8b5cf6; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 6px; text-align: center;">
+          ⚡ مسار GeoAI التنبؤي
+        </div>
         <b>الوجهة:</b> ${serviceName || "الخدمة المحددة"}<br>
-        <b>الزمن المتوقع:</b> ${routeData.eta_minutes} دقيقة
+        <b>المسافة الفعلية:</b> ${routeData.geojson.properties.distance_meters} متر<br>
+        <b>الزمن الذكي المتوقع:</b> <span style="color:#8b5cf6; font-weight: bold;">${routeData.eta_minutes} دقيقة</span>
       </div>
     `).openPopup();
 
