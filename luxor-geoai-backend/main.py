@@ -5,6 +5,7 @@ from river import linear_model, preprocessing
 import networkx as nx
 import math
 import datetime
+from typing import List, Optional
 
 app = FastAPI(title="GeoGuide Luxor - GeoAI Engine")
 
@@ -25,8 +26,9 @@ G = nx.Graph()
 
 # نماذج الطلبات
 class RouteRequest(BaseModel):
-    origin: list       # [lat, lng]
-    destination: list  # [lat, lng]
+    origin: list                     # [lat, lng]
+    destination: list                # [lat, lng]
+    route_coords: Optional[List[list]] = None  # قائمة نقاط الشوارع
     timestamp: str = None
 
 class FeedbackRequest(BaseModel):
@@ -54,7 +56,18 @@ def get_smart_route(req: RouteRequest):
     hour = now.hour
     is_weekend = 1 if now.weekday() in [4, 5] else 0
 
-    dist_meters = haversine_distance(req.origin, req.destination)
+    # حساب طول المسار وإحداثيات الـ GeoJSON
+    if req.route_coords and len(req.route_coords) > 1:
+        dist_meters = 0.0
+        for i in range(len(req.route_coords) - 1):
+            dist_meters += haversine_distance(req.route_coords[i], req.route_coords[i+1])
+        coordinates = [[pt[1], pt[0]] for pt in req.route_coords]
+    else:
+        dist_meters = haversine_distance(req.origin, req.destination)
+        coordinates = [
+            [req.origin[1], req.origin[0]],
+            [req.destination[1], req.destination[0]]
+        ]
     
     # ميزات التنبؤ للنموذج اللحظي
     features = {
@@ -77,10 +90,7 @@ def get_smart_route(req: RouteRequest):
         "type": "Feature",
         "geometry": {
             "type": "LineString",
-            "coordinates": [
-                [req.origin[1], req.origin[0]],         # [lng, lat]
-                [req.destination[1], req.destination[0]]
-            ]
+            "coordinates": coordinates
         },
         "properties": {
             "distance_meters": round(dist_meters, 1),
