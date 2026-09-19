@@ -1,5 +1,5 @@
-// geoai-routing.js - كود مستقل تماماً
-const GEOAI_API_URL = "https://your-geoai-service.onrender.com/api";
+// geoai-routing.js - وحدة التوجيه الذكي المستقلة
+const GEOAI_API_URL = "https://disclosure-maintaining-helen-bath.trycloudflare.com/api";
 
 let activeTrip = {
   trackingId: null,
@@ -18,10 +18,13 @@ async function requestSmartRoute(userCoords, facilityCoords, facilityName) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         origin: [userCoords.lat, userCoords.lng],
-        destination: [facilityCoords.lat, facilityCoords.lng],
-        timestamp: new Date().toISOString()
+        destination: [facilityCoords.lat, facilityCoords.lng]
       })
     });
+
+    if (!response.ok) {
+      throw new Error(`Server returned status: ${response.status}`);
+    }
 
     const routeData = await response.json();
 
@@ -30,60 +33,82 @@ async function requestSmartRoute(userCoords, facilityCoords, facilityName) {
       map.removeLayer(smartRouteLayer);
     }
 
-    // رسم المسار الذكي بلون مميز فوق الخريطة دون لمس الطبقات الأخرى
+    // رسم المسار الذكي بلون أزرق وتصميم متقطع يبرز أنه مسار AI
     smartRouteLayer = L.geoJSON(routeData.geojson, {
       style: {
-        color: "#2563eb", // لون أزرق مميز
+        color: "#2563eb",
         weight: 6,
-        opacity: 0.85,
-        dashArray: "1, 8" // خط ديناميكي يبرز أنه مسار AI
+        opacity: 0.9,
+        dashArray: "4, 8"
       }
     }).addTo(map);
 
+    // تكبير الخريطة لتشمل كامل المسار
+    map.fitBounds(smartRouteLayer.getBounds(), { padding: [40, 40] });
+
     smartRouteLayer.bindPopup(`
-      <b>مسار GeoAI الذكي</b><br>
-      الوجهة: ${facilityName}<br>
-      الزمن التقديري المتوقع: ${routeData.eta_minutes} دقيقة
+      <div style="direction: rtl; text-align: right; font-family: sans-serif;">
+        <b style="color: #2563eb;">مسار GeoAI الذكي ⚡</b><br>
+        <b>الوجهة:</b> ${facilityName}<br>
+        <b>الزمن المتوقع:</b> ${routeData.eta_minutes} دقيقة
+      </div>
     `).openPopup();
 
     // بدء رصد الرحلة للتعلّم المستمر
-    startTripMonitoring(userCoords, facilityCoords, routeData.route_id);
+    startTripMonitoring(facilityCoords);
 
   } catch (err) {
-    console.warn("GeoAI Engine fallback to standard routing:", err);
+    console.error("GeoAI Engine error:", err);
+    alert("تعذر جلب المسار الذكي. تأكد من عمل سيرفر بايثون ونفق Cloudflare.");
   }
 }
 
 // 2. مراقبة حركة المستخدم وحساب زمن الوصول الفعلي
-function startTripMonitoring(start, destination, routeId) {
+function startTripMonitoring(destination) {
   activeTrip.startTime = Date.now();
-  
-  // تتبع موقع المستخدم
+
+  if (!navigator.geolocation) return;
+
+  // إلغاء أي مراقبة سابقة إن وجدت
+  if (activeTrip.trackingId) {
+    navigator.geolocation.clearWatch(activeTrip.trackingId);
+  }
+
   activeTrip.trackingId = navigator.geolocation.watchPosition((position) => {
     const currentLat = position.coords.latitude;
     const currentLng = position.coords.longitude;
-    
-    // فحص المسافة بين المستخدم والوجهة (إذا وصل ضمن نطاق 30 متراً)
+
+    // فحص المسافة بين المستخدم والوجهة (ضمن نطاق 30 متراً)
     const dist = map.distance([currentLat, currentLng], [destination.lat, destination.lng]);
-    if (dist < 30) {
-      completeTrip(routeId);
+    if (dist <= 30) {
+      completeTrip();
     }
   }, null, { enableHighAccuracy: true });
 }
 
 // 3. إرسال التغذية العكسية للنموذج ليتعلم تلقائياً
-async function completeTrip(routeId) {
-  navigator.geolocation.clearWatch(activeTrip.trackingId);
-  const totalDurationSec = (Date.now() - activeTrip.startTime) / 1000;
+async function completeTrip() {
+  if (activeTrip.trackingId) {
+    navigator.geolocation.clearWatch(activeTrip.trackingId);
+    activeTrip.trackingId = null;
+  }
 
-  await fetch(`${GEOAI_API_URL}/feedback-trip`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      route_id: routeId,
-      actual_duration_seconds: totalDurationSec
-    })
-  });
-  
-  console.log("Trip data sent to GeoAI engine for online learning.");
+  const totalDurationSec = (Date.now() - activeTrip.startTime) / 1000;
+  const currentHour = new Date().getHours();
+
+  try {
+    await fetch(`${GEOAI_API_URL}/feedback-trip`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        actual_duration_seconds: totalDurationSec,
+        length_m: 1200, // مسافة تقريبية للقطاع
+        hour: currentHour,
+        is_tourist_zone: 1
+      })
+    });
+    console.log("GeoAI: Trip completed and feedback processed for online learning.");
+  } catch (err) {
+    console.warn("Could not submit feedback to GeoAI:", err);
+  }
 }
