@@ -1049,7 +1049,7 @@ loadMap();
 // ==========================================
 // دالة التوجيه الذكي المباشرة GeoAI (تتبع الشوارع بدقة)
 // ==========================================
-const GEOAI_API_URL = "https://lung-mono-calculator-differ.trycloudflare.com/api";
+const GEOAI_API_URL = "https://directed-condo-producer-accepting.trycloudflare.com/api";
 
 let smartRouteLayer = null;
 
