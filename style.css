@@ -633,11 +633,11 @@ body {
         font-size: 1.3rem;
     }
 }
-/* سهم الشمال: داخل الخريطة على يمين أزرار التكبير مباشرة */
+/* سهم الشمال: بمحاذاة زري التكبير والتصغير على يمينهما مباشرة */
 .north-arrow {
   position: absolute !important;
-  top: 10px !important;
-  left: 50px !important; /* بعد أزرار الزووم مباشرة */
+  top: 92px !important;    /* نزلناه بمقدار ارتفاع الهيدر ليستقر تماماً بجوار + و - */
+  left: 55px !important;   /* يبعد 55px عن اليسار ليأتي على يمين الأزرار */
   right: auto !important;
   z-index: 1000 !important;
   background: rgba(255, 255, 255, 0.95);
