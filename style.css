@@ -633,32 +633,45 @@ body {
         font-size: 1.3rem;
     }
 }
-/* سهم الشمال: في اليسار بجوار أزرار التكبير والتصغير مباشرة */
-.north-arrow {
-  position: absolute;
-  top: 12px;
-  left: 55px; /* يبتعد 55 بكسل عن الحافة ليأتي تماماً يمين أزرار الزووم */
-  z-index: 1000;
+/* سهم الشمال ملحق بجوار زري الزووم تماماً */
+.leaflet-control-north {
   background: rgba(255, 255, 255, 0.95);
-  padding: 5px 7px;
-  border-radius: 6px;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(0,0,0,0.2);
+  border-radius: 4px;
+  padding: 4px 6px;
   text-align: center;
-  pointer-events: none;
-  border: 1px solid #ccc;
-  width: 46px;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.3);
+  margin-left: 8px !important;
+  display: inline-block;
+  vertical-align: top;
+  width: 44px;
 }
 
-.north-arrow svg {
+.leaflet-control-north svg {
   width: 24px;
-  height: 28px;
+  height: 26px;
   display: block;
-  margin: 0 auto 2px;
+  margin: 0 auto 1px;
 }
 
-.north-arrow span {
-  font-size: 9px;
+.leaflet-control-north span {
+  font-size: 8px;
   font-weight: bold;
   color: #2c3e50;
   display: block;
+  line-height: 1;
+}
+
+/* شريط الإحداثيات في أسفل يسار الخريطة بجوار زر الـ i */
+.leaflet-control-coords {
+  background: rgba(27, 58, 75, 0.92);
+  color: #ffffff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-family: monospace, sans-serif;
+  direction: ltr;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.3);
+  margin-left: 10px !important;
+  margin-bottom: 6px !important;
 }
