@@ -633,11 +633,11 @@ body {
         font-size: 1.3rem;
     }
 }
-/* 1. ضبط موضع سهم الشمال بحيث ينزل تحت أزرار الزووم */
+/* 1. سهم الشمال: نقله إلى أقصى اليمين تحت زر الطبقات ليكون في فراغ ممتاز */
 .north-arrow {
   position: absolute;
-  top: 95px; /* نزلناه للأسفل ليكون تحت زري + و - */
-  left: 12px;
+  top: 90px;
+  right: 15px; /* نُقل إلى اليمين لتفادي التداخل نهائياً */
   z-index: 1000;
   background: rgba(255, 255, 255, 0.95);
   padding: 6px 8px;
@@ -646,7 +646,7 @@ body {
   text-align: center;
   pointer-events: none;
   border: 1px solid #ccc;
-  width: 50px;
+  width: 52px;
 }
 
 .north-arrow svg {
@@ -663,15 +663,15 @@ body {
   display: block;
 }
 
-/* 2. ضبط شريط الإحداثيات ليرتفع فوق زر (i) ولا يغطيه */
+/* 2. شريط الإحداثيات: تحريكه لليمين قليلاً ليتجاوز دائرة (i) بالكامل */
 .coords-bar {
   position: absolute;
-  bottom: 30px; /* تم رفعه قليلاً لتجنب زر الإسناد الافتراضي */
-  left: 10px;
+  bottom: 8px;
+  left: 55px; /* مسافة كافية لكي يبتعد تماماً عن أيقونة i الزرقاء */
   z-index: 1000;
   background: rgba(27, 58, 75, 0.92);
   color: #ffffff;
-  padding: 4px 10px;
+  padding: 5px 12px;
   border-radius: 4px;
   font-size: 11px;
   font-family: monospace, sans-serif;
