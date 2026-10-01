@@ -636,8 +636,8 @@ body {
 /* سهم الشمال: بمحاذاة زري التكبير والتصغير على يمينهما مباشرة */
 .north-arrow {
   position: absolute !important;
-  top: 100px !important;    /* نزلناه بمقدار ارتفاع الهيدر ليستقر تماماً بجوار + و - */
-  left: 60px !important;   /* يبعد 55px عن اليسار ليأتي على يمين الأزرار */
+  top: 110px !important;    /* نزلناه بمقدار ارتفاع الهيدر ليستقر تماماً بجوار + و - */
+  left: 65px !important;   /* يبعد 55px عن اليسار ليأتي على يمين الأزرار */
   right: auto !important;
   z-index: 1000 !important;
   background: rgba(255, 255, 255, 0.95);
