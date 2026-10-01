@@ -1125,3 +1125,28 @@ async function fetchSmartRoute(originLatLng, destLatLng, serviceName) {
     alert("تعذر جلب المسار الذكي. تأكد من اتصال السيرفر.");
   }
 }
+// 1. تفعيل مقياس الرسم المتري الديناميكي (Scale Bar)
+L.control.scale({
+  position: 'bottomright', // مكانه في الركن السفلي الأيمن
+  metric: true,            // بالنظام المتري (متر / كيلومتر)
+  imperial: false,         // إخفاء الأميال
+  maxWidth: 150
+}).addTo(map);
+
+// 2. تفعيل شريط الإحداثيات الديناميكي ومستوى التكبير لحظياً
+const coordsBar = document.getElementById('coords-bar');
+
+function updateCoords(lat, lng) {
+  coordsBar.innerText = `Lat: ${lat.toFixed(4)}° N | Lon: ${lng.toFixed(4)}° E | Zoom: ${map.getZoom()}`;
+}
+
+// التحديث عند تحريك مؤشر الماوس فوق الخريطة
+map.on('mousemove', function (e) {
+  updateCoords(e.latlng.lat, e.latlng.lng);
+});
+
+// التحديث عند التكبير/التصغير بناءً على مركز الخريطة الحالي
+map.on('zoomend', function () {
+  const center = map.getCenter();
+  updateCoords(center.lat, center.lng);
+});
