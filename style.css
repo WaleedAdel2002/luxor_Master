@@ -633,25 +633,25 @@ body {
         font-size: 1.3rem;
     }
 }
-/* 1. سهم الشمال: نقله إلى أقصى اليمين تحت زر الطبقات ليكون في فراغ ممتاز */
+/* سهم الشمال: في اليسار بجوار أزرار التكبير والتصغير مباشرة */
 .north-arrow {
   position: absolute;
-  top: 90px;
-  right: 15px; /* نُقل إلى اليمين لتفادي التداخل نهائياً */
+  top: 12px;
+  left: 55px; /* يبتعد 55 بكسل عن الحافة ليأتي تماماً يمين أزرار الزووم */
   z-index: 1000;
   background: rgba(255, 255, 255, 0.95);
-  padding: 6px 8px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  padding: 5px 7px;
+  border-radius: 6px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
   text-align: center;
   pointer-events: none;
   border: 1px solid #ccc;
-  width: 52px;
+  width: 46px;
 }
 
 .north-arrow svg {
-  width: 28px;
-  height: 32px;
+  width: 24px;
+  height: 28px;
   display: block;
   margin: 0 auto 2px;
 }
@@ -661,22 +661,4 @@ body {
   font-weight: bold;
   color: #2c3e50;
   display: block;
-}
-
-/* 2. شريط الإحداثيات: تحريكه لليمين قليلاً ليتجاوز دائرة (i) بالكامل */
-.coords-bar {
-  position: absolute;
-  bottom: 8px;
-  left: 55px; /* مسافة كافية لكي يبتعد تماماً عن أيقونة i الزرقاء */
-  z-index: 1000;
-  background: rgba(27, 58, 75, 0.92);
-  color: #ffffff;
-  padding: 5px 12px;
-  border-radius: 4px;
-  font-size: 11px;
-  font-family: monospace, sans-serif;
-  letter-spacing: 0.5px;
-  direction: ltr;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
-  pointer-events: none;
 }
