@@ -828,7 +828,29 @@ document.addEventListener('DOMContentLoaded', () => {
     // **ربط زر المسار البديل بالدالة الجديدة للتبديل**
     document.getElementById('findAlternateRouteBtn').addEventListener('click', toggleNextRoute);
 
+// ربط زر التوجيه الذكي GeoAI
+    // ==========================================
+    const geoaiBtn = document.getElementById('geoaiRouteBtn');
+    if (geoaiBtn) {
+        geoaiBtn.addEventListener('click', function () {
+            if (!userLat || !userLng) {
+                alert("يرجى تحديد موقعك أولاً عبر الضغط على زر 📍 موقعي");
+                return;
+            }
 
+            if (!destinationService) {
+                alert("يرجى اختيار أو البحث عن خدمة أولاً لتحديد وجهة المسار");
+                return;
+            }
+
+            // إرسال الإحداثيات الفعلية إلى دالة GeoAI
+            fetchSmartRoute(
+                { lat: userLat, lng: userLng },
+                { lat: destinationService.coord[0], lng: destinationService.coord[1] },
+                destinationService.name
+            );
+        });
+    }
     const searchInput = document.getElementById('searchInput');
     searchInput.addEventListener('input', updateSuggestions); // استدعاء الدالة عند كل تغيير في الإدخال
 
@@ -1019,4 +1041,87 @@ function generateMapLegendControl() {
     return legend;
 }
 
+
 loadMap();
+
+
+
+// ==========================================
+// دالة التوجيه الذكي المباشرة GeoAI (تتبع الشوارع بدقة)
+// ==========================================
+const GEOAI_API_URL = "https://lung-mono-calculator-differ.trycloudflare.com/api";
+
+let smartRouteLayer = null;
+
+async function fetchSmartRoute(originLatLng, destLatLng, serviceName) {
+  try {
+    const uLat = originLatLng.lat !== undefined ? originLatLng.lat : originLatLng[0];
+    const uLng = originLatLng.lng !== undefined ? originLatLng.lng : originLatLng[1];
+    const fLat = destLatLng.lat !== undefined ? destLatLng.lat : destLatLng[0];
+    const fLng = destLatLng.lng !== undefined ? destLatLng.lng : destLatLng[1];
+
+    // 1. جلب مسار الشوارع الفعلي بانحناءاته الحقيقية عبر OSRM
+    const osrmUrl = `https://router.project-osrm.org/route/v1/driving/${uLng},${uLat};${fLng},${fLat}?overview=full&geometries=geojson`;
+    const osrmRes = await fetch(osrmUrl);
+    const osrmData = await osrmRes.json();
+
+    let realStreetCoords = [];
+    if (osrmData.routes && osrmData.routes.length > 0) {
+      // تحويل الإحداثيات من [lng, lat] إلى [lat, lng]
+      realStreetCoords = osrmData.routes[0].geometry.coordinates.map(coord => [coord[1], coord[0]]);
+    } else {
+      realStreetCoords = [[uLat, uLng], [fLat, fLng]];
+    }
+
+    // 2. إرسال المسار الكامل لسيرفر GeoAI للتنبؤ بالزمن والازدحام
+    const response = await fetch(`${GEOAI_API_URL}/get-smart-route`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        origin: [uLat, uLng],
+        destination: [fLat, fLng],
+        route_coords: realStreetCoords
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error(`Server status: ${response.status}`);
+    }
+
+    const routeData = await response.json();
+
+    // 3. مسح أي مسار ذكي سابق
+    if (smartRouteLayer && map.hasLayer(smartRouteLayer)) {
+      map.removeLayer(smartRouteLayer);
+    }
+
+    // 4. رسم مسار الشوارع الحقيقي بخط متصل وأنيق
+    smartRouteLayer = L.geoJSON(routeData.geojson, {
+      style: {
+        color: "#7c3aed",      // لون بنفسجي عصري للـ AI
+        weight: 6,
+        opacity: 0.9,
+        lineCap: "round",
+        lineJoin: "round"
+      }
+    }).addTo(map);
+
+    map.fitBounds(smartRouteLayer.getBounds(), { padding: [40, 40] });
+
+    // 5. فتح النافذة المنبثقة بمعلومات التنبؤ
+    smartRouteLayer.bindPopup(`
+      <div style="direction: rtl; text-align: right; font-family: sans-serif; min-width: 170px;">
+        <div style="background: #7c3aed; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 6px; text-align: center;">
+          ⚡ مسار GeoAI الذكي
+        </div>
+        <b>الوجهة:</b> ${serviceName || "الخدمة المحددة"}<br>
+        <b>المسافة الفعلية:</b> ${routeData.geojson.properties.distance_meters} متر<br>
+        <b>الزمن المتوقع:</b> <span style="color:#7c3aed; font-weight: bold;">${routeData.eta_minutes} دقيقة</span>
+      </div>
+    `).openPopup();
+
+  } catch (err) {
+    console.error("GeoAI Error:", err);
+    alert("تعذر جلب المسار الذكي. تأكد من اتصال السيرفر.");
+  }
+}
