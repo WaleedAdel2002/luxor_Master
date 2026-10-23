@@ -3,575 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>المنصة التفاعلية لإنجازات جامعة قنا 2023 - 2026</title>
-    
-    <!-- الخطوط والأيقونات -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <style>
-        :root {
-            --bg-body: #f1f5f9;
-            --card-bg: #ffffff;
-            --primary: #0f172a;
-            --accent-blue: #2563eb;
-            --border-color: #e2e8f0;
-            --text-main: #1e293b;
-            --radius-lg: 14px;
-            --radius-md: 10px;
-            --shadow-subtle: 0 4px 20px -2px rgba(15, 23, 42, 0.06);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Cairo', sans-serif;
-        }
-
-        html, body {
-            height: 100vh;
-            overflow: hidden;
-            background-color: var(--bg-body);
-            color: var(--text-main);
-        }
-
-        header {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(8px);
-            border-bottom: 1px solid var(--border-color);
-            padding: 8px 3%;
+    <title>Home</title>
+    <!-- Custom CSS for the project page -->
+    <link rel="stylesheet" href="project-style.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+        /* الحاوية الرأسية للأزرار */
+        .buttons-vertical-container {
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 65px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-        }
-
-        .logo-box {
-            width: 90px;
-            height: 50px;
-            display: flex;
-            align-items: center;
+            flex-direction: column;
+            gap: 8px; /* تقليل المسافة بين الزرين */
             justify-content: center;
+            align-items: center;
         }
 
-        .logo-box img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-
-        .header-title h1 {
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: var(--primary);
+        /* التحكم في تصغير حجم الأزرار وتوحيد أبعادها */
+        .buttons-vertical-container .access-map-button {
+            padding: 8px 16px !important; /* تقليل الحشو الداخلي لجعل الزر نحيفاً */
+            font-size: 0.85rem !important; /* تصغير حجم خط النص داخل الزر */
+            min-width: 180px !important;   /* تحديد عرض أدنى موحد للزرين */
+            max-width: 220px !important;   /* تحديد عرض أقصى لكي لا يتمدد الزر */
             text-align: center;
         }
 
-        .main-container {
-            max-width: 1350px;
-            margin: 0 auto;
-            padding: 12px 20px;
-            height: calc(100vh - 65px);
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .intro-banner {
-            background: var(--card-bg);
-            border-radius: var(--radius-lg);
-            padding: 12px 22px;
-            box-shadow: var(--shadow-subtle);
-            border: 1px solid var(--border-color);
-            border-right: 5px solid var(--accent-blue);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 15px;
-            flex-shrink: 0;
-        }
-
-        .intro-banner p {
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: #334155;
-            line-height: 1.5;
-        }
-
-        .map-action-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--accent-blue);
-            color: #ffffff;
-            padding: 10px 22px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 800;
-            white-space: nowrap;
-            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .map-action-btn:hover {
-            background: #1d4ed8;
-            transform: translateY(-2px);
-        }
-
-        .showcase-layout {
-            display: grid;
-            grid-template-columns: 320px 1fr;
-            gap: 16px;
-            flex-grow: 1;
-            min-height: 0;
-        }
-
-        .playlist-panel {
-            background: var(--card-bg);
-            border-radius: var(--radius-lg);
-            padding: 14px;
-            box-shadow: var(--shadow-subtle);
-            border: 1px solid var(--border-color);
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            min-height: 0;
-        }
-
-        .playlist-panel h3 {
-            font-size: 1rem;
-            font-weight: 800;
-            color: var(--primary);
-            margin-bottom: 10px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #f1f5f9;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-shrink: 0;
-        }
-
-        .playlist-items {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            overflow-y: auto;
-            flex-grow: 1;
-            padding-left: 4px;
-        }
-
-        .playlist-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px;
-            border-radius: var(--radius-md);
-            border: 1px solid #f1f5f9;
-            background: #f8fafc;
-            cursor: pointer;
-            transition: all 0.25s ease;
-        }
-
-        .playlist-item:hover, .playlist-item.active {
-            background: #eff6ff;
-            border-color: #bfdbfe;
-        }
-
-        .playlist-item.active {
-            border-right: 4px solid var(--accent-blue);
-        }
-
-        .thumb-icon {
-            width: 36px;
-            height: 36px;
-            background: #dbeafe;
-            color: var(--accent-blue);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.95rem;
-            flex-shrink: 0;
-        }
-
-        .playlist-item.active .thumb-icon {
-            background: var(--accent-blue);
-            color: #ffffff;
-        }
-
-        .atlas-item .thumb-icon {
-            background: #fef3c7;
-            color: #d97706;
-        }
-
-        .atlas-item:hover, .atlas-item.active {
-            background: #fffbeb;
-            border-color: #fde68a;
-        }
-
-        .item-info h4 {
-            font-size: 0.88rem;
-            font-weight: 700;
-            color: var(--primary);
-            line-height: 1.3;
-        }
-
-        .player-card {
-            background: var(--card-bg);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            box-shadow: var(--shadow-subtle);
-            border: 1px solid var(--border-color);
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            min-height: 0;
-        }
-
-        .screen-wrapper {
-            position: relative;
-            width: 100%;
-            flex-grow: 1;
-            background: #000;
-            min-height: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .screen-wrapper video {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            display: block;
-        }
-
-        /* شبكة الأطلس والحاويات مع زِر التكبير */
-        .atlas-main-grid {
-            width: 100%;
-            height: 100%;
-            overflow-y: auto;
-            padding: 15px;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            background-color: #0f172a;
-        }
-
-        .atlas-card {
-            position: relative;
-            background-color: #ffffff;
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid #334155;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            height: 380px;
-        }
-
-        .atlas-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            display: block;
-        }
-
-        /* زر تكبير الصورة فوق الكارت */
-        .zoom-overlay-btn {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: rgba(37, 99, 235, 0.9);
-            color: #ffffff;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-            transition: all 0.2s ease;
-            z-index: 10;
-        }
-
-        .zoom-overlay-btn:hover {
-            background: #1d4ed8;
-            transform: scale(1.05);
-        }
-
-        /* نافذة التكبير بملء الشاشة (Fullscreen Lightbox) */
-        .fullscreen-modal {
-            display: none;
-            position: fixed;
-            z-index: 999999;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.92);
-            backdrop-filter: blur(5px);
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .fullscreen-modal img {
-            max-width: 95vw;
-            max-height: 90vh;
-            object-fit: contain;
-            border-radius: 8px;
-            box-shadow: 0 0 25px rgba(255, 255, 255, 0.1);
-        }
-
-        .close-fullscreen {
-            position: absolute;
-            top: 20px;
-            left: 30px;
-            color: #ffffff;
-            font-size: 35px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-
-        .close-fullscreen:hover {
-            color: #ef4444;
-        }
-
-        .player-details {
-            padding: 12px 20px;
-            background: #ffffff;
-            border-top: 1px solid var(--border-color);
-            flex-shrink: 0;
-        }
-
-        .player-details h2 {
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: var(--primary);
-        }
-
-        @media (max-width: 992px) {
-            html, body {
-                height: auto;
-                overflow: auto;
-            }
-
-            .main-container {
-                height: auto;
-            }
-
-            .showcase-layout {
-                grid-template-columns: 1fr;
-            }
-
-            .atlas-main-grid {
-                grid-template-columns: 1fr;
-            }
+        /* تصغير حجم الأيقونة داخل الأزرار بالتناسب */
+        .buttons-vertical-container .access-map-button i {
+            font-size: 0.9rem !important;
+            margin-left: 6px;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo-box">
-            <img src="Image/logo.png" alt="شعار جامعة قنا" onerror="this.src='image/logo.png';">
-        </div>
+    <header class="project-header">
+        <div class="header-content-wrapper">
+            <img src="images/القسم.png" alt="شعار القسم" class="header-logo">
 
-        <div class="header-title">
-            <h1>الخريطة التفاعلية لإنجازات جامعة قنا 2023 - 2026</h1>
-        </div>
-
-        <div class="logo-box">
-            <img src="Image/مسيرة.png" alt="شعار مسيرة" onerror="this.src='Image/مسيرة.jpg';">
+            <div class="header-text">
+                <h1>بناء خريطة ويب تفاعلية لتوجيه المستخدمين لأقرب الخدمات
+العامة في مدينة الاقصر</h1>
+                <p>دراسة تطبيقية في الذكاء الاصطناعي الجغرافي</p>
+            </div>
+<div class="buttons-vertical-container">
+                <a href="index2.html" class="access-map-button">
+                    <i class="fas fa-map"></i> زيارة منصة الخرائط
+                </a>
+                <a href="dashbourd.html" class="access-map-button">
+                    <i class="fas fa-chart-pie"></i> زيارة منصة المعلومات
+                </a>
+            </div>            <img src="images/جامعة قنا.jpg" alt="شعار جامعة قنا" class="header-logo1">
         </div>
     </header>
 
-    <div class="main-container">
-        
-        <div class="intro-banner">
-            <div style="display: flex; align-items: center; gap: 15px; flex-grow: 1;">
-                <img src="Image/project-logo.png" alt="شعار المشروع" style="height: 80px; width: auto; object-fit: contain; flex-shrink: 0;" onerror="this.style.display='none';">
-                <p>أهلاً بكم في المنصة التفاعلية لإنجازات جامعة قنا خلال الفترة من 2023 إلى 2026، والتي تسلط الضوء على أبرز المشاريع والتطويرات العمرانية والتكنولوجية والتعليمية التي شهدتها الجامعة.</p>
-            </div>
-            
-            <a href="Map.html" class="map-action-btn">
-                <i class="fa-solid fa-map-location-dot"></i>
-                الخريطة التفاعلية
-            </a>
-        </div>
+    <main class="project-main-content">
 
-        <div class="showcase-layout">
-            
-            <div class="playlist-panel">
-                <h3><i class="fa-solid fa-layer-group"></i> العروض التوثيقية</h3>
-                
-                <div class="playlist-items">
-                    
-                    <div class="playlist-item active" onclick="switchVideo(this, 'https://artsvuedu-my.sharepoint.com/:v:/g/personal/waleedadel_art_svu_edu_eg/IQDCu2FmPcUMTqLwNTOOmsz_AYKSd4dTsmTU17jWid7uALI?download=1', 'فيديو موقع جامعة قنا 2026')">
-                        <div class="thumb-icon"><i class="fa-solid fa-play"></i></div>
-                        <div class="item-info">
-                            <h4>فيديو موقع جامعة قنا 2026</h4>
-                        </div>
-                    </div>
+        <!-- Section: Researcher Info -->
+        <section class="section researcher-section">
+            <h2 class="section-title"><i class="fas fa-user-graduate"></i> الباحث</h2>
+            <div class="person-card">
+                <img src="images/صورة الباحث.jpg" alt="صورة الباحث" class="person-photo">
+                <div class="person-details"> <!-- **الحاوية الجديدة** -->
+                    <h3> وليد عادل صلاح عبدالغفار</h3>
+                    <p class="person-title">معيد بقسم الجغرافيا و نظم المعلومات الجغرافية، كلية الاداب ، جامعة قنا</p>
+                    <p class="person-bio">
+                        
 
-                    <div class="playlist-item" onclick="switchVideo(this, 'video/video2.mp4', 'تطوير البنية التحتية')">
-                        <div class="thumb-icon"><i class="fa-solid fa-play"></i></div>
-                        <div class="item-info">
-                            <h4>تطوير البنية التحتية</h4>
-                        </div>
-                    </div>
-
-                    <div class="playlist-item" onclick="switchVideo(this, 'video/video3.mp4', 'المشاريع الهندسية والإنشاءات')">
-                        <div class="thumb-icon"><i class="fa-solid fa-play"></i></div>
-                        <div class="item-info">
-                            <h4>المشاريع الهندسية والإنشاءات</h4>
-                        </div>
-                    </div>
-
-                    <div class="playlist-item" onclick="switchVideo(this, 'video/video4.mp4', 'التحول الرقمي والخدمات')">
-                        <div class="thumb-icon"><i class="fa-solid fa-play"></i></div>
-                        <div class="item-info">
-                            <h4>التحول الرقمي والخدمات</h4>
-                        </div>
-                    </div>
-
-                    <div class="playlist-item" onclick="switchVideo(this, 'video/video5.mp4', 'البيئة التعليمية والمرافق')">
-                        <div class="thumb-icon"><i class="fa-solid fa-play"></i></div>
-                        <div class="item-info">
-                            <h4>البيئة التعليمية والمرافق</h4>
-                        </div>
-                    </div>
-
-                    <div class="playlist-item atlas-item" onclick="showAtlasImages(this)">
-                        <div class="thumb-icon"><i class="fa-solid fa-book-atlas"></i></div>
-                        <div class="item-info">
-                            <h4>الأطلس الرقمي</h4>
-                        </div>
-                    </div>
+                    </p>
 
                 </div>
             </div>
+        </section>
 
-            <div class="player-card">
-                <div class="screen-wrapper" id="screenWrapper">
-                    <video id="activeVideoPlayer" controls autoplay muted playsinline preload="metadata">
-                        <source id="videoSource" src="https://artsvuedu-my.sharepoint.com/:v:/g/personal/waleedadel_art_svu_edu_eg/IQDCu2FmPcUMTqLwNTOOmsz_AYKSd4dTsmTU17jWid7uALI?download=1" type="video/mp4">
-                        متصفحك لا يدعم تشغيل الفيديو.
-                    </video>
+        <!-- Section: Supervisory Committee -->
+        <section class="section supervisory-section">
+            <h2 class="section-title"><i class="fas fa-user-shield"></i> لجنة الإشراف</h2>
+            <div class="persons-grid">
+                <!-- المشرف 1 -->
+                <div class="person-card">
+                    <img src="images/صورة المشرف الأول.jpg" alt="صورة المشرف الأول" class="person-photo">
+                    <div class="person-details"> <!-- **الحاوية الجديدة** -->
+                        <h3>ا.د/ محمد الخزامي عزيز</h3>
+                        <p class="person-title">أستاذ نظم المعلومات الجغرافية، جامعة الفيوم</p>
+                        <p class="person-bio">
+                            عميد كلية العلوم الاجتماعية والإنسانية جامعة الجلالة (السابق) 
+
+                        </p>
+                    </div>
                 </div>
-                <div class="player-details">
-                    <h2 id="activeVideoTitle">فيديو موقع جامعة قنا 2026</h2>
+                <!-- المشرف 2 (إذا كان هناك أكثر من مشرف) -->
+                <div class="person-card">
+                    <img src="images/صورة المشرف الثاني.jpg" alt="صورة المشرف الثاني" class="person-photo">
+                    <div class="person-details"> <!-- **الحاوية الجديدة** -->
+                        <h3>ا.د/ زمزم مرعي أحمد</h3>
+                        <p class="person-title">أستاذ الجغرافيا البشرية </p>
+                        <p class="person-bio">
+                            كلية الآداب، جامعة قنا
+                        </p>
+                    </div>
+                </div>
+                <!-- المشرف 3 (إذا كان هناك أكثر من مشرف) -->
+                <div class="person-card">
+                    <img src="images/صورة المشرف الثالث.jpg" alt="صورة المشرف الثالث" class="person-photo">
+                    <div class="person-details"> <!-- **الحاوية الجديدة** -->
+                        <h3>ا.م.د/ مريان نشأت فرح عبدالشهيد</h3>
+                        <p class="person-title">أستاذ الجغرافيا الاقتصادية المساعد</p>
+                        <p class="person-bio">
+                            كلية الآداب، جامعة قنا
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Section: Examination Committee -->
+         <section class="section examination-section">
+           <h2 class="section-title"><i class="fas fa-gavel"></i> لجنة الحكم والمناقشة</h2>
+            <div class="persons-grid">
+                <!-- عضو التحكيم 1 -->
+                <div class="person-card">
+                    <!--<img src="images/examiner1_photo.jpg" alt="صورة عضو التحكيم الأول" class="person-photo">
+                    <div class="person-details"> <!-- **الحاوية الجديدة** -->
+                        <!--<h3>ا.د/ [اسم عضو التحكيم الأول]</h3>
+                        <p class="person-title">[اللقب الأكاديمي والجهة]</p>
+                        <p class="person-bio">
+                            نبذة مختصرة عن عضو لجنة التحكيم الأول.
+                        </p>
+                    </div>
+                </div>
+                <!-- عضو التحكيم 2 -->
+                <div class="person-card">
+                    <!--<img src="images/examiner2_photo.jpg" alt="صورة عضو التحكيم الثاني" class="person-photo">
+                    <div class="person-details"> <!-- **الحاوية الجديدة** -->
+                        <!--<h3>ا.د/ [اسم عضو التحكيم الثاني]</h3>
+                        <p class="person-title">[اللقب الأكاديمي والجهة]</p>
+                        <p class="person-bio">
+                            نبذة مختصرة عن عضو لجنة التحكيم الثاني، .
+                        </p>
+                    </div>
+                </div>
+                <!-- عضو التحكيم 3 (إذا كان هناك) -->
+                <div class="person-card">
+                    <!--<img src="images/examiner3_photo.jpg" alt="صورة عضو التحكيم الثالث" class="person-photo">
+                    <div class="person-details"> <!-- **الحاوية الجديدة** -->
+                        <!--<h3>ا.د/ [اسم عضو التحكيم الثالث]</h3>
+                        <p class="person-title">[اللقب الأكاديمي والجهة]</p>
+                        <p class="person-bio">
+                            نبذة مختصرة عن عضو لجنة التحكيم الثالث.
+                        </p>
+                    </div>
                 </div>
             </div>
+        </section>
 
-        </div>
+    </main>
 
-    </div>
+    <footer class="project-footer">
+        <p>&copy; 2025 منصة ويب لنيل درجة الماجستير. جميع الحقوق محفوظة.</p>
+        <p>جامعة قنا - قسم الجغرافيا ونظم المعلومات الجغرافية</p>
+    </footer>
 
-    <!-- نافذة العرض بملء الشاشة -->
-    <div id="fullscreenModal" class="fullscreen-modal" onclick="closeFullscreen()">
-        <span class="close-fullscreen">&times;</span>
-        <img id="fullscreenImg" src="" alt="صورة مكبرة">
-    </div>
-
-    <script>
-        function switchVideo(element, src, title) {
-            const wrapper = document.getElementById('screenWrapper');
-            const titleEl = document.getElementById('activeVideoTitle');
-
-            wrapper.innerHTML = `
-                <video id="activeVideoPlayer" controls autoplay playsinline preload="metadata">
-                    <source src="${src}" type="video/mp4">
-                    متصفحك لا يدعم تشغيل الفيديو.
-                </video>
-            `;
-            titleEl.innerText = title;
-
-            document.querySelectorAll('.playlist-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            element.classList.add('active');
-        }
-
-        // عرض الأطلس وبداخل كل صورة زر تكبير
-function showAtlasImages(element) {
-    const wrapper = document.getElementById('screenWrapper');
-    const titleEl = document.getElementById('activeVideoTitle');
-
-    wrapper.innerHTML = `
-        <div class="atlas-main-grid">
-            <div class="atlas-card">
-                <button class="zoom-overlay-btn" onclick="openFullscreen('atlas/الأدلة التنظيمية.jpg')"><i class="fa-solid fa-expand"></i> تكبير</button>
-                <img src="atlas/الأدلة التنظيمية.jpg" alt="الأدلة التنظيمية">
-            </div>
-            <div class="atlas-card">
-                <button class="zoom-overlay-btn" onclick="openFullscreen('atlas/الإنشاءات والصيانة.jpg')"><i class="fa-solid fa-expand"></i> تكبير</button>
-                <img src="atlas/الإنشاءات والصيانة.jpg" alt="الإنشاءات والصيانة">
-            </div>
-            <div class="atlas-card">
-                <button class="zoom-overlay-btn" onclick="openFullscreen('atlas/البنية التحتية.jpg')"><i class="fa-solid fa-expand"></i> تكبير</button>
-                <img src="atlas/البنية التحتية.jpg" alt="البنية التحتية">
-            </div>
-            <div class="atlas-card">
-                <button class="zoom-overlay-btn" onclick="openFullscreen('atlas/البيئة التعليمية.jpg')"><i class="fa-solid fa-expand"></i> تكبير</button>
-                <img src="atlas/البيئة التعليمية.jpg" alt="البيئة التعليمية">
-            </div>
-            <div class="atlas-card">
-                <button class="zoom-overlay-btn" onclick="openFullscreen('atlas/التحول الرقمي.jpg')"><i class="fa-solid fa-expand"></i> تكبير</button>
-                <img src="atlas/التحول الرقمي.jpg" alt="التحول الرقمي">
-            </div>
-            <div class="atlas-card">
-                <button class="zoom-overlay-btn" onclick="openFullscreen('atlas/الخدمات اللوجستية.jpg')"><i class="fa-solid fa-expand"></i> تكبير</button>
-                <img src="atlas/الخدمات اللوجستية.jpg" alt="الخدمات اللوجستية">
-            </div>
-            <div class="atlas-card">
-                <button class="zoom-overlay-btn" onclick="openFullscreen('atlas/الطرق والبوابات.jpg')"><i class="fa-solid fa-expand"></i> تكبير</button>
-                <img src="atlas/الطرق والبوابات.jpg" alt="الطرق والبوابات">
-            </div>
-            <div class="atlas-card">
-                <button class="zoom-overlay-btn" onclick="openFullscreen('atlas/الموقع العام .jpg')"><i class="fa-solid fa-expand"></i> تكبير</button>
-                <img src="atlas/الموقع العام .jpg" alt="الموقع العام">
-            </div>
-            <div class="atlas-card">
-                <button class="zoom-overlay-btn" onclick="openFullscreen('atlas/مباني ومرافق الجامعة.jpg')"><i class="fa-solid fa-expand"></i> تكبير</button>
-                <img src="atlas/مباني ومرافق الجامعة.jpg" alt="مباني ومرافق الجامعة">
-            </div>
-            <div class="atlas-card">
-                <button class="zoom-overlay-btn" onclick="openFullscreen('atlas/مظلة سيارات.jpg')"><i class="fa-solid fa-expand"></i> تكبير</button>
-                <img src="atlas/مظلة سيارات.jpg" alt="مظلة سيارات">
-            </div>
-            <div class="atlas-card">
-                <button class="zoom-overlay-btn" onclick="openFullscreen('atlas/مظلة طلاب.jpg')"><i class="fa-solid fa-expand"></i> تكبير</button>
-                <img src="atlas/مظلة طلاب.jpg" alt="مظلة طلاب">
-            </div>
-        </div>
-    `;
-    
-    titleEl.innerText = "الأطلس الرقمي";
-
-    document.querySelectorAll('.playlist-item').forEach(item => {
-        item.classList.remove('active');
-    });
-    element.classList.add('active');
-}
-
-        // دالة فتح الصورة بملء الشاشة
-        function openFullscreen(src) {
-            const modal = document.getElementById('fullscreenModal');
-            const img = document.getElementById('fullscreenImg');
-            img.src = src;
-            modal.style.display = 'flex';
-        }
-
-        // دالة إغلاق ملء الشاشة
-        function closeFullscreen() {
-            document.getElementById('fullscreenModal').style.display = 'none';
-        }
-    </script>
 </body>
 </html>
