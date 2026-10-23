@@ -1,1152 +1,347 @@
-const roadsPath = 'data/roads.json';
-const servicesPath = 'data/point.json';
-const borderPath = 'data/border.json';
-const RailwayPath = 'data/Railway.json';
-
-let graph = {};
-let edgeLengths = {};
-let servicePoints = [];
-let map, userLat, userLng;
-
-let roadsLayer = L.layerGroup();
-let servicePointsLayer = L.layerGroup();
-let routeLayer = L.layerGroup();
-let railwayLayer = L.layerGroup();
-let borderLayer = L.layerGroup();
-
-let userMarker = null;
-let destinationMarker = null;
-
-// متغيرات جديدة لتخزين المسار الأقصر والخدمة النهائية
-let initialBestPath = [];
-let destinationService = null;
-
-// متغير لتتبع حالة العرض الحالية (0: الأقصر، 1-4: بدائل)
-let currentRouteIndex = 0;
-
-// لتخزين نتائج المسارات البديلة (4 بدائل)
-let alternateRouteCache = {
-    1: null,
-    2: null,
-    3: null,
-    4: null
-};
-
-const ALTERNATE_COLORS = {
-    1: 'orange',
-    2: 'red',
-    3: 'purple',
-    4: 'green'
-};
-
-
-// متغير جديد لجمع جميع المصطلحات الفريدة للبحث عنها كاقتراحات
-let allSearchableTerms = new Set();
-
-const greenIcon = L.icon({
-    iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-green.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-});
-
-const redIcon = L.icon({
-    iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-red.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-});
-
-const serviceIconMap = {
-    "مستشفي": { localImage: 'images/مستشفى.png' },
-    "مدرسة ابتدائية": { localImage: 'images/school (1).png' },
-    "مدرسة اعدادية": { localImage: 'images/school (2).png' },
-    "مدرسة ثانوية": { localImage: 'images/school (3).png' },
-    "مدرسة رياض اطفال": { localImage: 'images/school.png' },
-    "مسجد": { localImage: 'images/مسجد.png' },
-    "كنيسة": { localImage: 'images/كنيسة.png' },
-    "نقطة إطفاء": { localImage: 'images/fire.png' },
-    "نقطة إسعاف": { localImage: 'images/اسعاف.png' },
-    "مكتب بريد": { localImage: 'images/بريد.png' },
-    "شرطة": { localImage: 'images/شرطة.jpg' },
-    "قصر ثقافة": { localImage: 'images/diocletian-palace.png' },
-    "مركز شباب": { localImage: 'images/pennant.png' },
-    "نادي رياضي": { localImage: 'images/club.png' },
-    "معبد | متحف": { localImage: 'images/museum.png' },
-    "مكتبة عامة": { localImage: 'images/public-library.png' },
-
-
-    // أضف المزيد من الأنواع هنا مع مسارات صورك المحلية أو الألوان
-};
-
-function getRoadColor(fclass) {
-    // قم بتحويل fclass إلى أحرف صغيرة للتأكد من المطابقة مع المفاتيح أدناه
-    const lowerFclass = fclass.toLowerCase();
-
-    switch (lowerFclass) {
-        case 'motorway':
-        case 'الطرق الإقليمية':
-            return '#ff4d4d';
-        case 'الطرق الشريانية':
-            return '#ff4d4d';
-        case 'الطرق التجميعية':
-            return '#000000';
-        case 'الطرق المحلية':
-            return '#cccccc';
-        default:
-            return 'gray';
-    }
-}
-
-function getServiceIcon(type) {
-    const iconConfig = serviceIconMap[type];
-    let iconUrl;
-    let iconOptions = {
-        iconSize: [18, 26],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
-    };
-
-    if (iconConfig && iconConfig.localImage) {
-        iconUrl = iconConfig.localImage;
-    } else if (iconConfig && iconConfig.color) {
-        iconUrl = `https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-${iconConfig.color}.png`;
-    } else {
-        iconUrl = `https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-grey.png`;
-    }
-
-    return L.icon({
-        iconUrl: iconUrl,
-        ...iconOptions
-    });
-}
-
-function formatTime(minutes) {
-    const totalSeconds = Math.round(minutes * 60);
-    const hours = Math.floor(totalSeconds / 3600);
-    const minutesPart = Math.floor((totalSeconds % 3600) / 60);
-    const seconds = totalSeconds % 60;
-    let parts = [];
-    if (hours > 0) parts.push(`${hours} ساعة`);
-    if (minutesPart > 0) parts.push(`${minutesPart} دقيقة`);
-    if (seconds > 0) parts.push(`${seconds} ثانية`);
-    return parts.join(" و ");
-}
-
-function formatDistance(metersInput) { // غيرنا اسم المتغير ليكون أوضح
-    const meters = Math.round(metersInput); // الآن هي قيمة بالمتر بالفعل، فقط نقوم بتقريبها
-    const kmPart = Math.floor(meters / 1000);
-    const mPart = meters % 1000;
-    let parts = [];
-    if (kmPart > 0) parts.push(`${kmPart} كم`);
-    if (mPart > 0) parts.push(`${mPart} متر`);
-    return parts.join(" و ");
-}
-
-function findClosestNode(x, y, nodes) {
-    let minDist = Infinity, closest = null;
-    for (const node of nodes) {
-        const [nx, ny] = node.split(',').map(Number);
-        const d = (nx - x) ** 2 + (ny - y) ** 2;
-        if (d < minDist) {
-            minDist = d;
-            closest = node;
-        }
-    }
-    return closest;
-}
-
-function togglePopup() {
-    const popup = document.getElementById("info-popup");
-    const overlay = document.getElementById("info-overlay");
-    if (popup.style.display === "block") {
-        popup.style.display = "none";
-        overlay.style.display = "none";
-    } else {
-        popup.style.display = "block";
-        overlay.style.display = "block";
-    }
-}
-
-function getDirectionText(from, to) {
-    const dx = to[0] - from[0];
-    const dy = to[1] - from[1];
-    const angle = Math.atan2(dy, dx) * (180 / Math.PI);
-    if (angle >= -22.5 && angle < 22.5) return "شرقًا";
-    if (angle >= 22.5 && angle < 67.5) return "شمال شرق";
-    if (angle >= 67.5 && angle < 112.5) return "شمالًا";
-    if (angle >= 112.5 && angle < 157.5) return "شمال غرب";
-    if (angle >= 157.5 || angle < -157.5) return "غربًا";
-    if (angle >= -157.5 && angle < -112.5) return "جنوب غرب";
-    if (angle >= -112.5 && angle < -67.5) return "جنوبًا";
-    if (angle >= -67.5 && angle < -22.5) return "جنوب شرق";
-    return "";
-}
-
-function displayFeatureInfo(properties, title = "معلومات الميزة") {
-    let infoHtml = `<h4>${title}</h4>`;
-    infoHtml += '<table>';
-    infoHtml += '<thead><tr><th>الحقل</th><th>القيمة</th></tr></thead>';
-    infoHtml += '<tbody>';
-    for (const key in properties) {
-        if (properties.hasOwnProperty(key) && properties[key] !== null && properties[key] !== "" && key !== "FID") {
-            infoHtml += `<tr><td><b>${key}</b></td><td>${properties[key]}</td></tr>`;
-        }
-    }
-    infoHtml += '</tbody></table>';
-    document.getElementById('info').innerHTML = infoHtml;
-}
-
-function displayServicePoints(filterValue) {
-    servicePointsLayer.clearLayers();
-    servicePoints.forEach(s => {
-        if (filterValue === "all" || s.type === filterValue) {
-            s.marker.addTo(servicePointsLayer);
-        }
-    });
-}
-
-// دالة البحث عن الخدمات (مُعدَّلة لإخفاء الاقتراحات وإعادة تعيين حالة المسار)
-function searchServices() {
-    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-    servicePointsLayer.clearLayers();
-
-    let foundMarkers = [];
-
-    servicePoints.forEach(s => {
-        const nameMatches = s.name.toLowerCase().includes(searchTerm);
-        const typeMatches = s.type.toLowerCase().includes(searchTerm);
-
-        if (nameMatches || typeMatches) {
-            s.marker.addTo(servicePointsLayer);
-            foundMarkers.push(s.marker);
-        }
-    });
-
-    const typeFilterSelect = document.getElementById('typeFilter');
-    if (searchTerm) {
-        typeFilterSelect.value = "all";
-    } else {
-        displayServicePoints(typeFilterSelect.value);
-    }
-
-    // إعادة تعيين حالة المسار عند البحث الجديد
-    routeLayer.clearLayers();
-    if (destinationMarker) map.removeLayer(destinationMarker);
-    initialBestPath = [];
-    destinationService = null;
-    currentRouteIndex = 0;
-    alternateRouteCache = { 1: null, 2: null, 3: null, 4: null };
-    document.getElementById('findAlternateRouteBtn').style.display = 'none';
-
-    if (servicePointsLayer.getLayers().length > 0) {
-        document.getElementById('info').innerHTML = `<h4>نتائج البحث:</h4><p>تم العثور على ${servicePointsLayer.getLayers().length} نقطة خدمة مطابقة لبحثك.</p>`;
-
-        const group = new L.featureGroup(foundMarkers);
-        map.fitBounds(group.getBounds(), { padding: [50, 50] });
-
-        if (userLat && userLng) {
-            runRouting();
-        } else {
-            document.getElementById('info').innerHTML += '<br>الرجاء تحديد موقعك أولاً أو الضغط على "موقعي" لرسم المسار.';
-        }
-
-    } else {
-        document.getElementById('info').innerHTML = `<h4>نتائج البحث:</h4><p>لم يتم العثور على أي نقطة خدمة مطابقة لبحثك.</p>`;
-    }
-
-    const suggestionsContainer = document.getElementById('suggestions-container');
-    if (suggestionsContainer) {
-        suggestionsContainer.style.display = 'none';
-    }
-}
-
-// New function to update suggestions
-function updateSuggestions() {
-    const searchInput = document.getElementById('searchInput');
-    const searchTerm = searchInput.value.toLowerCase();
-    let suggestionsContainer = document.getElementById('suggestions-container');
-
-    // If there is no suggestion container, create one.
-    if (!suggestionsContainer) {
-        suggestionsContainer = document.createElement('div');
-        suggestionsContainer.id = 'suggestions-container';
-        searchInput.parentNode.insertBefore(suggestionsContainer, searchInput.nextSibling);
-    }
-
-    suggestionsContainer.innerHTML = ''; // Clear old suggestions
-
-    if (searchTerm.length === 0) {
-        suggestionsContainer.style.display = 'none'; // Hide the container if the search field is empty
-        return;
-    }
-
-    const filteredSuggestions = Array.from(allSearchableTerms).filter(term =>
-        term.startsWith(searchTerm)
-    ).slice(0, 5); // Showing only 5 suggestions
-
-    if (filteredSuggestions.length > 0) {
-        suggestionsContainer.style.display = 'block';
-        filteredSuggestions.forEach(suggestion => {
-            const suggestionItem = document.createElement('div');
-            suggestionItem.classList.add('suggestion-item');
-            suggestionItem.textContent = suggestion;
-            suggestionItem.addEventListener('click', () => {
-                searchInput.value = suggestion;
-                suggestionsContainer.style.display = 'none';
-                searchServices(); // Run the search immediately upon selecting the suggestion.
-            });
-            suggestionsContainer.appendChild(suggestionItem);
-        });
-    } else {
-        suggestionsContainer.style.display = 'none';
-    }
-}
-
-
-async function loadMap() {
-    map = L.map('map').setView([25.696, 32.664], 13);
-
-    const osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    });
-
-    const esriWorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-    });
-
-    osmLayer.addTo(map);
-
-    roadsLayer.addTo(map);
-    servicePointsLayer.addTo(map);
-    routeLayer.addTo(map);
-        railwayLayer.addTo(map);
-    borderLayer.addTo(map);
-
-    const baseMaps = {
-        "OSM": osmLayer,
-        "Google earth": esriWorldImagery
-    };
-
-    L.control.layers(baseMaps).addTo(map);
-
-    const [roadsData, servicesData, borderData, railwayData] = await Promise.all([
-        fetch(roadsPath).then(res => res.json()),
-        fetch(servicesPath).then(res => res.json()),
-        fetch(borderPath).then(res => res.json()),
-        fetch(RailwayPath).then(res => res.json())
-    ]);
-
-    L.geoJSON(borderData, {
-        style: {
-            color: 'purple',
-            weight: 4
-        },
-        onEachFeature: function (feature, layer) {
-            const name = feature.properties?.name || 'خط بدون اسم';
-            layer.bindPopup(name);
-            layer.on('click', function() {
-                displayFeatureInfo(feature.properties || feature.attributes, `معلومات الحدود: ${name}`);
-            });
-        }
-    }).addTo(borderLayer);
-
-L.geoJSON(railwayData, {
-    style: {
-        color: '#2c3e50',       // لون رمادي غامق/أسود
-        weight: 3,              // سمك الخط
-        dashArray: '8, 6'       // خط متقطع ليمثل سكة حديد بشكل كارتوجرافي سليم
-    },
-    onEachFeature: function (feature, layer) {
-        const name = feature.properties?.name || 'خط سكة حديد';
-        layer.bindPopup(`🚂 ${name}`);
-        layer.on('click', function() {
-            displayFeatureInfo(feature.properties || feature.attributes, `معلومات السكة الحديد: ${name}`);
-        });
-    }
-}).addTo(railwayLayer);
-
-    roadsData.features.forEach(f => {
-        const coords = f.geometry.paths?.[0] || f.geometry.coordinates;
-        const props = f.attributes || f.properties;
-        const totalTime = props.time || 1; // Assuming 'time' is driving time
-        const totaltime_Walking_ = props.time_Walking_ || (props.length / (5000 / 60)); // Calculate walking time if not provided, assuming 5 km/h = 5000m/60min
-        const totalLength = props.length || 0;
-        const segments = coords.length - 1;
-        const perSegmentTime = totalTime / segments;
-        const perSegmentime_Walking_ = totaltime_Walking_ / segments;
-        const perSegmentLength = totalLength / segments;
-
-        const fclass = props.fclass || 'unknown';
-        const roadColor = getRoadColor(fclass);
-
-        const roadPolyline = L.polyline(coords.map(c => [c[1], c[0]]), {
-            color: roadColor,
-            weight: 3,
-            opacity: 0.8
-        });
-
-        roadPolyline.feature = f;
-
-        roadPolyline.addTo(roadsLayer);
-        roadPolyline.on('click', function() {
-            displayFeatureInfo(props, `معلومات الطريق: ${props.name || props.fclass || 'غير معروف'}`);
-        });
-
-        for (let i = 0; i < segments; i++) {
-            const a = coords[i], b = coords[i + 1];
-            const from = `${a[0]},${a[1]}`;
-            const to = `${b[0]},${b[1]}`;
-            if (!graph[from]) graph[from] = {};
-            if (!graph[to]) graph[to] = {};
-            // Modified: Store an object with drivingTime and walkingTime
-            graph[from][to] = {
-                drivingTime: perSegmentTime,
-                walkingTime: perSegmentime_Walking_
-            };
-            graph[to][from] = { // Bidirectional
-                drivingTime: perSegmentTime,
-                walkingTime: perSegmentime_Walking_
-            };
-            edgeLengths[`${from}_${to}`] = perSegmentLength;
-            edgeLengths[`${to}_${from}`] = perSegmentLength;
-        }
-    });
-
-    const typesSet = new Set();
-    servicePoints = servicesData.features.map(f => {
-        let coord;
-        if (f.geometry.coordinates) {
-            coord = f.geometry.coordinates;
-        } else if (f.geometry.x && f.geometry.y) {
-            coord = [f.geometry.x, f.geometry.y];
-        }
-        const props = f.attributes || f.properties;
-        const name = props?.Name || "خدمة";
-        const type = props?.type || "غير معروف";
-        const latlng = [coord[1], coord[0]];
-        typesSet.add(type);
-
-        // أضف اسم الخدمة ونوعها إلى قائمة المصطلحات القابلة للبحث
-        allSearchableTerms.add(name.toLowerCase());
-        allSearchableTerms.add(type.toLowerCase());
-
-        const marker = L.marker(latlng, { icon: getServiceIcon(type) }).bindPopup(name);
-        marker.on('click', function() {
-            displayFeatureInfo(props, `معلومات الخدمة: ${name}`);
-        });
-        return { coord: latlng, name, type, marker: marker };
-    });
-
-    const typeSelect = document.getElementById("typeFilter");
-    Array.from(typesSet).sort().forEach(type => {
-        const option = document.createElement("option");
-        option.value = type;
-        option.textContent = type;
-        typeSelect.appendChild(option);
-    });
-
-    displayServicePoints('all');
-
-    // تم تعديل مستمع حدث "typeFilter" لكي لا يتعارض مع البحث
-    // اجعل هذا المستمع يستدعي displayServicePoints مباشرة
-    document.getElementById("typeFilter").addEventListener("change", () => {
-        const selectedType = document.getElementById("typeFilter").value;
-        document.getElementById('searchInput').value = ''; // مسح حقل البحث عند تغيير الفلتر
-        displayServicePoints(selectedType);
-
-        // إعادة تعيين حالة المسار عند تغيير الفلتر
-        routeLayer.clearLayers();
-        if (destinationMarker) map.removeLayer(destinationMarker);
-        initialBestPath = [];
-        destinationService = null;
-        currentRouteIndex = 0;
-        alternateRouteCache = { 1: null, 2: null, 3: null, 4: null };
-        document.getElementById('findAlternateRouteBtn').style.display = 'none';
-
-        if (userLat && userLng) {
-            runRouting();
-        } else {
-            document.getElementById('info').textContent = 'الرجاء تحديد موقعك أولاً أو الضغط على "موقعي".';
-        }
-    });
-
-    setupLayerControls();
-
-    // *** تم نقل استدعاء مفتاح الخريطة إلى هنا بعد تحميل جميع البيانات ***
-    const mapLegendControl = generateMapLegendControl();
-    mapLegendControl.addTo(map);
-}
-
-
-// ** دالة مساعدة جديدة لإنشاء الرسم البياني الموزون بزمن القيادة **
-function createDrivingGraph(baseGraph) {
-    let drivingGraph = {};
-    for (const fromNode in baseGraph) {
-        drivingGraph[fromNode] = {};
-        for (const toNode in baseGraph[fromNode]) {
-            drivingGraph[fromNode][toNode] = baseGraph[fromNode][toNode].drivingTime;
-        }
-    }
-    return drivingGraph;
-}
-
-
-// ** Dijkstra function (modified to calculate real time) **
-function findShortestPath(startNode, endNode, drivingGraphToUse) {
-    let shortestPath = null;
-    // Two variables were added to calculate real time
-    let totalDrivingTime = 0;
-    let totalDrivingTime_Penalty = 0;
-    let totalWalkingTime = 0;
-    let totalLength = 0;
-
-    try {
-        // 1. Using the Dixtra library to find the node sequence
-        const path = dijkstra.find_path(drivingGraphToUse, startNode, endNode);
-
-        // 2. Calculate the total time and distance of the resulting route
-        for (let i = 0; i < path.length - 1; i++) {
-            const from = path[i], to = path[i + 1];
-
-            totalDrivingTime_Penalty += drivingGraphToUse[from][to];
-
-            const segmentDataOriginal = graph[from][to];
-            totalDrivingTime += segmentDataOriginal.drivingTime;
-            totalWalkingTime += segmentDataOriginal.walkingTime;
-            totalLength += edgeLengths[`${from}_${to}`] || 0;
-        }
-
-        shortestPath = path;
-
-    } catch (e) {
-        // The path is inaccessible
-        console.warn('لا يمكن الوصول من:', startNode, 'إلى:', endNode, e);
-    }
-
-    // return totalDrivingTime (real time) for the calculations
-    return { path: shortestPath, distDriving: totalDrivingTime, distWalking: totalWalkingTime, length: totalLength, distDriving_Penalty: totalDrivingTime_Penalty };
-}
-
-
-// ** دالة جديدة لعرض نتائج التوجيه (مُعدّلة لحل مشكلة #info) **
-function displayRouteResult(routeData, color, title, isInitialRoute = false) {
-    const latlngs = routeData.path.map(str => str.split(',').reverse().map(Number));
-
-    routeLayer.clearLayers();
-    if (destinationMarker) map.removeLayer(destinationMarker);
-
-    L.polyline(latlngs, { color: color, weight: 5, opacity: 0.8 }).addTo(routeLayer);
-    map.fitBounds(latlngs, { padding: [50, 50] });
-
-    if (routeData.service) {
-        destinationMarker = L.marker(routeData.service.coord, { icon: getServiceIcon(routeData.service.type) })
-            .addTo(map)
-            .bindPopup(`📌 ${routeData.service.name}`)
-            .openPopup();
-    }
-
-    let timeNote = '';
-    // ملاحظة: في المسار البديل، لا نحتاج لتحذير حول "الأوقات المبالغ فيها" لأننا الآن نعرض الزمن الحقيقي
-    if (!isInitialRoute && color !== 'blue') {
-        // إذا كان مساراً بديلاً، نذكر أنه أطول زمنياً من الافتراضي
-        timeNote = ' ';
-    }
-
-
-    document.getElementById('info').innerHTML = `
-        <h4>${title}: <b>${routeData.service.name}</b></h4>
-        نوع الخدمة: <b>${routeData.service.type}</b><br>
-        زمن الوصول التقريبي بالسيارة: <b>${formatTime(routeData.distDriving)}</b>${timeNote}<br>
-        زمن الوصول التقريبي بالاقدام: <b>${formatTime(routeData.distWalking)}</b><br>
-        المسافة التقريبية: <b>${formatDistance(routeData.length)}</b>
-    `;
-}
-
-
-function setupLayerControls() {
-    document.getElementById('toggleRoads').addEventListener('change', function() {
-        if (this.checked) {
-            map.addLayer(roadsLayer);
-        } else {
-            map.removeLayer(roadsLayer);
-        }
-    });
-
-    document.getElementById('toggleServicePoints').addEventListener('change', function() {
-        if (this.checked) {
-            map.addLayer(servicePointsLayer);
-        } else {
-            map.removeLayer(servicePointsLayer);
-        }
-    });
-
-    document.getElementById('toggleRoute').addEventListener('change', function() {
-        if (this.checked) {
-            map.addLayer(routeLayer);
-        } else {
-            map.removeLayer(routeLayer);
-        }
-    });
-
-    document.getElementById('toggleBorder').addEventListener('change', function() {
-        if (this.checked) {
-            map.addLayer(borderLayer);
-        } else {
-            map.removeLayer(borderLayer);
-        }
-    });
-}
-
-function runRouting() {
-    if (!userLat || !userLng) {
-        document.getElementById('info').textContent = 'الرجاء تحديد موقعك أولاً.';
-        routeLayer.clearLayers();
-        if (destinationMarker) map.removeLayer(destinationMarker);
-        initialBestPath = [];
-        destinationService = null;
-        currentRouteIndex = 0;
-        alternateRouteCache = { 1: null, 2: null, 3: null, 4: null };
-        document.getElementById('findAlternateRouteBtn').style.display = 'none';
-        return;
-    }
-
-    const selectedType = document.getElementById("typeFilter").value;
-    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-
-    let effectiveFilterType = null;
-    let effectiveSearchTerm = null;
-
-    if (selectedType !== "all") {
-        effectiveFilterType = selectedType;
-    } else if (searchTerm) {
-        effectiveSearchTerm = searchTerm;
-    } else {
-        document.getElementById('info').textContent = 'الرجاء اختيار نوع خدمة محدد أو استخدام شريط البحث لتحديد أقرب نقطة.';
-        routeLayer.clearLayers();
-        if (destinationMarker) map.removeLayer(destinationMarker);
-        initialBestPath = [];
-        destinationService = null;
-        currentRouteIndex = 0;
-        alternateRouteCache = { 1: null, 2: null, 3: null, 4: null };
-        document.getElementById('findAlternateRouteBtn').style.display = 'none';
-        return;
-    }
-
-    const userNode = findClosestNode(userLng, userLat, Object.keys(graph));
-
-    let best = { distDriving: Infinity, service: null, path: [] };
-
-    const drivingGraphForDijkstra = createDrivingGraph(graph);
-
-    servicePoints.forEach(s => {
-        let matchesFilter = false;
-        if (effectiveFilterType && s.type === effectiveFilterType) {
-            matchesFilter = true;
-        } else if (effectiveSearchTerm) {
-            const nameMatches = s.name.toLowerCase().includes(effectiveSearchTerm);
-            const typeMatches = s.type.toLowerCase().includes(effectiveSearchTerm);
-            matchesFilter = nameMatches || typeMatches;
-        }
-
-        if (!matchesFilter) return;
-
-        const [lat, lng] = s.coord;
-        const targetNode = findClosestNode(lng, lat, Object.keys(graph));
-        const result = findShortestPath(userNode, targetNode, drivingGraphForDijkstra);
-
-        if (result.path && result.distDriving < best.distDriving) {
-            best = {
-                distDriving: result.distDriving,
-                distWalking: result.distWalking,
-                length: result.length,
-                service: s,
-                path: result.path
-            };
-        }
-    });
-
-    if (best.path.length > 0) {
-        initialBestPath = best.path;
-        destinationService = best.service;
-
-        // Reset the alternate path state and store the shorter pat
-        currentRouteIndex = 0;
-        alternateRouteCache = { 1: null, 2: null, 3: null, 4: null };
-
-        displayRouteResult(best, 'blue', 'أقصر مسار(الافتراضي)', true);
-        document.getElementById('findAlternateRouteBtn').style.display = 'block';
-
-    } else {
-        document.getElementById('info').textContent = 'لم يتم العثور على مسار مناسب لنوع الخدمة المحدد من موقعك الحالي.';
-        initialBestPath = [];
-        destinationService = null;
-        currentRouteIndex = 0;
-        alternateRouteCache = { 1: null, 2: null, 3: null, 4: null };
-        document.getElementById('findAlternateRouteBtn').style.display = 'none';
-    }
-}
-
-
-// ** دالة موحدة لحساب وعرض أي مسار بديل **
-function calculateAndDisplayAlternate(alternateNum) {
-    if (!initialBestPath || !destinationService) return;
-
-    if (alternateRouteCache[alternateNum]) {
-        // إذا كان مخزناً، اعرضه فوراً
-        const cache = alternateRouteCache[alternateNum];
-        displayRouteResult(cache, cache.color, `مسار بديل ${alternateNum}`, false);
-        return;
-    }
-
-    // **************** منطق الحساب الفعلي ****************
-
-    const userNode = findClosestNode(userLng, userLat, Object.keys(graph));
-    const [lat, lng] = destinationService.coord;
-    const targetNode = findClosestNode(lng, lat, Object.keys(graph));
-
-    // 1. Create a copy of the original graph to apply the penalty to it
-    let alternateGraph = JSON.parse(JSON.stringify(graph));
-    const PENALTY = 1000;
-
-    // 2. Applying the penalty to previous routes
-    let pathsToPenalize = [initialBestPath];
-
-    // Add all alternative routes previously calculated for the penalty
-    for (let i = 1; i < alternateNum; i++) {
-        if (alternateRouteCache[i]) {
-            pathsToPenalize.push(alternateRouteCache[i].path);
-        }
-    }
-
-    // Punishment application
-    pathsToPenalize.forEach(path => {
-        for (let i = 0; i < path.length - 1; i++) {
-            const from = path[i];
-            const to = path[i + 1];
-
-            // Weight gain in both directions
-            if (alternateGraph[from] && alternateGraph[from][to]) {
-                alternateGraph[from][to].drivingTime += PENALTY;
-            }
-            if (alternateGraph[to] && alternateGraph[to][from]) {
-                alternateGraph[to][from].drivingTime += PENALTY;
-            }
-        }
-    });
-
-    // 3. Preparing the new Dijkstra chart after the penalty is applied
-    const drivingAlternateGraphForDijkstra = createDrivingGraph(alternateGraph);
-
-    // 4. Find an alternative path
-    // The shortest path will be found in the punishing graph, but it will restore real-time.
-    const alternateResult = findShortestPath(userNode, targetNode, drivingAlternateGraphForDijkstra);
-
-    if (alternateResult.path && alternateResult.path.length > 0) {
-
-        // Retrieve the original shorter path data for later playback
-        const drivingGraphForDijkstra = createDrivingGraph(graph);
-        const currentBest = findShortestPath(userNode, targetNode, drivingGraphForDijkstra);
-
-        //Data storage in temporary memory
-        const color = ALTERNATE_COLORS[alternateNum] || 'gray';
-        alternateRouteCache[alternateNum] = {
-            ...alternateResult,
-            service: destinationService,
-            color: color,
-            initialDistDriving: currentBest.distDriving,
-            initialDistWalking: currentBest.distWalking,
-            initialLength: currentBest.length
+// استدعاء ملف GeoJSON وتنسيق الخطوط
+fetch('border.json')
+  .then(response => response.json())
+  .then(geojsonData => {
+    
+    // إنشاء طبقة الخط
+    var campusWallLayer = L.geoJSON(geojsonData, {
+      style: function(feature) {
+        return {
+          color: '#FF0000',       // لون الخط (أسود داكن)
+          weight: 4,              // سمك الخط بالبكسل
+          opacity: 0.9,           // درجة الشفافية (من 0 إلى 1)
+          dashArray: '6, 6',      // تجعل الخط منقطاً (حذف هذا السطر يجعله متصلاً)
+          lineCap: 'round',
+          lineJoin: 'round'
         };
-
-        // Change display title here
-        displayRouteResult(alternateRouteCache[alternateNum], color, `مسار بديل ${alternateNum}`, false);
-
-    } else {
-        document.getElementById('info').textContent = `تعذر العثور على المسار البديل ${alternateNum} المتاح.`;
-    }
-}
-
-
-// ** The new function for switching between the five paths (Toggle) **
-function toggleNextRoute() {
-    if (!initialBestPath || !destinationService) {
-        document.getElementById('info').textContent = 'الرجاء تحديد موقعك والبحث عن أقرب خدمة أولاً.';
-        return;
-    }
-
-    // 1. حساب حالة العرض التالية (5 حالات: 0-4)
-    currentRouteIndex = (currentRouteIndex + 1) % 5;
-
-    // 2. تحديث العرض حسب الحالة الجديدة
-    if (currentRouteIndex === 0) {
-        // الحالة 0: العودة إلى المسار الأقصر
-        // نستخدم بيانات المسار البديل الأول المخزنة كمرجع للزمن الأقصر الحقيقي
-        const best = {
-            distDriving: alternateRouteCache[1]?.initialDistDriving || 0,
-            distWalking: alternateRouteCache[1]?.initialDistWalking || 0,
-            length: alternateRouteCache[1]?.initialLength || 0,
-            service: destinationService,
-            path: initialBestPath
-        };
-        displayRouteResult(best, 'blue', 'أقصر مسار (الافتراضي)', true);
-
-    } else {
-        // الحالات 1 إلى 4: حساب وعرض المسار البديل N
-        calculateAndDisplayAlternate(currentRouteIndex);
-    }
-}
-
-
-document.getElementById("locateBtn").addEventListener("click", () => {
-    document.getElementById('info').textContent = '...جارٍ تحديد موقعك';
-    navigator.geolocation.getCurrentPosition(pos => {
-        userLat = pos.coords.latitude;
-        userLng = pos.coords.longitude;
-
-        if (userMarker) {
-            map.removeLayer(userMarker);
-        }
-
-        userMarker = L.marker([userLat, userLng], { icon: greenIcon })
-            .addTo(map)
-            .bindPopup("📍 أنت هنا")
-            .openPopup();
-
-        map.setView([userLat, userLng], 15);
-        runRouting();
-    }, (error) => {
-        console.error("خطأ في تحديد الموقع:", error);
-        document.getElementById('info').textContent = 'تعذر تحديد موقعك. يرجى التأكد من تفعيل خدمات الموقع.';
-    });
-});
-
-// إضافة مستمعي الأحداث لزر البحث وحقل الإدخال عند تحميل DOM
-document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('searchBtn').addEventListener('click', searchServices);
-
-    // **ربط زر المسار البديل بالدالة الجديدة للتبديل**
-    document.getElementById('findAlternateRouteBtn').addEventListener('click', toggleNextRoute);
-
-// ربط زر التوجيه الذكي GeoAI
-    // ==========================================
-    const geoaiBtn = document.getElementById('geoaiRouteBtn');
-    if (geoaiBtn) {
-        geoaiBtn.addEventListener('click', function () {
-            if (!userLat || !userLng) {
-                alert("يرجى تحديد موقعك أولاً عبر الضغط على زر 📍 موقعي");
-                return;
-            }
-
-            if (!destinationService) {
-                alert("يرجى اختيار أو البحث عن خدمة أولاً لتحديد وجهة المسار");
-                return;
-            }
-
-            // إرسال الإحداثيات الفعلية إلى دالة GeoAI
-            fetchSmartRoute(
-                { lat: userLat, lng: userLng },
-                { lat: destinationService.coord[0], lng: destinationService.coord[1] },
-                destinationService.name
-            );
-        });
-    }
-    const searchInput = document.getElementById('searchInput');
-    searchInput.addEventListener('input', updateSuggestions); // استدعاء الدالة عند كل تغيير في الإدخال
-
-    searchInput.addEventListener('keyup', (event) => {
-        if (event.key === 'Enter') {
-            searchServices();
-            // إخفاء الاقتراحات بعد البحث بالضغط على Enter
-            const suggestionsContainer = document.getElementById('suggestions-container');
-            if (suggestionsContainer) {
-                suggestionsContainer.style.display = 'none';
-            }
-        } else if (event.key === 'Escape' || searchInput.value === '') {
-            // إذا ضغط المستخدم على Esc أو مسح حقل البحث، أعد عرض جميع نقاط الخدمة
-            const typeFilterSelect = document.getElementById("typeFilter");
-            displayServicePoints(typeFilterSelect.value);
-            document.getElementById('info').textContent = 'جارٍ تحميل الخريطة...'; // أو رسالة افتراضية أخرى
-            routeLayer.clearLayers();
-            if (destinationMarker) map.removeLayer(destinationMarker);
-            initialBestPath = [];
-            destinationService = null;
-            currentRouteIndex = 0;
-            alternateRouteCache = { 1: null, 2: null, 3: null, 4: null };
-            document.getElementById('findAlternateRouteBtn').style.display = 'none';
-            // إخفاء الاقتراحات عند مسح البحث أو Esc
-            const suggestionsContainer = document.getElementById('suggestions-container');
-            if (suggestionsContainer) {
-                suggestionsContainer.style.display = 'none';
-            }
-        }
-    });
-
-    // إضافة مستمع لغلق الاقتراحات عند النقر خارجها
-    document.addEventListener('click', (event) => {
-        const suggestionsContainer = document.getElementById('suggestions-container');
-        if (suggestionsContainer && !searchInput.contains(event.target) && !suggestionsContainer.contains(event.target)) {
-            suggestionsContainer.style.display = 'none';
-        }
-    });
-
-    // The expansion and contraction zone of the accordion
-    const accordionHeaders = document.querySelectorAll('.accordion-header');
-
-    accordionHeaders.forEach(header => {
-        header.addEventListener('click', () => {
-            const content = header.nextElementSibling;
-            const toggleIcon = header.querySelector('.toggle-icon');
-
-
-            accordionHeaders.forEach(otherHeader => {
-                if (otherHeader !== header) {
-                    otherHeader.classList.remove('active');
-                    otherHeader.nextElementSibling.style.display = 'none';
-                    otherHeader.querySelector('.toggle-icon').style.transform = 'rotate(0deg)';
-                }
-            });
-
-
-            header.classList.toggle('active');
-            if (content.style.display === 'block') {
-                content.style.display = 'none';
-                toggleIcon.style.transform = 'rotate(0deg)';
-            } else {
-                content.style.display = 'block';
-                toggleIcon.style.transform = 'rotate(180deg)'; // Rotate the arrow
-            }
-        });
-    });
-
-    // اختياري: افتح القسم الأول (البحث عن خدمة) عند التحميل
-    // يمكنك تعديل هذا ليناسب تفضيلاتك
-    const searchHeader = document.getElementById('searchHeader');
-    if (searchHeader) {
-        searchHeader.click(); // يحاكي النقر لفتحها
-    }
-});
-
-
-function generateMapLegendControl() {
-    const legend = L.control({ position: 'topleft' });
-
-    legend.onAdd = function (map) {
-        const div = L.DomUtil.create('div', 'info legend');
-        div.innerHTML = '<h4>مفتاح الخريطة:</h4>';
-
-        // مفتاح الخدمات
-        div.innerHTML += '<h5>:نقاط الخدمة</h5>';
-        const uniqueServiceTypes = new Set(servicePoints.map(s => s.type));
-        Array.from(uniqueServiceTypes).sort().forEach(type => {
-            const iconConfig = serviceIconMap[type];
-            let iconSrc;
-
-            if (iconConfig && iconConfig.localImage) {
-                iconSrc = iconConfig.localImage;
-            } else if (iconConfig && iconConfig.color) {
-                iconSrc = `https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-${iconConfig.color}.png`;
-            } else {
-                iconSrc = `https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-grey.png`;
-            }
-
-            div.innerHTML += `
-                <div class="legend-item">
-                    <img src="${iconSrc}" class="legend-icon" alt="${type}">
-                    <span>${type}</span>
-                </div>
-            `;
-        });
-
-        // مفتاح الطرق
-        div.innerHTML += '<h5>:الطرق</h5>';
-        const roadClassesMap = { // تم التأكد من وجود جميع الفئات التي قد تكون في بياناتك
-            'motorway': 'طريق سريع',
-            'الطرق الإقليمية': 'طريق إقليمي',
-            'الطرق الشريانية': 'طريق شرياني',
-            'الطرق التجميعية': 'طريق تجميعي',
-            'الطرق المحلية': 'طريق محلي',
-            'trunk': 'طريق جذعي',
-            'trunk_link': 'وصلة طريق جذعي',
-            'unclassified': 'طريق غير مصنف',
-            'residential': 'طريق سكني',
-            'footway': 'ممر للمشاة',
-            'track': 'طريق ترابي',
-            'default': 'أخرى/غير معروف'
-        };
-
-        const uniqueRoadClasses = new Set();
-        roadsLayer.eachLayer(layer => {
-            const properties = layer.feature?.properties || layer.feature?.attributes;
-            // التحويل إلى أحرف صغيرة ضروري هنا للمطابقة مع المفاتيح في roadClassesMap
-            const fclass = (properties?.fclass || 'default').toLowerCase();
-            uniqueRoadClasses.add(fclass);
-        });
-
-        const sortedRoadClasses = Array.from(uniqueRoadClasses).sort();
-        // تأكد من أن 'default' يظهر دائمًا في النهاية إذا كان موجودًا
-        if (sortedRoadClasses.includes('default')) {
-            sortedRoadClasses.splice(sortedRoadClasses.indexOf('default'), 1);
-            sortedRoadClasses.push('default');
-        }
-
-        sortedRoadClasses.forEach(fclass => {
-            const color = getRoadColor(fclass); // fclass هنا سيكون بأحرف صغيرة
-            const displayName = roadClassesMap[fclass] || roadClassesMap['default'];
-            div.innerHTML += `
-                <div class="legend-item">
-                    <div class="legend-color-box" style="background-color: ${color};"></div>
-                    <span>${displayName}</span>
-                </div>
-            `;
-        });
-
-        // مفتاح الحدود
-        div.innerHTML += '<h5>:الحدود</h5>';
-        div.innerHTML += `
-            <div class="legend-item">
-                <div class="legend-color-box" style="background-color: purple;"></div>
-                <span>حدود المنطقة</span>
-            </div>
-        `;
-
-        // مفتاح المسار البديل (5 مسارات)
-        div.innerHTML += '<h5>:المسارات</h5>';
-        div.innerHTML += `
-            <div class="legend-item">
-                <div class="legend-color-box" style="background-color: blue;"></div>
-                <span>أقصر مسار (الافتراضي)</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color-box" style="background-color: ${ALTERNATE_COLORS[1]};"></div>
-                <span>المسار البديل 1</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color-box" style="background-color: ${ALTERNATE_COLORS[2]};"></div>
-                <span>المسار البديل 2</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color-box" style="background-color: ${ALTERNATE_COLORS[3]};"></div>
-                <span>المسار البديل 3</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color-box" style="background-color: ${ALTERNATE_COLORS[4]};"></div>
-                <span>المسار البديل 4</span>
-            </div>
-        `;
-
-
-        return div;
-    };
-    return legend;
-}
-
-
-loadMap();
-
-
-
-// ==========================================
-// دالة التوجيه الذكي المباشرة GeoAI (تتبع الشوارع بدقة)
-// ==========================================
-const GEOAI_API_URL = "https://directed-condo-producer-accepting.trycloudflare.com/api";
-
-let smartRouteLayer = null;
-
-async function fetchSmartRoute(originLatLng, destLatLng, serviceName) {
-  try {
-    const uLat = originLatLng.lat !== undefined ? originLatLng.lat : originLatLng[0];
-    const uLng = originLatLng.lng !== undefined ? originLatLng.lng : originLatLng[1];
-    const fLat = destLatLng.lat !== undefined ? destLatLng.lat : destLatLng[0];
-    const fLng = destLatLng.lng !== undefined ? destLatLng.lng : destLatLng[1];
-
-    // 1. جلب مسار الشوارع الفعلي بانحناءاته الحقيقية عبر OSRM
-    const osrmUrl = `https://router.project-osrm.org/route/v1/driving/${uLng},${uLat};${fLng},${fLat}?overview=full&geometries=geojson`;
-    const osrmRes = await fetch(osrmUrl);
-    const osrmData = await osrmRes.json();
-
-    let realStreetCoords = [];
-    if (osrmData.routes && osrmData.routes.length > 0) {
-      // تحويل الإحداثيات من [lng, lat] إلى [lat, lng]
-      realStreetCoords = osrmData.routes[0].geometry.coordinates.map(coord => [coord[1], coord[0]]);
-    } else {
-      realStreetCoords = [[uLat, uLng], [fLat, fLng]];
-    }
-
-    // 2. إرسال المسار الكامل لسيرفر GeoAI للتنبؤ بالزمن والازدحام
-    const response = await fetch(`${GEOAI_API_URL}/get-smart-route`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        origin: [uLat, uLng],
-        destination: [fLat, fLng],
-        route_coords: realStreetCoords
-      })
-    });
-
-    if (!response.ok) {
-      throw new Error(`Server status: ${response.status}`);
-    }
-
-    const routeData = await response.json();
-
-    // 3. مسح أي مسار ذكي سابق
-    if (smartRouteLayer && map.hasLayer(smartRouteLayer)) {
-      map.removeLayer(smartRouteLayer);
-    }
-
-    // 4. رسم مسار الشوارع الحقيقي بخط متصل وأنيق
-    smartRouteLayer = L.geoJSON(routeData.geojson, {
-      style: {
-        color: "#7c3aed",      // لون بنفسجي عصري للـ AI
-        weight: 6,
-        opacity: 0.9,
-        lineCap: "round",
-        lineJoin: "round"
+      },
+      onEachFeature: function (feature, layer) {
+        // إضافة نافذة تفاعلية (Popup) تظهر ارتفاع السور أو اسمه عند النقر
+        var wallHeight = feature.properties.hight || 'غير محدد';
+        layer.bindPopup(`
+          <div style="text-align: right; direction: rtl;">
+            <h4 style="margin:0 0 5px 0;">سور جامعة جنوب الوادي</h4>
+            <p style="margin:0;">الارتفاع: <b>${wallHeight} أمتار</b></p>
+          </div>
+        `);
       }
     }).addTo(map);
 
-    map.fitBounds(smartRouteLayer.getBounds(), { padding: [40, 40] });
+    // إضافة الطبقة لقائمة التحكم بالطبقات في الخريطة (إن وجدت)
+    if (typeof layerControl !== 'undefined') {
+      layerControl.addOverlay(campusWallLayer, "سور الجامعة");
+    }
 
-    // 5. فتح النافذة المنبثقة بمعلومات التنبؤ
-    smartRouteLayer.bindPopup(`
-      <div style="direction: rtl; text-align: right; font-family: sans-serif; min-width: 170px;">
-        <div style="background: #7c3aed; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 6px; text-align: center;">
-          ⚡ مسار GeoAI الذكي
-        </div>
-        <b>الوجهة:</b> ${serviceName || "الخدمة المحددة"}<br>
-        <b>المسافة الفعلية:</b> ${routeData.geojson.properties.distance_meters} متر<br>
-        <b>الزمن المتوقع:</b> <span style="color:#7c3aed; font-weight: bold;">${routeData.eta_minutes} دقيقة</span>
-      </div>
-    `).openPopup();
+  })
+  .catch(error => console.error('حدث خطأ أثناء تحميل ملف السور:', error));
+        // Default Layer Dictionary Palette
+        const DEFAULT_LAYERS_DICT = [
+            { id: 'construction', name: 'الإنشاءات والصيانة', color: '#ef4444', icon: 'fa-building' },
+            { id: 'infrastructure', name: 'البنية التحتية', color: '#f59e0b', icon: 'fa-network-wired' },
+            { id: 'education', name: 'البيئة التعليمية', color: '#10b981', icon: 'fa-graduation-cap' },
+            { id: 'logistics', name: 'الخدمات اللوجستية', color: '#3b82f6', icon: 'fa-truck-ramp-box' },
+            { id: 'roads', name: 'الطرق والبوابات', color: '#8b5cf6', icon: 'fa-road' },
+            { id: 'general_site', name: 'الموقع العام', color: '#ec4899', icon: 'fa-map-location-dot' },
+            { id: 'organizational', name: 'قائمة الأدلة التنظيمية', color: '#6366f1', icon: 'fa-book' },
+            { id: 'digital_transform', name: 'قائمة التحول الرقمي', color: '#14b8a6', icon: 'fa-laptop-code' },
+            { id: 'engineering_projects', name: 'قائمة المشروعات الهندسة', color: '#84cc16', icon: 'fa-compass-drafting' },
+            { id: 'مظلة سيارات', name: 'مظلات السيارات', color: '#64748b', icon: 'fa-square-parking' },
+            { id: 'مظلة طلاب', name: 'مظلات الطلاب', color: '#06b6d4', icon: 'fa-umbrella' },
+            { id: 'layer_1791384461841', name: 'مباني ومرافق الجامعة', color: '#1e3a8a', icon: 'fa-building-columns' },
+            { id: 'layer_1791395851126', name: 'التحول الرقمي', color: '#14b8a6', icon: 'fa-laptop-code' },
+            { id: 'layer_1791397704911', name: 'الأدلة التنظيمية', color: '#6366f1', icon: 'fa-book' }
+        ];
 
-  } catch (err) {
-    console.error("GeoAI Error:", err);
-    alert("تعذر جلب المسار الذكي. تأكد من اتصال السيرفر.");
-  }
+        let map, activeTileLayer, achievements = [];
+        let detectedLayers = [];
+        let activeLayers = new Set();
+        let mapMarkers = {};
+        let markersClusterGroup;
+
+        const TILE_SERVERS = {
+            satellite: L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { maxZoom: 18, attribution: '&copy; Esri' }),
+            streets: L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '&copy; OpenStreetMap' })
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initMap();
+            loadAchievementsFromJSON();
+        });
+
+        function initMap() {
+            map = L.map('map', { center: [26.194457, 32.744322], zoom: 15, zoomControl: false });
+            L.control.zoom({ position: 'bottomleft' }).addTo(map);
+            
+            // Set Default Map to Satellite
+            activeTileLayer = TILE_SERVERS.satellite;
+            activeTileLayer.addTo(map);
+
+            // تهيئة مجموعة التجميع
+            markersClusterGroup = L.markerClusterGroup({
+                disableClusteringAtZoom: 18,
+                spiderfyOnMaxZoom: true
+            });
+            map.addLayer(markersClusterGroup);
+        }
+
+        function toggleSection(bodyId, headerEl) {
+            const body = document.getElementById(bodyId);
+            body.classList.toggle('collapsed');
+            headerEl.classList.toggle('collapsed');
+        }
+
+        function toggleSidebar(collapse) {
+            const sidebar = document.getElementById('sidebar');
+            const openBtn = document.getElementById('open-sidebar-btn');
+
+            if (collapse) {
+                sidebar.classList.add('collapsed');
+                openBtn.style.display = 'flex';
+            } else {
+                sidebar.classList.remove('collapsed');
+                openBtn.style.display = 'none';
+            }
+
+            setTimeout(() => {
+                if (map) map.invalidateSize();
+            }, 300);
+        }
+
+        function switchMapLayer(mode) {
+            if (activeTileLayer) map.removeLayer(activeTileLayer);
+            activeTileLayer = TILE_SERVERS[mode];
+            activeTileLayer.addTo(map);
+            document.getElementById('btn-streets').classList.toggle('active', mode === 'streets');
+            document.getElementById('btn-satellite').classList.toggle('active', mode === 'satellite');
+        }
+
+        function loadAchievementsFromJSON() {
+            fetch('data.json')
+                .then(response => response.json())
+                .then(data => {
+                    achievements = data;
+                    extractDynamicLayers();
+                    renderLayerControls();
+                    renderAchievementsList();
+                    updateMapMarkers();
+                })
+                .catch(error => {
+                    console.error('Error loading data.json:', error);
+                });
+        }
+
+        // Dynamically detect layers present in data.json
+        function extractDynamicLayers() {
+            const usedLayerIds = new Set(achievements.map(a => a.layerId));
+            detectedLayers = [];
+
+            usedLayerIds.forEach(id => {
+                const found = DEFAULT_LAYERS_DICT.find(l => l.id === id);
+                if (found) {
+                    detectedLayers.push(found);
+                } else {
+                    detectedLayers.push({
+                        id: id,
+                        name: id,
+                        color: '#1e3a8a',
+                        icon: 'fa-location-dot'
+                    });
+                }
+            });
+
+            activeLayers = new Set(detectedLayers.map(l => l.id));
+        }
+
+        function renderLayerControls() {
+            const container = document.getElementById('layers-container');
+            container.innerHTML = '';
+
+            if (detectedLayers.length === 0) {
+                container.innerHTML = '<div style="font-size:0.8rem; color:var(--text-muted); padding:4px;">لا توجد طبقات مضافة في الملف.</div>';
+                document.getElementById('active-layers-count').innerText = 0;
+                return;
+            }
+
+            detectedLayers.forEach(layer => {
+                const count = achievements.filter(a => a.layerId === layer.id).length;
+                const isChecked = activeLayers.has(layer.id);
+
+                const item = document.createElement('div');
+                item.className = 'layer-item';
+                item.innerHTML = `
+                    <div class="layer-info">
+                        <span class="layer-color" style="background-color: ${layer.color}"></span>
+                        <i class="fa-solid ${layer.icon}" style="color: ${layer.color}"></i>
+                        <span>${layer.name} (${count})</span>
+                    </div>
+                    <input type="checkbox" ${isChecked ? 'checked' : ''} onchange="toggleLayer('${layer.id}', this.checked)">
+                `;
+                container.appendChild(item);
+            });
+            document.getElementById('active-layers-count').innerText = activeLayers.size;
+        }
+
+        function renderAchievementsList() {
+            const container = document.getElementById('achievements-container');
+            container.innerHTML = '';
+            const filtered = getFilteredAchievements();
+            document.getElementById('total-count').innerText = filtered.length;
+
+            if (filtered.length === 0) {
+                container.innerHTML = '<div style="font-size:0.8rem; color:var(--text-muted); text-align:center; padding:10px;">لا توجد إنجازات مطابقة للبحث أو الفلتر.</div>';
+                return;
+            }
+
+            filtered.forEach(item => {
+                const layer = detectedLayers.find(l => l.id === item.layerId);
+                const card = document.createElement('div');
+                card.className = 'achievement-card';
+                card.onclick = () => focusOnMap(item.id);
+                card.innerHTML = `
+                    <div class="title">${item.title}</div>
+                    <div class="meta">
+                        <span><i class="fa-solid fa-tag"></i> ${layer ? layer.name : ''}</span>
+                        ${item.date ? `<span><i class="fa-regular fa-calendar"></i> ${item.date}</span>` : ''}
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function getFilteredAchievements() {
+    const searchText = document.getElementById('search-input') ? document.getElementById('search-input').value.trim().toLowerCase() : '';
+    
+    // التحقق من وجود عناصر التاريخ في HTML قبل قراءة قيمتها لمنع التوقف
+    const startDateEl = document.getElementById('filter-start-date');
+    const endDateEl = document.getElementById('filter-end-date');
+    const startDate = startDateEl ? startDateEl.value : '';
+    const endDate = endDateEl ? endDateEl.value : '';
+
+    return achievements.filter(item => {
+        const isLayerActive = activeLayers.has(item.layerId);
+        const isDateValid = (!startDate || !item.date || item.date >= startDate) && (!endDate || !item.date || item.date <= endDate);
+        
+        // Search Filter
+        let matchesSearch = true;
+        if (searchText !== '') {
+            const titleMatch = item.title && item.title.toLowerCase().includes(searchText);
+            const descMatch = item.description && item.description.toLowerCase().includes(searchText);
+            
+            let customMatch = false;
+            if (item.customFields && typeof item.customFields === 'object') {
+                customMatch = Object.values(item.customFields).some(val => val && val.toString().toLowerCase().includes(searchText));
+            }
+            matchesSearch = titleMatch || descMatch || customMatch;
+        }
+
+        return isLayerActive && isDateValid && matchesSearch;
+    });
 }
-// 1. تفعيل مقياس الرسم المتري الديناميكي (Scale Bar)
-L.control.scale({
-  position: 'bottomright', // مكانه في الركن السفلي الأيمن
-  metric: true,            // بالنظام المتري (متر / كيلومتر)
-  imperial: false,         // إخفاء الأميال
-  maxWidth: 150
-}).addTo(map);
 
-// 2. تفعيل شريط الإحداثيات الديناميكي ومستوى التكبير لحظياً
-const coordsBar = document.getElementById('coords-bar');
+        function filterData() {
+            renderAchievementsList();
+            updateMapMarkers();
+        }
 
-function updateCoords(lat, lng) {
-  coordsBar.innerText = `Lat: ${lat.toFixed(4)}° N | Lon: ${lng.toFixed(4)}° E | Zoom: ${map.getZoom()}`;
+        function toggleLayer(layerId, isChecked) {
+            if (isChecked) activeLayers.add(layerId);
+            else activeLayers.delete(layerId);
+            renderLayerControls();
+            filterData();
+        }
+
+function toggleAllLayers() {
+    // التحقق مما إذا كانت جميع الطبقات المفحوصة محددة حالياً
+    const areAllSelected = detectedLayers.length > 0 && activeLayers.size === detectedLayers.length;
+
+    if (areAllSelected) {
+        // إذا كانت جميعها محددة، قم بإلغاء التحديد عن الجميع
+        activeLayers.clear();
+    } else {
+        // إذا كانت هناك طبقات غير محددة، قم بتحديد جميع الطبقات
+        detectedLayers.forEach(l => activeLayers.add(l.id));
+    }
+
+    renderLayerControls();
+    filterData();
 }
 
-// التحديث عند تحريك مؤشر الماوس فوق الخريطة
-map.on('mousemove', function (e) {
-  updateCoords(e.latlng.lat, e.latlng.lng);
-});
+        function updateMapMarkers() {
+            markersClusterGroup.clearLayers();
+            mapMarkers = {};
 
-// التحديث عند التكبير/التصغير بناءً على مركز الخريطة الحالي
-map.on('zoomend', function () {
-  const center = map.getCenter();
-  updateCoords(center.lat, center.lng);
-});
+            const filtered = getFilteredAchievements();
+            filtered.forEach(item => {
+                const layer = detectedLayers.find(l => l.id === item.layerId);
+                const color = layer ? layer.color : '#1e3a8a';
+
+                const customIcon = L.divIcon({
+                    className: 'custom-map-pin',
+                    html: `<div style="background-color: ${color}; width: 28px; height: 28px; border-radius: 50%; border: 3px solid white; box-shadow: 0 3px 8px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; color: white; font-size: 12px;"><i class="fa-solid ${layer ? layer.icon : 'fa-location-dot'}"></i></div>`,
+                    iconSize: [28, 28],
+                    iconAnchor: [14, 14]
+                });
+
+                const marker = L.marker([item.lat, item.lng], { icon: customIcon });
+                
+                let imageHTML = item.image ? `<img src="${item.image}" alt="${item.title}" onerror="this.style.display='none';">` : '';
+                let videoHTML = item.video ? `<video controls src="${item.video}"></video>` : '';
+                let audioHTML = item.audio ? `<audio controls src="${item.audio}"></audio>` : '';
+                let dateHTML = item.date ? `<div class="date"><i class="fa-regular fa-calendar"></i> ${item.date}</div>` : '';
+
+let dynamicFieldsHTML = '';
+if (item.customFields && typeof item.customFields === 'object') {
+    Object.entries(item.customFields).forEach(([k, v]) => {
+        if (v && v.toString().trim() !== '') {
+            let textValue = v.toString();
+
+            // تعبير نمطي (Regex) للتعرف على أي رابط داخل النص سواء كان يبدأ بـ http/https أو www
+            const urlPattern = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])|(\bwww\.[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+
+            // تحويل الروابط المكتشفة داخل النص إلى عناصر <a> قابلة للنقر
+            const formattedValue = textValue.replace(urlPattern, function(match) {
+                const href = match.startsWith('www.') ? 'http://' + match : match;
+                return `<a href="${href}" target="_blank" rel="noopener noreferrer" style="color: #1e3a8a; font-weight: bold; text-decoration: underline;">${match} <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.7rem;"></i></a>`;
+            });
+
+            dynamicFieldsHTML += `<div class="field-item"><span>${k}:</span> ${formattedValue}</div>`;
+        }
+    });
+}
+
+                const popupHTML = `
+                    <div class="popup-card">
+                        ${imageHTML}
+                        ${videoHTML}
+                        ${audioHTML}
+                        <span class="layer-tag" style="background:${color}22; color:${color};">${layer ? layer.name : ''}</span>
+                        <h4>${item.title}</h4>
+                        <p>${item.description || ''}</p>
+                        ${dynamicFieldsHTML}
+                        ${dateHTML}
+                    </div>
+                `;
+                marker.bindPopup(popupHTML);
+
+                markersClusterGroup.addLayer(marker);
+                mapMarkers[item.id] = marker;
+            });
+        }
+
+        function focusOnMap(id) {
+            const item = achievements.find(a => a.id === id);
+            if (item && mapMarkers[id]) {
+                // إغلاق الشريط الجانبي تلقائياً بعد اختيار إنجاز للتركيز على الخريطة عند استخدام الهاتف
+                if (window.innerWidth <= 768) {
+                    toggleSidebar(true);
+                }
+
+                markersClusterGroup.zoomToShowLayer(mapMarkers[id], () => {
+                    mapMarkers[id].openPopup();
+                });
+            }
+        }
+
+
+
+

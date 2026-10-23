@@ -1,685 +1,285 @@
-/* الأنماط العامة لمفتاح الخريطة */
-.info.legend {
-    background: white;
-    padding: 6px 8px;
-    font: 14px/16px Arial, Helvetica, sans-serif;
-    background-color: rgba(255,255,255,0.9); /* خلفية شفافة قليلاً */
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
-    border-radius: 5px;
-    line-height: 18px; /* لتحسين تباعد الأسطر */
-    max-height: 300px; /* تحديد أقصى ارتفاع، يمكنك تعديل القيمة */
-    overflow-y: auto; /* إضافة شريط تمرير عمودي عند الحاجة */
-    touch-action: pan-y; /* يسمح بتمرير العنصر باللمس عمودياً */
-    z-index: 999; /* تأكد من أنه فوق الخريطة */
-    /* **الجزء الذي يجعل الاسكرول يمينًا مع الحفاظ على النص في اليمين:** */
-    direction: ltr;     /* هذا يدفع شريط التمرير إلى اليمين */
-    text-align: right;  /* وهذا يحافظ على محاذاة النص لليمين */
+        :root {
+            --primary-color: #1e3a8a;
+            --bg-light: #f8fafc;
+            --panel-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --sidebar-width: 380px;
+        }
 
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
+        body { display: flex; text-align: right; height: 100vh; overflow: hidden; background-color: var(--bg-light); color: var(--text-main); }
 
-    /* خصائص تخصيص شريط التمرير للمتصفحات الحديثة (Firefox) */
-    scrollbar-width: thin; /* 'auto' | 'thin' | 'none' */
-    scrollbar-color: #007bff #f1f1f1; /* لون مقبض شريط التمرير ثم لون المسار */
-}
+        .top-header {
+            position: absolute; top: 0; left: 0; right: 0; height: 60px;
+            background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+            color: white; display: flex; align-items: center; justify-content: space-between;
+            padding: 0 20px; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
 
-/* خصائص تخصيص شريط التمرير للمتصفحات المستندة إلى WebKit (Chrome, Safari, Edge) */
-.info.legend::-webkit-scrollbar {
-    width: 12px; /* عرض شريط التمرير */
-    background-color: #f1f1f1; /* لون خلفية شريط التمرير */
-}
+        .brand-title { display: flex; align-items: center; gap: 12px; }
+        .univ-logo { width: 42px; height: 42px; object-fit: contain; border-radius: 50%; background: white; padding: 2px; }
+        .brand-title h1 { font-size: 1.15rem; font-weight: 700; }
 
-.info.legend::-webkit-scrollbar-thumb {
-    background-color: #007bff; /* لون مقبض شريط التمرير (الجزء الذي يتحرك) */
-    border-radius: 10px; /* تقويس زوايا مقبض شريط التمرير */
-    border: 10px solid #c0c0c0; /* حدود لمقبض شريط التمرير */
-}
+        .header-controls { display: flex; align-items: center; gap: 12px; }
+        .map-type-selector { background: rgba(255, 255, 255, 0.1); padding: 4px; border-radius: 8px; display: flex; gap: 4px; border: 1px solid rgba(255, 255, 255, 0.2); }
+        .map-type-btn { background: transparent; border: none; color: #e2e8f0; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+        .map-type-btn.active { background: #ffffff; color: var(--primary-color); }
 
-.info.legend::-webkit-scrollbar-track {
-    background-color: #e0e0e0; /* لون مسار شريط التمرير */
-    border-radius: 10px;
-}
+        .app-container { display: flex; width: 100%; height: calc(100vh - 60px); margin-top: 60px; position: relative; }
+        
+        .sidebar { 
+            width: var(--sidebar-width); 
+            background: var(--panel-bg); 
+            border-left: 1px solid var(--border-color); 
+            display: flex; 
+            flex-direction: column; 
+            z-index: 900; 
+            overflow: hidden; 
+            transition: margin-right 0.3s ease, width 0.3s ease;
+            position: relative;
+        }
 
-/* لجعل مقبض شريط التمرير أغمق عند التمرير فوقه */
-.info.legend::-webkit-scrollbar-thumb:hover {
-    background-color: #0056b3; /* لون أغمق عند التمرير فوقه */
-}
-.info.legend h4 {
-    margin: 0 0 5px;
-    color: #333;
-    font-size: 1.1em;
-    text-align: center;
-}
+        .sidebar.collapsed {
+            margin-right: calc(-1 * var(--sidebar-width));
+        }
 
-.info.legend h5 { /* هذا النمط مهم لعناوين الأقسام الفرعية (الخدمات، الطرق) */
-    margin: 10px 0 5px;
-    color: #555;
-    font-size: 1em;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 3px;
-}
+        .sidebar-header { 
+            padding: 16px 20px; 
+            border-bottom: 1px solid var(--border-color); 
+            background: #f8fafc; 
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
 
+        .toggle-btn {
+            background: #e2e8f0;
+            border: none;
+            color: var(--text-main);
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
 
-.legend-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 4px; /* تقليل المسافة بين العناصر */
-    white-space: nowrap; /* منع انقسام النص إلى سطرين */
-}
+        .toggle-btn:hover { background: #cbd5e1; }
 
-.legend-color-box {
-    width: 20px;
-    height: 4px;
-    border: 0px solid #555; /* حدود أغمق */
-    margin-left: 8px; /* هامش لليمين بدلاً من اليسار للغة العربية */
-    flex-shrink: 0; /* منع المربع من الانكماش */
-}
-.legend-icon {
-    width: 20px;
-    height: 20px;
-    margin-left: 8px; /* هامش لليمين بدلاً من اليسار للغة العربية */
-    object-fit: contain;
-    flex-shrink: 0; /* منع الأيقونة من الانكماش */
-}
+        .open-sidebar-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            z-index: 850;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.85rem;
+            display: flex; /* العرض الافتراضي مفعل لأن القائمة مخفية */
+            align-items: center;
+            gap: 8px;
+            transition: background 0.2s;
+        }
 
-/* لضمان ظهور النص بشكل صحيح مع اللغة العربية */
-.info.legend .legend-item span {
-    direction: rtl;
-    text-align: right;
-    flex-grow: 1; /* السماح للنص بأخذ المساحة المتاحة */
-}
+        .open-sidebar-btn:hover {
+            background: #1e40af;
+        }
 
-/* أنماط Accordion الجديدة */
-.accordion-item {
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    overflow: hidden; /* لضمان أن المحتوى المخفي لا يفيض */
-    background-color: #f8f9fa;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
+        .stats-card { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; flex: 1; }
+        .stat-box { background: white; padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center; }
+        .stat-box .number { font-size: 1.4rem; font-weight: 800; color: var(--primary-color); }
+        .stat-box .label { font-size: 0.75rem; color: var(--text-muted); }
 
-.accordion-header {
-    background-color: #e9ecef;
-    padding: 10px 15px;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: bold;
-    color: #333;
-    border-bottom: 1px solid #dee2e6; /* فاصل بين الهيدر والمحتوى */
-}
+        .sidebar-content { flex: 1; overflow-y: auto; padding: 16px 20px; }
 
-.accordion-header:hover {
-    background-color: #dee2e6;
-}
+        /* Search Box Styling */
+        .search-box {
+            position: relative;
+            margin-bottom: 16px;
+        }
 
-.accordion-header h4 {
-    margin: 0;
-    font-size: 1.1em;
-    flex-grow: 1; /* لجعل العنوان يأخذ المساحة المتاحة */
-}
+        .search-input {
+            width: 100%;
+            padding: 10px 36px 10px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 0.85rem;
+            outline: none;
+            background: #f8fafc;
+            transition: border-color 0.2s, background 0.2s;
+        }
 
-.toggle-icon {
-    font-size: 1.2em;
-    transition: transform 0.3s ease;
-    margin-right: 10px; /* مسافة بين النص والأيقونة */
-}
+        .search-input:focus {
+            border-color: var(--primary-color);
+            background: white;
+        }
 
-.accordion-header.active .toggle-icon {
-    transform: rotate(180deg); /* تدوير السهم عند الفتح */
-}
+        .search-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
 
-.accordion-content {
-    padding: 15px;
-    background-color: #ffffff;
-    display: none; /* إخفاء المحتوى افتراضياً */
-    border-top: none; /* إزالة الحد العلوي */
-}
+        .section-header {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-main);
+            padding: 10px 12px;
+            background: #f1f5f9;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            user-select: none;
+        }
 
-/* بقية أكواد CSS الخاصة بك كما هي */
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  direction: rtl;
-}
+        .section-header .chevron {
+            transition: transform 0.3s ease;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
 
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  height: 60px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-  z-index: 1000;
-}
+        .section-header.collapsed .chevron {
+            transform: rotate(-90deg);
+        }
 
-.header-logo {
-    height: 70px;
-    margin-left: 20px;
-    border-radius: 20%;
-    border: 3px solid rgba(255,255,255,0.7);
-    flex-shrink: 0;
-}
-
-.header-title {
-  flex-grow: 1;
-  text-align: center;
+.collapsible-body {
+    max-height: none; /* لإزالة القيد على الارتفاع */
+    overflow: visible;
+    transition: opacity 0.2s ease;
+    opacity: 1;
+    margin-bottom: 16px;
 }
 
-.header-title h1 {
-  margin: 0;
-  font-size: 1.8rem;
-  color: #fff;
-}
-
-.main-content {
-  display: flex;
-  flex-grow: 1;
-  height: calc(100vh - 60px); /* يضمن أن المحتوى يملأ بقية مساحة الشاشة تحت الهيدر مباشرة */
-}
-
-#sidebar {
-  width: 280px; /* عرض الشريط الجانبي */
-  height: 100%; /* جعل الشريط يملأ الارتفاع المتاح بالكامل بدلاً من الـ 600px الثابتة */
-  background-color: #f4f4f4;
-  padding: 20px;
-  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-  overflow-y: auto; /* لإضافة شريط تمرير إذا كان المحتوى طويلاً */
-  position: relative; /* للسماح بوضع العناصر الفرعية بشكل مطلق */
-  z-index: 999; /* للتأكد من أنها فوق الخريطة */
-  display: flex; /* لجعل عناصر الشريط الجانبي تتكدس بشكل صحيح */
-  flex-direction: column;
-}
-
-#map {
-  flex-grow: 1; /* للسماح للخريطة بأخذ المساحة المتبقية */
-  height: 100%; /* جعل الخريطة تملأ كامل المساحة المتاحة ديناميكياً بدلاً من 600px ثابته */
-  width: 100%;
-  position: relative; /* لجعل عناصر التحكم في Leaflet تعمل بشكل صحيح */
-}
-
-#locateBtn, #findAlternateRouteBtn {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    transition: background-color 0.3s ease;
-}
-#findAlternateRouteBtn:hover {
-    background-color: #d39e00 !important; /* لون داكن للبرتقالي عند التحويم */
-}
-#locateBtn:hover {
-    background-color: #0056b3;
-}
-
-/* قم بإلغاء تعليق أو حذف أنماط #filter-container و #map-controls و #search-container القديمة
-   لأن Accordion-item و accordion-content سيتوليان التنسيق الآن. */
-/*
-#filter-container {
-    margin-bottom: 20px;
-    background-color: #e9ecef;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-#map-controls {
-  background-color: #e9ecef;
-  padding: 10px;
-  border-radius: 5px;
-  margin-bottom: 20px;
-}
-
-#search-container {
-    margin-bottom: 20px;
-    background-color: #e9ecef;
-    padding: 10px;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    position: relative;
-}
-*/
-
-#filter-container label {
-    display: block;
+.collapsible-body.collapsed {
+    display: none; /* استخدام display:none لإخفاء العناصر بسلاسة عند الطي */
+    opacity: 0;
     margin-bottom: 8px;
-    font-weight: bold;
-    color: #333;
+    padding: 0;
 }
 
-#typeFilter {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-    background-color: #fff;
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
-}
+        .layers-list { display: flex; flex-direction: column; gap: 8px; }
+        .layer-item { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; background: #f8fafc; border: 1px solid var(--border-color); border-radius: 6px; }
+        .layer-info { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; font-weight: 600; }
+        .layer-color { width: 12px; height: 12px; border-radius: 50%; }
 
-#info {
-    background-color: #fff;
-    padding: 5px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    margin-top: auto; /* يدفع صندوق المعلومات إلى الأسفل */
-    text-align: right; /* محاذاة النص لليمين */
-    overflow-y: auto; /* إضافة شريط تمرير إذا كان المحتوى كبيراً */
-    max-height: 400px; /* تعيين ارتفاع أقصى */
-}
+        .filter-box { background: #f8fafc; border: 1px solid var(--border-color); padding: 12px; border-radius: 8px; }
+        .date-inputs { display: flex; gap: 10px; }
+        .form-group { flex: 1; }
+        .form-group label { display: block; font-size: 0.75rem; color: var(--text-muted); margin-bottom: 4px; }
+        .form-control { width: 100%; padding: 8px 10px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 0.85rem; }
 
-#info table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-    font-size: 0.9em;
-}
+        .achievements-list { display: flex; flex-direction: column; gap: 10px; }
+        .achievement-card { background: white; border: 1px solid var(--border-color); border-radius: 8px; padding: 12px; cursor: pointer; transition: all 0.2s; }
+        .achievement-card:hover { border-color: var(--primary-color); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .achievement-card .title { font-size: 0.9rem; font-weight: 700; color: var(--primary-color); margin-bottom: 4px; }
+        .achievement-card .meta { display: flex; gap: 12px; font-size: 0.75rem; color: var(--text-muted); }
 
-#info th, #info td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: right; /* محاذاة النص لليمين */
-}
+        #map { flex: 1; height: 100%; background: #e2e8f0; }
 
-#info th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-}
+        .popup-card { width: 250px; }
+        .popup-card img, .popup-card video { width: 100%; height: 130px; object-fit: cover; border-radius: 6px; margin-bottom: 8px; }
+        .popup-card audio { width: 100%; height: 35px; margin-bottom: 8px; }
+        .popup-card h4 { font-size: 0.95rem; color: var(--primary-color); margin-bottom: 4px; }
+        .popup-card .layer-tag { display: inline-block; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; margin-bottom: 6px; font-weight: 600; }
+        .popup-card p { font-size: 0.8rem; color: #334155; margin-bottom: 8px; line-height: 1.4; }
+        .popup-card .date { font-size: 0.75rem; color: var(--text-muted); }
+        .popup-card .field-item { font-size: 0.78rem; text-align: right; background: #f1f5f9; padding: 4px 8px; border-radius: 4px; margin-bottom: 4px; border-right: 3px solid var(--primary-color); }
+        .popup-card .field-item span { font-weight: 700; color: #0f172a; }
 
+        /* إجبار الخريطة والنوافذ المنبثقة على محاذاة اليمين */
+        .leaflet-popup-content-wrapper, 
+        .leaflet-popup-content, 
+        .popup-card {
+            text-align: right !important;
+            direction: rtl !important;
+        }
 
-#map-controls h4 {
-  margin-top: 0;
-  margin-bottom: 10px;
-  color: #333;
-}
+        /* محاذاة عناصر القائمة ومدخلات البحث والنماذج */
+        .achievement-card, 
+        .layer-item, 
+        .modal-body, 
+        .form-group label, 
+        .form-control {
+            text-align: right;
+        }
 
-.control-section {
-  display: flex;
-  flex-direction: column;
-}
+        /* تخصيص أنيق لدوائر التجميع الخاصة بـ MarkerCluster */
+        .marker-cluster-small { background-color: rgba(30, 58, 138, 0.6) !important; }
+        .marker-cluster-small div { background-color: rgba(30, 58, 138, 0.85) !important; color: white !important; font-weight: 800; font-family: 'Cairo', sans-serif; }
+        .marker-cluster-medium { background-color: rgba(245, 158, 11, 0.6) !important; }
+        .marker-cluster-medium div { background-color: rgba(245, 158, 11, 0.85) !important; color: white !important; font-weight: 800; font-family: 'Cairo', sans-serif; }
+        .marker-cluster-large { background-color: rgba(239, 68, 68, 0.6) !important; }
+        .marker-cluster-large div { background-color: rgba(239, 68, 68, 0.85) !important; color: white !important; font-weight: 800; font-family: 'Cairo', sans-serif; }
 
-.control-item {
-  margin-bottom: 8px;
-}
+        /* ========================================================= */
+        /* التجاوب مع الهواتف للشاشات الصغيرة (Responsive Design)     */
+        /* ========================================================= */
+        @media (max-width: 768px) {
+            :root {
+                --sidebar-width: 100%; /* العرض بالكامل على الجوال */
+            }
 
-.control-item input[type="checkbox"] {
-  margin-left: 5px;
-}
+            .top-header {
+                padding: 0 12px;
+                height: 55px;
+            }
 
-/* تنسيق الأيقونة */
-.designer-info {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    text-align: center;
-    line-height: 30px;
-    font-size: 20px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    z-index: 1000;
-}
+            .brand-title h1 {
+                font-size: 0.85rem;
+            }
 
-.designer-info:hover {
-    background-color: #555;
-}
+            .univ-logo {
+                width: 34px;
+                height: 34px;
+            }
 
-/* تنسيق النافذة المنبثقة */
-.popup {
-    display: none;
-    position: fixed;
-    bottom: 80px;
-    left: 20px;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    z-index: 1000;
-    text-align: center;
-    width: 200px;
-}
+            .map-type-btn {
+                padding: 4px 8px;
+                font-size: 0.75rem;
+            }
 
-.popup img {
-    width: 80px;
-    height: 80px;
-    border-radius: 5px;
-    margin-bottom: 10px;
-}
+            .app-container {
+                height: calc(100vh - 55px);
+                margin-top: 55px;
+            }
 
-.popup h3 {
-    margin-top: 0;
-    color: #333;
-}
+            .sidebar {
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                height: 100%;
+                z-index: 1100; /* يظهر فوق كل العناصر بما فيها الهيدر على الموبايل */
+            }
 
-.popup p {
-    margin: 5px 0;
-    font-size: 14px;
-    color: #666;
-}
+            .sidebar.collapsed {
+                margin-right: -100%;
+            }
 
-.overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-}
+            .open-sidebar-btn {
+                top: 10px;
+                right: 10px;
+                padding: 8px 12px;
+                font-size: 0.8rem;
+            }
 
-/* أنماط الاكمال التلقائي */
-#searchInput {
-    width: calc(100% - 70px); /* Adjust width to fit button and padding */
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-    background-color: #fff;
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
-    direction: rtl; /* دعم اللغة العربية */
-    text-align: right; /* محاذاة النص لليمين */
-}
-
-#searchBtn {
-    padding: 8px 12px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
-    margin-right: 10px; /* مسافة بين حقل البحث والزر */
-}
-
-#searchBtn:hover {
-    background-color: #0056b3;
-}
-
-#suggestions-container {
-    border: 1px solid #ccc;
-    max-height: 150px;
-    overflow-y: auto;
-    background-color: white;
-    position: absolute; /* لجعلها تظهر فوق العناصر الأخرى */
-    width: calc(100% - 30px); /* نفس عرض حقل البحث تقريباً (مع الأخذ في الاعتبار الـ padding) */
-    z-index: 1001; /* تأكد أنها تظهر فوق كل شيء آخر */
-    border-top: none;
-    border-radius: 0 0 4px 4px;
-    top: auto; /* إزالة top: 100% لأنها ستكون ضمن accordion-content */
-    left: 15px; /* محاذاتها مع حقل البحث بناءً على padding الأب */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* لإضافة ظل خفيف */
-    display: none; /* إخفاؤها مبدئيًا */
-}
-
-.suggestion-item {
-    padding: 8px;
-    cursor: pointer;
-    text-align: right; /* محاذاة النص لليمين للغة العربية */
-    direction: rtl; /* دعم اللغة العربية */
-}
-
-.suggestion-item:hover {
-    background-color: #f0f0f0;
-}
-/* المتغيرات بعد التعديل للوضع الفاتح */
-:root {
-    --srv-bg-dark: #ffffff;       /* الخلفية */
-    --srv-container-bg: #339cff;  /*لون المربع الكبير الداخلي */
-    --srv-card-bg: #339cff;       /* الكروت الفردية */
-    --srv-accent: #e67e22;        /* اللون البرتقالي للتركيز */
-    --srv-text: #ffffff;          /* النص الأساسي  */
-    --srv-text-dim: #6c757d;      /* تم تغيير النص الفرعي إلى رمادي متوسط */
-}
-
-body {
-    background-color: var(--srv-bg-dark); 
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 20px;
-}
-
-/* المربع الخارجي الكبير */
-.srv-main-container {
-    background-color: var(--srv-container-bg);
-    border-radius: 20px;
-    padding: 30px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    max-width: 1200px;
-    margin: 20px auto;
-    border: 1px solid #333;
-}
-
-/* العنوان الداخلي للمربع */
-.srv-main-header {
-    display: flex;
-    align-items: center;
-    border-bottom: 2px solid #333;
-    padding-bottom: 15px;
-    margin-bottom: 30px;
-}
-
-.srv-header-icon {
-    font-size: 2rem;
-    margin-left: 15px;
-}
-
-.srv-main-header h2 {
-    color: var(--srv-accent);
-    margin: 0;
-    font-size: 1.8rem;
-}
-
-/* شبكة الكروت */
-.srv-services-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
-
-/* الكارت الفردي */
-.srv-card {
-    background-color: var(--srv-card-bg);
-    border-radius: 12px;
-    padding: 20px;
-    text-align: center;
-    border-bottom: 4px solid var(--srv-accent);
-    transition: 0.3s ease;
-}
-
-.srv-card:hover {
-    transform: translateY(-5px);
-    background-color: #e0e0e0;
-}
-
-.srv-card-title {
-    color: var(--srv-text);
-    margin-top: 0;
-}
-
-.srv-card-count {
-    color: var(--srv-text-dim);
-}
-
-.srv-card-count span {
-    color: var(--srv-text);
-    font-weight: bold;
-}
-
-.srv-btn-details {
-    display: inline-block;
-    margin-top: 15px;
-    padding: 8px 20px;
-    background-color: var(--srv-accent);
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 0.9rem;
-}
-
-/* ======================================================= */
-/* تحسينات الاستجابة الفائقة للهواتف والشاشات الصغيرة        */
-/* ======================================================= */
-
-@media (max-width: 768px) {
-    /* إلغاء وضع الارتفاع الثابت الكلي للـ body ليتحرك بمرونة */
-    body {
-        height: auto;
-        overflow-x: hidden;
-        padding: 0; /* التخلص من الهوامش الجانبية المزعجة على الموبايل */
-    }
-
-    header {
-        flex-direction: column;
-        height: auto;
-        padding: 10px;
-        gap: 8px;
-        text-align: center;
-    }
-
-    .header-logo {
-        margin-left: 0;
-        height: 50px; /* تصغير اللوجو ليناسب الهيدر العمودي */
-    }
-
-    .header-title h1 {
-        font-size: 1.2rem;
-    }
-
-    /* تحويل العرض الرئيسي من بجانب بعض إلى تحت بعض بالتوالي لملء الشاشة */
-    .main-content {
-        flex-direction: column;
-        height: auto;
-    }
-
-    /* شريط الأدوات الجانبي يملأ العرض بالكامل ويكون فوق أو تحت الخريطة */
-    #sidebar {
-        width: 100%;
-        height: auto;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        padding: 15px;
-        order: 2; /* إعطاء الخيار لظهور الشريط تحت الخريطة لسهولة التصفح */
-    }
-
-    /* الخريطة تأخذ مساحة عرضية كاملة وارتفاع مريح جداً على الهاتف يمنع انهيارها */
-    #map {
-        width: 100%;
-        height: 70vh; /* تأخذ 70% من طول شاشة الهاتف الفعلي لملء المساحة الرأسية */
-        min-height: 400px;
-        order: 1; /* الخريطة تظهر أولاً في الشاشة */
-    }
-
-    /* ضبط المفتاح التفاعلي (Legend) داخل الخريطة لكي لا يغطي الشاشة بالكامل */
-    .info.legend {
-        max-width: 160px;
-        max-height: 200px;
-        font-size: 11px;
-    }
-
-    /* معالجة صندوق تفاصيل المعلومات المنبثق ليصبح مريحاً على الهاتف */
-    #info {
-        max-height: 300px;
-        margin-top: 15px;
-    }
-
-    #info table {
-        font-size: 0.8rem;
-    }
-
-    th, td {
-        padding: 5px;
-    }
-
-    /* مركزة كارت الـ Popup الخاص ببيانات المصمم وتوسيطه بذكاء */
-    .popup {
-        left: 50%;
-        bottom: 50%;
-        transform: translate(-50%, 50%);
-        width: 85%;
-        max-width: 260px;
-    }
-}
-
-/* التجاوب مع الشاشات لكروت الخدمات العامة السفلى (srv) */
-@media (max-width: 992px) {
-    .srv-services-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 650px) {
-    .srv-services-grid { grid-template-columns: 1fr; }
-    .srv-main-container { 
-        padding: 15px; 
-        margin: 10px;
-        border-radius: 10px;
-    }
-    .srv-main-header h2 {
-        font-size: 1.3rem;
-    }
-}
-/* سهم الشمال: بمحاذاة زري التكبير والتصغير على يمينهما مباشرة */
-.north-arrow {
-  position: absolute !important;
-  top: 110px !important;    /* نزلناه بمقدار ارتفاع الهيدر ليستقر تماماً بجوار + و - */
-  left: 65px !important;   /* يبعد 55px عن اليسار ليأتي على يمين الأزرار */
-  right: auto !important;
-  z-index: 1000 !important;
-  background: rgba(255, 255, 255, 0.95);
-  padding: 4px 6px;
-  border-radius: 5px;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
-  text-align: center;
-  pointer-events: none;
-  border: 1px solid #bbb;
-  width: 44px;
-}
-
-.north-arrow svg {
-  width: 22px;
-  height: 25px;
-  display: block;
-  margin: 0 auto 1px;
-}
-
-.north-arrow span {
-  font-size: 8px;
-  font-weight: bold;
-  color: #2c3e50;
-  display: block;
-  line-height: 1;
-}
-
-/* شريط الإحداثيات: أسفل الخريطة بجوار أيقونة i */
-.coords-bar {
-  position: absolute !important;
-  bottom: 8px !important;
-  left: 55px !important; /* بعد أيقونة i الزرقاء مباشرة */
-  right: auto !important;
-  top: auto !important;
-  z-index: 1000 !important;
-  background: rgba(27, 58, 75, 0.92);
-  color: #ffffff;
-  padding: 4px 10px;
-  border-radius: 4px;
-  font-size: 11px;
-  font-family: monospace, sans-serif;
-  direction: ltr;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
-  pointer-events: none;
-}
+            .popup-card {
+                width: 200px;
+            }
+        }

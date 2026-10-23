@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الخريطة التفاعلية لإنجازات جامعة جنوب الوادي 2023 - 2026</title>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <!-- MarkerCluster CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- Google Fonts (Cairo) -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+        <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+    <header class="top-header">
+        <div class="brand-title">
+            <img src="Image/logo.png" alt="شعار الجامعة" class="univ-logo" onerror="this.style.display='none';">
+            <div>
+                <h1>الخريطة التفاعلية لإنجازات جامعة قنا 2023 -2026</h1>
+            </div>
+        </div>
+
+        <div class="header-controls">
+            <div class="map-type-selector">
+                <button class="map-type-btn active" id="btn-satellite" onclick="switchMapLayer('satellite')">
+                    <i class="fa-solid fa-satellite"></i> صورة جوية 
+                </button>
+                <button class="map-type-btn" id="btn-streets" onclick="switchMapLayer('streets')">
+                    <i class="fa-solid fa-map"></i> خرائط الطرق
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="app-container">
+        
+        <!-- زر فتح القائمة الجانبية المحدث والافتراضي ظهوره -->
+        <button class="open-sidebar-btn" id="open-sidebar-btn" onclick="toggleSidebar(false)">
+            <i class="fa-solid fa-bars"></i> عرض قائمة الإنجازات
+        </button>
+
+        <!-- الشريط الجانبي ومزود بكلاس collapsed افتراضياً ليظل مخفياً -->
+        <aside class="sidebar collapsed" id="sidebar">
+            <div class="sidebar-header">
+                <div class="stats-card">
+                    <div class="stat-box">
+                        <div class="number" id="total-count">0</div>
+                        <div class="label">إجمالي الإنجازات</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="number" id="active-layers-count">0</div>
+                        <div class="label">طبقات مفعلة</div>
+                    </div>
+                </div>
+                <button class="toggle-btn" title="إغلاق القائمة" onclick="toggleSidebar(true)">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="sidebar-content">
+
+                <!-- Search Input Field -->
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" class="search-input" id="search-input" placeholder="بحث في الإنجازات والمشاريع..." oninput="filterData()">
+                </div>
+                
+<!-- Section 1: Layers -->
+<div class="section-header" onclick="toggleSection('layers-body', this)">
+    <span><i class="fa-solid fa-layer-group"></i> طبقات الإنجازات</span>
+    <div style="display: flex; align-items: center; gap: 8px;">
+        <button style="background:none; border:none; color:var(--primary-color); cursor:pointer; font-size:0.75rem; font-weight:700;" onclick="event.stopPropagation(); toggleAllLayers()">تحديد الكل</button>
+        <i class="fa-solid fa-chevron-down chevron"></i>
+    </div>
+</div>
+                <div class="collapsible-body" id="layers-body">
+                    <div class="layers-list" id="layers-container"></div>
+                </div>
+
+                <!-- Section 3: Achievements List -->
+                <div class="section-header" onclick="toggleSection('achievements-body', this)">
+                    <span><i class="fa-solid fa-list-check"></i> قائمة الإنجازات المسجلة</span>
+                    <i class="fa-solid fa-chevron-down chevron"></i>
+                </div>
+                <div class="collapsible-body" id="achievements-body">
+                    <div class="achievements-list" id="achievements-container"></div>
+                </div>
+
+            </div>
+        </aside>
+
+        <main id="map"></main>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- MarkerCluster JS -->
+    <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+
+</body>
+</html>
