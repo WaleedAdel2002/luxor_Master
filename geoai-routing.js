@@ -1,5 +1,5 @@
 // geoai-routing.js - وحدة التوجيه الذكي المستقلة
-const GEOAI_API_URL = "https://rap-referral-hundred-technologies.trycloudflare.com/api";
+const GEOAI_API_URL = " https://surprising-bracelets-obvious-tribe.trycloudflare.com/api";
 
 let activeTrip = {
   trackingId: null,
